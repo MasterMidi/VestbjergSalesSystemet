@@ -1,6 +1,7 @@
 package model.customer;
 
 import model.Person;
+import model.PersonRole;
 
 public class BuisnessCustomer extends Person {
 	private String contact;
@@ -10,7 +11,7 @@ public class BuisnessCustomer extends Person {
 
 	public BuisnessCustomer(String phoneNr, String email, String name, String contact, String contactPhone,
 			String cVRNumber) {
-		super(phoneNr, email, name);
+		super(phoneNr, email, name, PersonRole.activeCustomer);
 		this.contact = contact;
 		this.contactPhone = contactPhone;
 		CVR = cVRNumber;

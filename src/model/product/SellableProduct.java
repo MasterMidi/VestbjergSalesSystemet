@@ -1,4 +1,6 @@
-package model;
+package model.product;
+
+import model.WarehouseStatus;
 
 public class SellableProduct extends Product {
 
