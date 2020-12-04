@@ -5,17 +5,19 @@ import java.util.Date;
 public class Price {
 	private double price;
 	private Date startDate;
-	private Date endData;
 
 	public double getPrice() {
 		return price;
+	}
+
+	public Price(double price, Date startDate) {
+		super();
+		this.price = price;
+		this.startDate = startDate;
 	}
 
 	public Date getStartDate() {
 		return startDate;
 	}
 
-	public Date getEndData() {
-		return endData;
-	}
 }
