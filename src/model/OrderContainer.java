@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class OrderContainer {
 	
 	private static OrderContainer instance; 
-	private List<Order> orders;
+	private LinkedList<Order> orders;
 	
 	private OrderContainer() {
 		orders = new LinkedList<>();
@@ -33,7 +33,7 @@ public class OrderContainer {
 	}
 	
 	public void addOrder(Order order) {
-		orders.add(order);
+		orders.addFirst(order);
 	}
 
 }
