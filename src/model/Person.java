@@ -13,7 +13,4 @@ public abstract class Person {
 		return this.email;
 	}
 
-	public String getName() {
-		return this.name;
-	}
 }
