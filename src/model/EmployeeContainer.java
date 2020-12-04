@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EmployeeContainer {
-	private EmployeeContainer instance;
+	private EmployeeContainer instance; 
 	private Map<Integer , Employee> employees;
 	
 	private EmployeeContainer() {
