@@ -6,7 +6,6 @@ import java.util.Map;
 public class ProductContainer {
 	private ProductContainer instance; 
 	private Map<String , Product> products;
-	private String test;
 	
 	private ProductContainer() {
 		products = new HashMap<>();
