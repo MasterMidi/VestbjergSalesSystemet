@@ -20,7 +20,7 @@ public class CustomerContainer {
 		return instance;
 	}
 
-	public Person getEmployee(int phoneNumber) {
+	public Person getCustomer(int phoneNumber) {
 		return customers.get(phoneNumber);
 	}
 
