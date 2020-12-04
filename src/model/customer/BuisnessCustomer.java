@@ -5,7 +5,7 @@ import model.Person;
 public class BuisnessCustomer extends Person {
 	private String contact;
 	private String contactPhone;
-	private String CVRNumber;
+	private String CVR;
 	private double balance;
 
 	public BuisnessCustomer(String phoneNr, String email, String name, String contact, String contactPhone,
@@ -13,7 +13,7 @@ public class BuisnessCustomer extends Person {
 		super(phoneNr, email, name);
 		this.contact = contact;
 		this.contactPhone = contactPhone;
-		CVRNumber = cVRNumber;
+		CVR = cVRNumber;
 		this.balance = 0d;
 	}
 
@@ -34,7 +34,7 @@ public class BuisnessCustomer extends Person {
 	}
 
 	public String getCVRNumber() {
-		return CVRNumber;
+		return CVR;
 	}
 
 }
