@@ -15,6 +15,10 @@ public abstract class Product {
 		this.price = price;
 	}
 
+	public Product(String name, String barcode, String description) {
+		this(name, barcode, description, null);
+	}
+
 	public String getName() {
 		return name;
 	}

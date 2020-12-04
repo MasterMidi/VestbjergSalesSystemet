@@ -7,7 +7,6 @@ public abstract class Person {
 	private String name;
 
 	public Person(String phoneNr, String email, String name) {
-		super();
 		this.phoneNr = phoneNr;
 		this.email = email;
 		this.name = name;
