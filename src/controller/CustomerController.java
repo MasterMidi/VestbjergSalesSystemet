@@ -32,7 +32,7 @@ public class CustomerController {
 	
 	public PrivateCustomer getPrivateCustomer(String search)
 	{
-		return new PrivateCustomer();
+		return null;
 	}
 	
 	public boolean update()
