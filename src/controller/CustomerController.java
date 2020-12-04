@@ -1,7 +1,8 @@
 package controller;
 
-import model.PrivateCustomer;
+import model.customer.BuisnessCustomer;
 import model.customer.CustomerContainer;
+import model.customer.PrivateCustomer;
 
 public class CustomerController {
 	
@@ -12,36 +13,52 @@ public class CustomerController {
 		//customerContainer = CustomerContainer.getInstance();
 	}
 	
-	public boolean create(String name, String email, String phoneNr, String cpr)
+	public boolean createPrivateCustomer(String name, String email, String phoneNr, String cpr)
 	{
 		
-		//Customer customer = new Customer(name,email,phoneNr,cpr,0);
+		PrivateCustomer customer = new PrivateCustomer(phoneNr, email, name,cpr);
 		//return customerContainer.addCustomer(customer); <- boolean
 		
 		return true; // <- to be deleted!;
 	}
 	
-	public boolean create(String name, String email, String phoneNr, String cvr,String contactNumber, String contactPerson)
+	public boolean createBuisnessCustomer(String name, String email, String phoneNr, String cvr,String contactNumber, String contactPerson)
 	{
-		
-		//BuisnessCustomer customer = new Customer(name,email,phoneNr,cvr,contactNumber, contactPerson);
+
+		BuisnessCustomer customer = new BuisnessCustomer(phoneNr, email, name, contactNumber, contactPerson, cvr);
 		//return customerContainer.addCustomer(customer); <- boolean
 		
 		return true;
 	}
 	
-	public PrivateCustomer getPrivateCustomer(String search)
+	public PrivateCustomer getPrivateCustomer(String phoneNr)
 	{
+		
+		
 		return null;
 	}
 	
-	public boolean update()
+	public BuisnessCustomer getBuisnessCustomer(String phoneNr)
+	{
+		
+		
+		return null;
+	}
+	
+	public boolean updateBuisnessCustomer()
 	{
 		return true;
 	}
 	
-	public boolean delete()
+	public boolean deleteBuisnessCustomer(String phoneNr)
 	{
+		//getBuisnessCustomer(phoneNr).role = PersonRole.inactiveClient;
+		return true;
+	}
+	
+	public boolean deletePrivateCustomer(String phoneNr)
+	{
+		//getBuisnessCustomer(phoneNr).role = PersonRole.inactiveClient;
 		return true;
 	}
 	
