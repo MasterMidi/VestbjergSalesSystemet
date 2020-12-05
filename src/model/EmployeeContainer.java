@@ -18,8 +18,8 @@ public class EmployeeContainer {
 		return instance;
 	}
 	
-	public Employee getEmployee(int kundeNummer) {
-		return employees.get(kundeNummer);
+	public Employee getEmployee(int employeeNumber) {
+		return employees.get(employeeNumber);
 	}
 	
 	public void addEmployee(int kundeNummer, Employee employee) {
