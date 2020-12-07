@@ -9,7 +9,7 @@ import model.customer.PrivateCustomer;
 
 public class CustomerController {
 
-	CustomerContainer customerContainer;
+	private CustomerContainer customerContainer;
 
 	public CustomerController() {
 		customerContainer = CustomerContainer.getInstance();
