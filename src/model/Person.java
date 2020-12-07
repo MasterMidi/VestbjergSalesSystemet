@@ -33,5 +33,4 @@ public abstract class Person {
 	public void setRole(PersonRole newRole) {
 		this.role = newRole;
 	}
-	//fuck Magnus 
 }
