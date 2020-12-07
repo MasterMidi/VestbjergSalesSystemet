@@ -24,7 +24,10 @@ public class CustomerContainer {
 
 	public List<Person> findCustomers(String phone) {
 		List<Person> customerList = new ArrayList<>();
-		customerList.add(customers.get(phone));
+		Person currPerson = customers.get(phone);
+		if (currPerson != null) {
+			customerList.add(currPerson);
+		}
 		return customerList;
 	}
 
