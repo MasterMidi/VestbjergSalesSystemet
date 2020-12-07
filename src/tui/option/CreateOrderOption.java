@@ -16,12 +16,10 @@ public class CreateOrderOption extends Option {
 		OrderController orderCon = new OrderController();
 		System.out.println("****** " + getDescription() + "******");
 		//TODO Implement function.
-		System.out.println("Order Number: " + 123);
 		System.out.println("Scan products now - ");
 		
 		TextInput textinput = new TextInput();
 		String barcode = textinput.promptString("Enter Barcode: ");
-		System.out.println("Products scanned: 1. " + barcode);
 	}
 
 
