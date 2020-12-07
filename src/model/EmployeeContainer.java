@@ -22,8 +22,8 @@ public class EmployeeContainer {
 		return employees.get(employeeNumber);
 	}
 
-	public void addEmployee(int employeeNumber, Employee employee) {
-		employees.put(employeeNumber, employee);
+	public void addEmployee(Employee employee) {
+		employees.put(employee.getEmployeeNumber(), employee);
 	}
 
 }
