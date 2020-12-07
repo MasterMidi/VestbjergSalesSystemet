@@ -22,8 +22,8 @@ public class EmployeeContainer {
 		return employees.get(employeeNumber);
 	}
 
-	public boolean addEmployee(int kundeNummer, Employee employee) {
-		return employees.put(kundeNummer, employee);
+	public void addEmployee(int employeeNumber, Employee employee) {
+		employees.put(employeeNumber, employee);
 	}
 
 }
