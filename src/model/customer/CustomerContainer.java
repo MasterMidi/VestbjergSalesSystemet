@@ -7,7 +7,7 @@ import model.Person;
 
 public class CustomerContainer {
 	private static CustomerContainer instance;
-	private Map<Integer, Person> customers;
+	private Map<String, Person> customers;
 
 	private CustomerContainer() {
 		customers = new HashMap<>();
@@ -20,12 +20,12 @@ public class CustomerContainer {
 		return instance;
 	}
 
-	public Person getCustomer(int phoneNumber) {
+	public Person getCustomer(String phoneNumber) {
 		return customers.get(phoneNumber);
 	}
 
-	public void addCustomer(int phoneNumber, Person customer) {
-		customers.put(phoneNumber, customer);
+	public void addCustomer(Person customer) {
+		customers.put(customer.getPhoneNr(), customer);
 	}
 
 }
