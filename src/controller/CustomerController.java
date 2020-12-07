@@ -10,7 +10,7 @@ public class CustomerController {
 	
 	public CustomerController()
 	{
-		//customerContainer = CustomerContainer.getInstance();
+		customerContainer = CustomerContainer.getInstance();
 	}
 	
 	public boolean createPrivateCustomer(String name, String email, String phoneNr, String cpr)
@@ -31,10 +31,10 @@ public class CustomerController {
 		return true;
 	}
 	
-	public PrivateCustomer getPrivateCustomer(String phoneNr)
+	public PrivateCustomer getCustomer(String phoneNr)
 	{
 		
-		
+		//return container.getCustomer(phoneNr);
 		return null;
 	}
 	
