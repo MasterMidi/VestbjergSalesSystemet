@@ -1,5 +1,6 @@
 package model.product;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Price {
@@ -10,10 +11,15 @@ public class Price {
 		return price;
 	}
 
-	public Price(double price, Date startDate) {
+	public Price(Double price, Date startDate) {
 		super();
 		this.price = price;
 		this.startDate = startDate;
+	}
+
+	public Price(Double price) {
+		this(price, Calendar.getInstance().getTime());
+
 	}
 
 	public Date getStartDate() {
