@@ -30,5 +30,10 @@ public class EmployeeContainer {
 	{
 		return employees.size();
 	}
+	
+	public void prepareForTest()
+	{
+		employees.clear();
+	}
 
 }

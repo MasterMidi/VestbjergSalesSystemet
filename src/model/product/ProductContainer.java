@@ -25,5 +25,15 @@ public class ProductContainer {
 	public void addProduct(Product product) {
 		products.put(product.getBarcode(), product);
 	}
+	
+	public int getAmoutOfProducts()
+	{
+		return products.size();
+	}
+	
+	public void prepareForTest()
+	{
+		products.clear();
+	}
 
 }

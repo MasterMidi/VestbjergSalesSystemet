@@ -21,6 +21,7 @@ class EmployeeControllerTest {
 	void setUp() throws Exception {
 		controller = new EmployeeController();
 		container = EmployeeContainer.getInstance();
+		container.prepareForTest();
 	}
 
 	@AfterEach
@@ -30,9 +31,9 @@ class EmployeeControllerTest {
 
 	@Test
 	void testCreate() {
-		controller.createEmployee("12345678", "mail1@mail", "manager", 12345, PersonRole.manager);
-		controller.createEmployee("87654321", "mail2@mail", "ekspedient", 12345, PersonRole.clerk);
-		controller.createEmployee("38562857", "mail3@mail", "lager", 12345, PersonRole.warehouse);
+		controller.createEmployee("12345678", "mail1@mail", "manager", 12341, PersonRole.manager);
+		controller.createEmployee("87654321", "mail2@mail", "ekspedient", 12342, PersonRole.clerk);
+		controller.createEmployee("38562857", "mail3@mail", "lager", 12343, PersonRole.warehouse);
 		
 		assertEquals(3,container.amountOfEmployees());
 	}
