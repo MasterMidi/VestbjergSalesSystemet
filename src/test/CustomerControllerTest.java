@@ -47,18 +47,21 @@ class CustomerControllerTest {
 		controller.createBuisnessCustomer("Buisness Customer", "mail@mail.com", "12345678", "10150817", "12345678",
 				"Ike med M");
 		
-		Person customerFromController = controller.getCustomer("12345678");
+		List<Person> customerFromController = controller.findCustomers("12345678");
 		List<Person> customerFromContainer = container.findCustomers("12345678");
 		
 		if(customerFromContainer == null || customerFromController == null)
 			fail("either controller or container customer is null!");
 		
+		int sizeController = customerFromController.size();
+		if(sizeController != 1)
+			fail("CustomersFromContainer should be 1. Its " + sizeController + " now.");
 		
-		int size = customerFromContainer.size();
-		if(size != 1)
-			fail("CustomersFromContainer should be 1. Its " + size + " now.");
+		int sizeContainer = customerFromContainer.size();
+		if(sizeContainer != 1)
+			fail("CustomersFromContainer should be 1. Its " + sizeContainer + " now.");
 		
-		assertSame(customerFromController,customerFromContainer);
+		assertSame(customerFromController.get(0),customerFromContainer.get(0));
 	}
 	
 	@Test
@@ -67,9 +70,11 @@ class CustomerControllerTest {
 
 		controller.createPrivateCustomer("Navn", "email@gmail.com", "87654321", "0609001234");
 		
-		Person privateCustomer = controller.getCustomer("87654321");
+		List<Person> privateCustomer = controller.findCustomers("87654321");
 		
-		assertTrue(privateCustomer instanceof PrivateCustomer);
+		assertSame(1, privateCustomer.size());
+		
+		assertTrue(privateCustomer.get(0) instanceof PrivateCustomer);
 	}
 	
 	@Test
@@ -78,9 +83,11 @@ class CustomerControllerTest {
 		controller.createBuisnessCustomer("Buisness Customer", "mail@mail.com", "12345678", "10150817", "12345678",
 				"Ike med M");
 		
-		Person buisnessCustomer = controller.getCustomer("12345678");
+		List<Person> buisnessCustomer = controller.findCustomers("12345678");
 		
-		assertTrue(buisnessCustomer instanceof BuisnessCustomer);
+		assertSame(1, buisnessCustomer.size());
+		
+		assertTrue(buisnessCustomer.get(0) instanceof BuisnessCustomer);
 	}
 
 }
