@@ -1,6 +1,8 @@
 package model.customer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import model.Person;
@@ -20,29 +22,29 @@ public class CustomerContainer {
 		return instance;
 	}
 
-	public Person getCustomer(String phoneNumber) {
-		return customers.get(phoneNumber);
+	public List<Person> findCustomers(String phone) {
+		List<Person> customerList = new ArrayList<>();
+		customerList.add(customers.get(phone));
+		return customerList;
 	}
 
 	public void addCustomer(Person customer) {
 		customers.put(customer.getPhoneNr(), customer);
 	}
-	
 
 	/**
 	 * Used in unit test
+	 * 
 	 * @return the amount of customers in the map.
 	 */
-	public int amountOfCustomers()
-	{
+	public int amountOfCustomers() {
 		return customers.size();
 	}
-	
+
 	/**
 	 * Clears the customer map, to ensure test results are right
 	 */
-	public void prepareForTest()
-	{
+	public void prepareForTest() {
 		customers.clear();
 	}
 
