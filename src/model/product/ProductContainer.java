@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProductContainer {
-	private ProductContainer instance;
+	private static ProductContainer instance;
 	private Map<String, Product> products;
 
 	private ProductContainer() {
