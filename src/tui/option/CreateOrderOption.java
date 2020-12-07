@@ -1,6 +1,7 @@
 package tui.option;
 
 import controller.OrderController;
+import model.product.SellableProduct;
 import textinput.TextInput;
 import tui.Option;
 
@@ -20,12 +21,17 @@ public class CreateOrderOption extends Option {
 		System.out.println("Scan products now - ");
 		
 		boolean done = false;
+		SellableProduct currProduct = null;
 		while(!done) {
 			TextInput textinput = new TextInput();
 			String barcode = textinput.promptString("Enter Barcode [press 0 to stop]: ");
-			orderCon.getProduct(barcode);
 			
-			if(barcode.equals(0)) {
+			currProduct = orderCon.getProduct(barcode);
+			orderCon.getCurrentOrder().addOrderLine(currProduct);
+			SellableProduct prod = orderCon.getCurrentOrder().getOrderLineList().get(0).getProduct();
+			System.out.println(prod.getName());
+			
+			if(barcode.equals("0")) {
 				done = true;
 			}
 		}

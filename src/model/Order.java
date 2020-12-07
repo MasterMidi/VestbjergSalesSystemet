@@ -7,7 +7,7 @@ import java.util.List;
 import model.product.SellableProduct;
 
 public class Order {
-	private class OrderLine {
+	public class OrderLine {
 		private SellableProduct product;
 		private int amount;
 		private double price;
