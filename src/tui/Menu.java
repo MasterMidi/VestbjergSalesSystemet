@@ -17,7 +17,7 @@ public class Menu implements Selectable {
 		this.description = description;
 		this.cancelText = "Exit";
 
-		options = new ArrayList<>();		
+		options = new ArrayList<>();
 		textchoice = new TextChoice<>("****** " + description + " ******", true, new SellectableRenderer());
 	}
 
