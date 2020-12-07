@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EmployeeContainer {
-	private EmployeeContainer instance;
+	private static EmployeeContainer instance;
 	private Map<Integer, Employee> employees;
 
 	private EmployeeContainer() {
 		employees = new HashMap<>();
 	}
 
-	public EmployeeContainer getInstance() {
+	public static EmployeeContainer getInstance() {
 		if (instance == null) {
 			instance = new EmployeeContainer();
 		}
@@ -22,8 +22,8 @@ public class EmployeeContainer {
 		return employees.get(employeeNumber);
 	}
 
-	public void addEmployee(int employeeNumber, Employee employee) {
-		employees.put(employeeNumber, employee);
+	public void addEmployee(Employee employee) {
+		employees.put(employee.getEmployeeNumber(), employee);
 	}
 
 }

@@ -5,8 +5,8 @@ public class SellableProduct extends Product {
 	private int warehouseAmount;
 	private WarehouseStatus status;
 
-	public SellableProduct(String name, String barcode, String description, int warehouseAmount) {
-		super(name, barcode, description);
+	public SellableProduct(String name, String barcode, String description, Double price, int warehouseAmount) {
+		super(name, barcode, description, price);
 		this.warehouseAmount = warehouseAmount;
 		if (warehouseAmount > 0) {
 			this.status = WarehouseStatus.Instock;
@@ -14,6 +14,10 @@ public class SellableProduct extends Product {
 			this.status = WarehouseStatus.OutOfStock;
 		}
 
+	}
+
+	public SellableProduct(String name, String barcode, String description, int warehouseAmount) {
+		this(name, barcode, description, null, warehouseAmount);
 	}
 
 	public int getStock() {
