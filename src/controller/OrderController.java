@@ -34,7 +34,7 @@ public class OrderController {
 		}
 		return sellable;
 	}
-	
+
 	public void editProductPrice(int index, double price) {
 		order.editProductPrice(index, price);
 	}
@@ -56,7 +56,7 @@ public class OrderController {
 		orderContainer.addOrder(order);
 	}
 
-	public Order getOrder() {
+	public Order getCurrentOrder() {
 		return order;
 	}
 }
