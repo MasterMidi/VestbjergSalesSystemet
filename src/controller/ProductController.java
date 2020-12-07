@@ -5,8 +5,8 @@ import model.product.ProductContainer;
 import model.product.SellableProduct;
 
 public class ProductController {
-	ProductContainer productContainer;
-	Product currProduct;
+	private ProductContainer productContainer;
+	private Product currProduct;
 
 	public ProductController() {
 		productContainer = ProductContainer.getInstance();
