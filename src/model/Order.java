@@ -39,7 +39,7 @@ public class Order {
 		public void editPrice(double price) {
 			this.price = price;
 		}
-		
+
 		public double getTotal() {
 			return amount * price;
 		}
@@ -62,7 +62,7 @@ public class Order {
 
 	public Order() {
 		this.orderNumber = -1;
-		
+
 		orderLineList = new ArrayList<>();
 	}
 
@@ -121,7 +121,7 @@ public class Order {
 	public void setPayment(PaymentMethod payment) {
 		this.payment = payment;
 	}
-	
+
 	public Employee getEmployee() {
 		return employee;
 	}

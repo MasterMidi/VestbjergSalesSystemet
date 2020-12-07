@@ -15,39 +15,39 @@ import model.product.SellableProduct;
 public class OrderController {
 	private OrderContainer orderContainer;
 	private Order order;
-	
+
 	public OrderController() {
 		orderContainer = OrderContainer.getInstance();
 	}
-	
+
 	public void createOrder() {
 		order = new Order();
 		order.setEmployee(new EmployeeController().getCurrentEmployee());
 	}
-	
+
 	public SellableProduct getProduct(String barcode) {
 		Product product = ProductContainer.getInstance().getProduct(barcode);
 		SellableProduct sellable = null;
-		if(product instanceof SellableProduct) {
+		if (product instanceof SellableProduct) {
 			sellable = (SellableProduct) product;
 			order.addOrderLine(sellable);
 		}
 		return sellable;
 	}
-	
-	public boolean editProductPrice(int index, double price) {
-		return new ProductController().editProductPrice(index, price);
+
+	public void editProductPrice(int index, double price) {
+		order.editProductPrice(index, price);
 	}
-	
-	public List<Person> findCustomers(String phone){
+
+	public List<Person> findCustomers(String phone) {
 		return new CustomerController().findCustomers(phone);
 	}
-	
+
 	public void attachCustomer(String phone) {
 		Person customer = new CustomerController().findCustomers(phone).get(0);
 		order.setCustomer(customer);
 	}
-	
+
 	public void finishSale(PaymentMethod payment) {
 		order.setDate(Calendar.getInstance().getTime());
 		order.setStatus(OrderStatus.completed);
@@ -55,8 +55,8 @@ public class OrderController {
 		order.setPayment(payment);
 		orderContainer.addOrder(order);
 	}
-	
+
 	public void printReceipt() {
-		
+
 	}
 }
