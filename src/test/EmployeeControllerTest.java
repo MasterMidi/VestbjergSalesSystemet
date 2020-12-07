@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,8 +43,12 @@ class EmployeeControllerTest {
 	void testGet() {
 		controller.createEmployee("12345678", "mail1@mail", "manager", 12345, PersonRole.manager);
 		
+		
 		Employee controllerEmployee = controller.getEmployee(12345);
 		Employee containerEmployee = container.getEmployee(12345);
+		
+		if(controllerEmployee == null || containerEmployee == null)
+			fail("either controller or container employee is null!");
 		
 		assertSame(controllerEmployee,containerEmployee);
 	}
