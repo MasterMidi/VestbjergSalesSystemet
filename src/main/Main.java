@@ -6,10 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import textinput.TextInput;
+import tui.menu.MainMenu;
 
 public class Main {
 	public static void main(String[] args) {
-//		new Menu("Main menu").start();
+		new MainMenu().start();
 		
 		Calendar c = Calendar.getInstance();
 		Date dat = c.getTime();
