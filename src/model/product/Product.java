@@ -1,18 +1,24 @@
 package model.product;
 
+import java.util.Calendar;
+import java.util.LinkedList;
+
 public abstract class Product {
 
 	private String name;
 	private String barcode;
 	private String description;
-	private Price price;
+	private LinkedList<Price> prices;
 
-	public Product(String name, String barcode, String description, Price price) {
+	public Product(String name, String barcode, String description, Double price) {
 		super();
+		this.prices = new LinkedList<>();
 		this.name = name;
 		this.barcode = barcode;
 		this.description = description;
-		this.price = price;
+		if (price != null) {
+			prices.addFirst(new Price(price, Calendar.getInstance().getTime()));
+		}
 	}
 
 	public Product(String name, String barcode, String description) {
@@ -31,8 +37,8 @@ public abstract class Product {
 		return description;
 	}
 
-	public double getPrice() {
-		return price.getPrice();
+	public Double getPrice() {
+		return this.prices.get(0).getPrice();
 	}
 
 }
