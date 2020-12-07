@@ -1,6 +1,13 @@
 package textinput;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TextInput {
 	private Scanner scanner;
@@ -16,13 +23,11 @@ public class TextInput {
 	}
 
 	public int promptInt(String question, String complaint) {
-		int number = 0;
-		boolean done = false;
+		int number = -1;
 
-		while (!done) {
+		while (number == -1) {
 			try {
 				number = Integer.parseInt(promptString(question));
-				done = true;
 			} catch (NumberFormatException e) {
 				System.out.println(complaint);
 			}
@@ -50,6 +55,24 @@ public class TextInput {
 		}
 
 		return answer;
+	}
+
+	public Date promptDate(String question, String format, String deliminator) {
+		DateFormat df = new SimpleDateFormat(format);
+		Date date = null;
+
+		while (date == null) {
+			try {
+				String input = promptString("What date? (" + format + ")")
+						.replaceAll("[^\\d]+", deliminator);
+				
+				date = df.parse(input);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return date;
 	}
 
 	private static void printQuestion(String question) {
