@@ -27,5 +27,23 @@ public class CustomerContainer {
 	public void addCustomer(Person customer) {
 		customers.put(customer.getPhoneNr(), customer);
 	}
+	
+
+	/**
+	 * Used in unit test
+	 * @return the amount of customers in the map.
+	 */
+	public int amountOfCustomers()
+	{
+		return customers.size();
+	}
+	
+	/**
+	 * Clears the customer map, to ensure test results are right
+	 */
+	public void prepareForTest()
+	{
+		customers.clear();
+	}
 
 }
