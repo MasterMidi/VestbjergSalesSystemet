@@ -3,6 +3,7 @@ package textinput;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -56,17 +57,14 @@ public class TextInput {
 		return answer;
 	}
 
-	public Date promptDate(String question, String format) {
-		Pattern pattern = Pattern.compile("");
-//		String deliminator = 
+	public Date promptDate(String question, String format, String deliminator) {
 		DateFormat df = new SimpleDateFormat(format);
 		Date date = null;
 
 		while (date == null) {
 			try {
 				String input = promptString("What date? (" + format + ")")
-						.replaceAll("[^\\d]+", "-");
-				Matcher matcher = pattern.matcher(input);
+						.replaceAll("[^\\d]+", deliminator);
 				
 				date = df.parse(input);
 			} catch (ParseException e) {
