@@ -56,7 +56,7 @@ public class OrderController {
 		orderContainer.addOrder(order);
 	}
 
-	public void printReceipt() {
-
+	public Order getOrder() {
+		return order;
 	}
 }

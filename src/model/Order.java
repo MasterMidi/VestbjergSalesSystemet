@@ -49,7 +49,7 @@ public class Order {
 		}
 	}
 
-	private int orderNumber;
+	private String orderNumber;
 	private boolean delivery;
 	private Date date;
 	private Date deliveryDate;
@@ -61,16 +61,15 @@ public class Order {
 	private List<OrderLine> orderLineList;
 
 	public Order() {
-		this.orderNumber = -1;
-
+		this.orderNumber = null;
 		orderLineList = new ArrayList<>();
 	}
 
-	public int getOrderNumber() {
+	public String getOrderNumber() {
 		return orderNumber;
 	}
 
-	public void setOrderNumber(int orderNumber) {
+	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
