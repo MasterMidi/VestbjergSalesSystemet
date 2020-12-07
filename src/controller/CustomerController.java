@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import model.Person;
 import model.customer.BuisnessCustomer;
 import model.customer.CustomerContainer;
@@ -27,8 +29,8 @@ public class CustomerController {
 		customerContainer.addCustomer(customer);
 	}
 
-	public Person getCustomer(String phoneNr) {
-		return customerContainer.getCustomer(phoneNr);
+	public List<Person> findCustomers(String phoneNr) {
+		return customerContainer.findCustomers(phoneNr);
 	}
 
 }
