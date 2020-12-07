@@ -10,8 +10,9 @@ import tui.menu.MainMenu;
 
 public class Main {
 	public static void main(String[] args) {
+		new TryMe();
 		new MainMenu().start();
-
+		
 		Calendar c = Calendar.getInstance();
 		Date dat = c.getTime();
 		System.out.println(dat);
