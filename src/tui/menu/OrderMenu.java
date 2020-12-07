@@ -6,8 +6,7 @@ public class OrderMenu extends Menu {
 
 	public OrderMenu() {
 		super("Order Menu");
-		
-		
+
 	}
 
 }

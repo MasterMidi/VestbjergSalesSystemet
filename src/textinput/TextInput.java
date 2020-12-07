@@ -3,11 +3,8 @@ package textinput;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TextInput {
 	private Scanner scanner;
@@ -63,9 +60,8 @@ public class TextInput {
 
 		while (date == null) {
 			try {
-				String input = promptString("What date? (" + format + ")")
-						.replaceAll("[^\\d]+", deliminator);
-				
+				String input = promptString("What date? (" + format + ")").replaceAll("[^\\d]+", deliminator);
+
 				date = df.parse(input);
 			} catch (ParseException e) {
 				e.printStackTrace();
