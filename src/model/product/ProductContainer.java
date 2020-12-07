@@ -11,7 +11,7 @@ public class ProductContainer {
 		products = new HashMap<>();
 	}
 
-	public ProductContainer getInstance() {
+	public static ProductContainer getInstance() {
 		if (instance == null) {
 			instance = new ProductContainer();
 		}
