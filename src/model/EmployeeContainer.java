@@ -25,5 +25,10 @@ public class EmployeeContainer {
 	public void addEmployee(Employee employee) {
 		employees.put(employee.getEmployeeNumber(), employee);
 	}
+	
+	public int amountOfEmployees()
+	{
+		return employees.size();
+	}
 
 }

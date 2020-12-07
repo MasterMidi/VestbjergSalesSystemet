@@ -7,6 +7,7 @@ import model.PersonRole;
 public class EmployeeController {
 
 	private EmployeeContainer container;
+	private Employee currentEmployee;
 	
 	public EmployeeController()
 	{
@@ -20,9 +21,19 @@ public class EmployeeController {
 		
 		return employee;
 	}	
+	
+	public Employee getCurrentEmployee() {
+		return currentEmployee;
+	}
 
 	public Employee getEmployee(int employeeNumber) {
 		return container.getEmployee(employeeNumber);
 	}
+	
+	public void login(int employeeNumber)
+	{
+		currentEmployee = getEmployee(employeeNumber);
+	}
+	
 
 }
