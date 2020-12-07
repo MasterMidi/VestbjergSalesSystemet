@@ -35,8 +35,8 @@ public class OrderController {
 		return sellable;
 	}
 	
-	public boolean editProductPrice(int index, double price) {
-		return new ProductController().editProductPrice(index, price);
+	public void editProductPrice(int index, double price) {
+		order.editProductPrice(index, price);
 	}
 	
 	public List<Person> findCustomers(String phone){
