@@ -1,6 +1,7 @@
 package model.product;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 
 public abstract class Product {
@@ -17,7 +18,7 @@ public abstract class Product {
 		this.barcode = barcode;
 		this.description = description;
 		if (price != null) {
-			prices.addFirst(new Price(price, Calendar.getInstance().getTime()));
+			prices.addFirst(new Price(price));
 		}
 	}
 
@@ -37,8 +38,25 @@ public abstract class Product {
 		return description;
 	}
 
+	public Double getPrice(Date date) {
+		Price currPrice = null;
+		int index = 0;
+		boolean found = false;
+		while (!found && index < prices.size()) {
+			currPrice = prices.get(index);
+			if (currPrice.getStartDate().before(date)) {
+				found = true;
+			}
+			index++;
+		}
+		return currPrice.getPrice();
+
+	}
+
 	public Double getPrice() {
-		return this.prices.get(0).getPrice();
+		Date currTime = Calendar.getInstance().getTime();
+		return getPrice(currTime);
+
 	}
 
 }
