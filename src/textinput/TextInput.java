@@ -19,14 +19,14 @@ public class TextInput {
 		return input;
 	}
 
-	public int promptInt(String question, String complaint) {
+	public int promptInt(String question) {
 		int number = -1;
 
 		while (number == -1) {
 			try {
 				number = Integer.parseInt(promptString(question));
 			} catch (NumberFormatException e) {
-				System.out.println(complaint);
+				System.out.println("Input has to be a number, try again");
 			}
 		}
 

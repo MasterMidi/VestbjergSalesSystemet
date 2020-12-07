@@ -7,7 +7,6 @@ import java.util.List;
 public class TextChoice<T> {
 	private String description;
 	private String cancelText;
-	private String numberComplaint;
 	private boolean cancellable;
 	private ListRenderer<T> renderer;
 	private List<T> options;
@@ -19,7 +18,6 @@ public class TextChoice<T> {
 		this.renderer = renderer;
 
 		this.cancelText = "cancel";
-		this.numberComplaint = "Input has to be a number, try again";
 
 		this.options = new ArrayList<T>();
 		this.options.add(null);
@@ -71,7 +69,7 @@ public class TextChoice<T> {
 		int startIndex = cancellable ? 0 : 1;		
 		int input = -1;
 		do {
-			input = textinput.promptInt(String.format("%s (%s - %s)", question, startIndex, options.size() - 1), numberComplaint);
+			input = textinput.promptInt(String.format("%s (%s - %s)", question, startIndex, options.size() - 1));
 		} while (input < startIndex || input >= options.size());
 
 		return input;
@@ -83,10 +81,6 @@ public class TextChoice<T> {
 
 	public void setCancelText(String cancelText) {
 		this.cancelText = cancelText;
-	}
-
-	public void setNumberComplaint(String numberComplaint) {
-		this.numberComplaint = numberComplaint;
 	}
 
 	public void setCancellable(boolean cancellable) {
