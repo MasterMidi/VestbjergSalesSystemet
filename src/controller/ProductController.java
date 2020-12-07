@@ -21,7 +21,7 @@ public class ProductController {
 		productContainer.addProduct(new SellableProduct(name, barcode, description, price, amount));
 	}
 
-	public void createSellableProdct(String name, String barcode, String description, int amount) {
+	public void createSellableProduct(String name, String barcode, String description, int amount) {
 		createSellableProduct(name, barcode, description, null, amount);
 	}
 }

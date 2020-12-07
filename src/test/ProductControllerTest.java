@@ -30,8 +30,8 @@ class ProductControllerTest {
 
 	@Test
 	void testCreate() {
-		controller.createSellableProdct("Name", "12345", "This is a description", 3);
-		controller.createSellableProdct("Name2", "54321", "This is a description, but for another product", 2);
+		controller.createSellableProduct("Name", "12345", "This is a description", 3);
+		controller.createSellableProduct("Name2", "54321", "This is a description, but for another product", 2);
 		
 		assertEquals(2,container.getAmoutOfProducts());
 	}
@@ -39,7 +39,7 @@ class ProductControllerTest {
 	
 	@Test
 	void testGet() {
-		controller.createSellableProdct("Name", "12345", "This is a description", 3);
+		controller.createSellableProduct("Name", "12345", "This is a description", 3);
 		
 		Product controllerProduct = controller.getProduct("12345");
 		Product containerProduct = container.getProduct("12345");

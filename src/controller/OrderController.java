@@ -44,7 +44,7 @@ public class OrderController {
 	}
 
 	public void attachCustomer(String phone) {
-		Person customer = new CustomerController().findCustomers(phone).get(0);
+		Person customer = findCustomers(phone).get(0);
 		order.setCustomer(customer);
 	}
 
