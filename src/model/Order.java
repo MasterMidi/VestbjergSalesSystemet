@@ -50,16 +50,19 @@ public class Order {
 	}
 
 	private int orderNumber;
-	private Date date;
-	private OrderStatus status;
 	private boolean delivery;
+	private Date date;
 	private Date deliveryDate;
 	private String specialInstructions;
+	private Employee employee;
+	private Person customer;
+	private OrderStatus status;
 	private PaymentMethod payment;
 	private List<OrderLine> orderLineList;
 
-	public Order(int orderNumber) {
-		this.orderNumber = orderNumber;
+	public Order() {
+		this.orderNumber = -1;
+		
 		orderLineList = new ArrayList<>();
 	}
 
@@ -117,6 +120,22 @@ public class Order {
 
 	public void setPayment(PaymentMethod payment) {
 		this.payment = payment;
+	}
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Person getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Person customer) {
+		this.customer = customer;
 	}
 
 	public List<OrderLine> getOrderLineList() {
