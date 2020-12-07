@@ -3,6 +3,9 @@ package test;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +48,15 @@ class CustomerControllerTest {
 				"Ike med M");
 		
 		Person customerFromController = controller.getCustomer("12345678");
-		Person customerFromContainer = container.getCustomer("12345678");
+		List<Person> customerFromContainer = container.findCustomers("12345678");
+		
+		if(customerFromContainer == null || customerFromController == null)
+			fail("either controller or container customer is null!");
+		
+		
+		int size = customerFromContainer.size();
+		if(size != 1)
+			fail("CustomersFromContainer should be 1. Its " + size + " now.");
 		
 		assertSame(customerFromController,customerFromContainer);
 	}
