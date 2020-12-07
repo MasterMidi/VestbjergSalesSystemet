@@ -16,7 +16,7 @@ public class EmployeeController {
 	public Employee createEmployee(String phoneNr, String email, String name, int employeeNumber, PersonRole role) {
 		
 		Employee employee = new Employee(phoneNr, email, name, employeeNumber, role);
-		container.addEmployee(employeeNumber, employee);
+		container.addEmployee(employee);
 		
 		return employee;
 	}	
