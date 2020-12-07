@@ -1,9 +1,26 @@
 package model;
-import java.util.Date;
 
 public class Location {
 	private String adress;
 	private String phoneNr;
-	private Date open;
-	private Date closed;
+	private String openingHours;
+
+	public Location(String adress, String phoneNr, String openingHours) {
+		super();
+		this.adress = adress;
+		this.phoneNr = phoneNr;
+		this.openingHours = openingHours;
+	}
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public String getPhoneNr() {
+		return phoneNr;
+	}
+
+	public String getOpeningHours() {
+		return openingHours;
+	}
 }
