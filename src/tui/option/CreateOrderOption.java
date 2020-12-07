@@ -14,8 +14,8 @@ public class CreateOrderOption extends Option {
 	//Mock data for create order.
 	public void start() {
 		OrderController orderCon = new OrderController();
-		System.out.println("****** Create Order ******");
-		//NOTE ADD GET ORDER NUMBER METHOD
+		System.out.println("****** " + getDescription() + "******");
+		//TODO Implement function.
 		System.out.println("Order Number: " + 123);
 		System.out.println("Scan products now - ");
 		

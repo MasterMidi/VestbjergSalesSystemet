@@ -10,6 +10,9 @@ public class MainMenu extends Menu {
 		
 		super.addOption(new CreateOrderOption());
 		super.addOption(new OrderMenu());
+		super.addOption(new CustomerMenu());
+		super.addOption(new EmployeeMenu());		
+		super.addOption(new StatisticsMenu());
 	}
 
 }
