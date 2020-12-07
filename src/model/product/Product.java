@@ -1,8 +1,12 @@
 package model.product;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
+
+import model.Placement;
 
 public abstract class Product {
 
@@ -10,10 +14,11 @@ public abstract class Product {
 	private String barcode;
 	private String description;
 	private LinkedList<Price> prices;
+	private List<Placement> placements;
 
 	public Product(String name, String barcode, String description, Double price) {
-		super();
 		this.prices = new LinkedList<>();
+		this.placements = new ArrayList<>();
 		this.name = name;
 		this.barcode = barcode;
 		this.description = description;
@@ -28,6 +33,10 @@ public abstract class Product {
 
 	public String getName() {
 		return name;
+	}
+
+	public void addPlacement(Placement placement) {
+		placements.add(placement);
 	}
 
 	public String getBarcode() {
@@ -57,6 +66,10 @@ public abstract class Product {
 		Date currTime = Calendar.getInstance().getTime();
 		return getPrice(currTime);
 
+	}
+
+	public List<Placement> getPlacements() {
+		return new ArrayList<Placement>(placements);
 	}
 
 }
