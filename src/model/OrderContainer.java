@@ -35,5 +35,15 @@ public class OrderContainer {
 	public void addOrder(Order order) {
 		orders.addFirst(order);
 	}
+	
+	public void clear()
+	{
+		orders.clear();
+	}
+	
+	public int getOrderCount()
+	{
+		return orders.size();
+	}
 
 }

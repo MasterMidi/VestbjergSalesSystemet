@@ -22,7 +22,7 @@ class EmployeeControllerTest {
 	void setUp() throws Exception {
 		controller = new EmployeeController();
 		container = EmployeeContainer.getInstance();
-		container.prepareForTest();
+		container.clear();
 	}
 
 	@AfterEach
@@ -36,7 +36,7 @@ class EmployeeControllerTest {
 		controller.createEmployee("87654321", "mail2@mail", "ekspedient", 12342, PersonRole.clerk);
 		controller.createEmployee("38562857", "mail3@mail", "lager", 12343, PersonRole.warehouse);
 		
-		assertEquals(3,container.amountOfEmployees());
+		assertEquals(3,container.getEmployeeCount());
 	}
 	
 	@Test

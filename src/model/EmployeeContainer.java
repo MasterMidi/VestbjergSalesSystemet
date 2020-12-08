@@ -26,12 +26,12 @@ public class EmployeeContainer {
 		employees.put(employee.getEmployeeNumber(), employee);
 	}
 	
-	public int amountOfEmployees()
+	public int getEmployeeCount()
 	{
 		return employees.size();
 	}
 	
-	public void prepareForTest()
+	public void clear()
 	{
 		employees.clear();
 	}

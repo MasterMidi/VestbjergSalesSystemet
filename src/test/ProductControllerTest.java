@@ -21,7 +21,7 @@ class ProductControllerTest {
 	void setUp() throws Exception {
 		controller = new ProductController();
 		container = ProductContainer.getInstance();
-		container.prepareForTest();
+		container.clear();
 	}
 
 	@AfterEach
@@ -33,7 +33,7 @@ class ProductControllerTest {
 		controller.createSellableProdct("Name", "12345", "This is a description", 3);
 		controller.createSellableProdct("Name2", "54321", "This is a description, but for another product", 2);
 		
-		assertEquals(2,container.getAmoutOfProducts());
+		assertEquals(2,container.getProductCount());
 	}
 	
 	
