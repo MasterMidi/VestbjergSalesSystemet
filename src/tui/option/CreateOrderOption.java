@@ -62,21 +62,14 @@ public class CreateOrderOption extends Option {
 		return input;
 	}
 
-	private void addProductToOrderline(SellableProduct currProduct) {
-		orderCon.getCurrentOrder().addOrderLine(currProduct);
-		SellableProduct prod = orderCon.getCurrentOrder().getOrderLineList().get(0).getProduct();
-		System.out.println(prod.getName());
-	}
-
 	private void scanProducts(TextInput textinput) {
 		boolean done = false;
 		SellableProduct currProduct = null;
 		while (!done) {
 			String barcode = textinput.promptString("Enter Barcode [0 to stop]: ");
-			currProduct = orderCon.getProduct(barcode);
-
+			currProduct = orderCon.scanProduct(barcode);
 			if (currProduct != null) {
-				addProductToOrderline(currProduct);
+				System.out.println("Scanned: " + currProduct);
 			}
 			if (barcode.equals("0")) {
 				done = true;

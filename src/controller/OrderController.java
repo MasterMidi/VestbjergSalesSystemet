@@ -34,9 +34,21 @@ public class OrderController {
 		}
 		return sellable;
 	}
-
+	
 	public SellableProduct getProduct(String barcode) {
 		return getProduct(barcode, 1);
+	}
+
+	public SellableProduct scanProduct(String barcode) {
+		SellableProduct currentProduct = getProduct(barcode);
+		if (currentProduct != null) {
+			addProductToOrderLine(currentProduct);
+		}
+		return currentProduct;
+	}
+
+	public void addProductToOrderLine(SellableProduct sellable) {
+		order.addOrderLine(sellable);
 	}
 
 	public void editProductPrice(int index, double price) {
