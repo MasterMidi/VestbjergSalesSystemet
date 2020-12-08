@@ -34,6 +34,6 @@ public class TryMe {
 		orderController.editProductAmount(3, 2);
 		orderController.attachCustomer("12345678");
 		orderController.finishSale(PaymentMethod.creditcard);
-//		new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
+		// new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
 	}
 }
