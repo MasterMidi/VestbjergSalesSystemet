@@ -48,7 +48,7 @@ public class CreateOrderOption extends Option {
 			String barcode = textinput.promptString("Enter Barcode [0 to stop]: ");
 			currProduct = orderCon.scanProduct(barcode);
 			if (currProduct != null) {
-				System.out.println("Scanned: " + currProduct);
+				System.out.println("Scanned: " + currProduct.getName());
 			}
 			if (barcode.equals("0")) {
 				done = true;
