@@ -32,6 +32,20 @@ public class TextInput {
 
 		return number;
 	}
+	
+	public double promptDouble(String question) {
+		double number = -1d;
+		
+		while (number == -1d) {
+			try {
+				number = Double.parseDouble(promptString(question));
+			} catch (NumberFormatException e) {
+				System.out.println("Input has to be a number, try again");
+			}
+		}
+		
+		return number;
+	}
 
 	public boolean promptBoolean(String question) {
 		boolean done = false;

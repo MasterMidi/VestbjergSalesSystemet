@@ -1,10 +1,15 @@
 package tui.option;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 import controller.OrderController;
 import model.Order;
 import model.Order.OrderLine;
+import model.PaymentMethod;
 import model.product.SellableProduct;
 import textinput.ListRenderer;
 import textinput.TextChoice;
@@ -32,6 +37,15 @@ public class CreateOrderOption extends Option {
 		if (textinput.promptBoolean("Would you like to change the price of any of the products you scanned?")) {
 			editProductPrice(orderCon.getCurrentOrder());
 		}
+		PaymentMethod paymentMethod = new TextChoice<PaymentMethod>("Payment methods", false,
+				new ListRenderer<PaymentMethod>() {
+					@Override
+					public String display(PaymentMethod option) {
+						return option.toString();
+					}
+				}, new ArrayList<PaymentMethod>(EnumSet.allOf(PaymentMethod.class))).promptMenu("Choose a method");
+
+		orderCon.finishSale(paymentMethod);
 		if (textinput.promptBoolean("Print the receipt?")) {
 			printReceipt(orderCon.getCurrentOrder());
 		}
@@ -42,11 +56,29 @@ public class CreateOrderOption extends Option {
 		System.out.println(String.format("* %s\t: %s\t*", "Ordernumber", order.getOrderNumber()));
 		System.out.println("*-------------------------------*");
 		for (OrderLine line : order.getOrderLineList()) {
-			System.out.println(String.format("* %s: %s x %s\t*", formatString(line.getProduct().getName(), 11),
-					line.getAmount(), line.getPrice() + " DKK"));
+			System.out.println(String.format("* %s: %s x %.2f,-\t*", formatString(line.getProduct().getName(), 11),
+					line.getAmount(), line.getPrice()));
 		}
 		System.out.println("*-------------------------------*");
-		System.out.println(String.format("* Total price\t: %s\t*", order.getTotal() + " DKK"));
+		System.out.println(String.format("* Total price\t: %.2f,-\t*", order.getTotal()));
+		System.out.println(String.format("* Tax amounts\t: %.2f,-\t*", order.getTotal() * 0.20));
+		System.out.println(String.format("* Cashier\t: %s*", formatString(order.getEmployee().getName(), 11)));
+		switch (order.getPayment()) {
+		case cash:
+			System.out.println("* Paid with cash\t\t*");
+			break;
+		case creditcard:
+			System.out.println("* Paid with creditcard\t\t*");
+			break;
+		case invoice:
+			System.out.println(String.format("* Customer\t: %s*", formatString(order.getCustomer().getName(), 11)));
+			System.out.println("* Paid over invoice\t\t*");
+			break;
+		default:
+			break;
+		}
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		System.out.println(String.format("* Payment date\t: %s*", formatString(df.format(order.getDate()), 11)));
 		System.out.println("*********************************");
 	}
 

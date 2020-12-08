@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import model.product.SellableProduct;
@@ -30,6 +31,10 @@ public class Order {
 
 		public void setAmount(int amount) {
 			this.amount = amount;
+		}
+
+		public void addAmount(int amount) {
+			this.amount += amount;
 		}
 
 		public double getPrice() {
@@ -140,11 +145,29 @@ public class Order {
 	public List<OrderLine> getOrderLineList() {
 		return new ArrayList<>(orderLineList);
 	}
-	
+
+	private int orderLineContainsProduct(SellableProduct product) {
+		int index = -1;
+		Iterator<OrderLine> it = orderLineList.iterator();
+
+		for (int i = 0; index == -1 && it.hasNext(); i++) {
+			if (it.next().getProduct() == product) {
+				index = i;
+			}
+		}
+
+		return index;
+	}
+
 	public void addOrderLine(SellableProduct product, int amount) {
 		if (product != null) {
-			OrderLine ol = new OrderLine(product, amount);
-			orderLineList.add(ol);
+			int index = orderLineContainsProduct(product);
+			if (index != -1) {
+				orderLineList.get(index).addAmount(amount);
+			} else {
+				OrderLine ol = new OrderLine(product, amount);
+				orderLineList.add(ol);
+			}
 		}
 	}
 
@@ -155,18 +178,18 @@ public class Order {
 	public void editProductPrice(int index, double price) {
 		orderLineList.get(index).editPrice(price);
 	}
-	
+
 	public void editProductAmount(int index, int amount) {
 		orderLineList.get(index).setAmount(amount);
 	}
-	
+
 	public double getTotal() {
-		int total = -1;
-		
-		for(OrderLine line : orderLineList) {
+		int total = 0;
+
+		for (OrderLine line : orderLineList) {
 			total += line.getTotal();
 		}
-		
+
 		return total;
 	}
 }
