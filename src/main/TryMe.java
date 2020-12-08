@@ -1,5 +1,6 @@
 package main;
 
+import controller.CustomerController;
 import controller.EmployeeController;
 import controller.OrderController;
 import controller.ProductController;
@@ -12,12 +13,16 @@ import tui.option.CreateOrderOption;
 public class TryMe {
 	ProductController prodCon;
 	EmployeeController empCon;
+	CustomerController cusCon;
 
 	public TryMe() {
 		prodCon = new ProductController();
 		empCon = new EmployeeController();
+		cusCon = new CustomerController();
 		prodCon.createSellableProduct("Magnuses gamle sko", "1111", "De lugter lidt", 200d, 10);
 		empCon.createEmployee("10101010", "hej@hejsa.dk", "Mike", 4321, PersonRole.manager);
+		cusCon.createPrivateCustomer("Default Cash customer", "N/A", "0000", "N/A");
+		cusCon.createPrivateCustomer("Michael", "bigbutts@gmail.com", "60495804", "290598-0117");
 		CustomerContainer.getInstance()
 				.addCustomer(new PrivateCustomer("12345678", "somehting@gmail.com", "My man", "87654321"));
 		prodCon.createSellableProduct("Toothbrush", "12345678", "A toothbrush", 20d, 1);
