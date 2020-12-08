@@ -8,16 +8,15 @@ import model.OrderContainer;
 import model.OrderStatus;
 import model.PaymentMethod;
 import model.Person;
-import model.product.Product;
-import model.product.ProductContainer;
 import model.product.SellableProduct;
 
 public class OrderController {
 	private OrderContainer orderContainer;
+	private ProductController productController;
 	private Order order;
 
 	public OrderController() {
-		orderContainer = OrderContainer.getInstance();
+		productController = new ProductController();
 	}
 
 	public void createOrder() {
@@ -26,12 +25,7 @@ public class OrderController {
 	}
 
 	public SellableProduct getProduct(String barcode) {
-		Product product = ProductContainer.getInstance().getProduct(barcode);
-		SellableProduct sellable = null;
-		if (product instanceof SellableProduct) {
-			sellable = (SellableProduct) product;
-		}
-		return sellable;
+		return productController.getProduct(barcode);
 	}
 
 	public SellableProduct scanProduct(String barcode) {

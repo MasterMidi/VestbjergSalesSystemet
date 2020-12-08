@@ -21,10 +21,10 @@ public class OrderContainer {
 	public Order getOrder(String orderNumber) {
 		Order res = null;
 		boolean done = false;
-		int i = 0;
-		while (!done && i < orders.size()) {
-			if (orders.get(i).getOrderNumber().equals(orderNumber)) {
-				res = orders.get(i);
+		int index = 0;
+		while (!done && index < orders.size()) {
+			if (orders.get(index).getOrderNumber().equals(orderNumber)) {
+				res = orders.get(index);
 				done = true;
 			}
 		}
