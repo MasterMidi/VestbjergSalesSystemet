@@ -39,5 +39,15 @@ public class OrderContainer {
 		order.setOrderNumber(orderNumber);
 		orders.addFirst(order);
 	}
+	
+	public void clear()
+	{
+		orders.clear();
+	}
+	
+	public int getOrderCount()
+	{
+		return orders.size();
+	}
 
 }

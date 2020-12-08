@@ -40,14 +40,14 @@ public class CustomerContainer {
 	 * 
 	 * @return the amount of customers in the map.
 	 */
-	public int amountOfCustomers() {
+	public int getCustomerCount() {
 		return customers.size();
 	}
 
 	/**
 	 * Clears the customer map, to ensure test results are right
 	 */
-	public void prepareForTest() {
+	public void clear() {
 		customers.clear();
 	}
 

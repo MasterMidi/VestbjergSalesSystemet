@@ -26,12 +26,12 @@ public class ProductContainer {
 		products.put(product.getBarcode(), product);
 	}
 	
-	public int getAmoutOfProducts()
+	public int getProductCount()
 	{
 		return products.size();
 	}
 	
-	public void prepareForTest()
+	public void clear()
 	{
 		products.clear();
 	}

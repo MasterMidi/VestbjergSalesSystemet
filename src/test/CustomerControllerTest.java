@@ -26,7 +26,7 @@ class CustomerControllerTest {
 	void setUp() throws Exception {
 		controller = new CustomerController();
 		container = CustomerContainer.getInstance();
-		container.prepareForTest();
+		container.clear();
 	}
 
 	@AfterEach
@@ -39,7 +39,7 @@ class CustomerControllerTest {
 		controller.createBuisnessCustomer("Buisness Customer", "mail@mail.com", "12345678", "10150817", "12345678",
 				"Ike med M");
 		controller.createPrivateCustomer("Navn", "email@gmail.com", "87654321", "0609001234");
-		assertEquals(2, container.amountOfCustomers());
+		assertEquals(2, container.getCustomerCount());
 	}
 
 	@Test
