@@ -140,15 +140,29 @@ public class Order {
 	public List<OrderLine> getOrderLineList() {
 		return new ArrayList<>(orderLineList);
 	}
-
-	public void addOrderLine(SellableProduct product) {
+	
+	public void addOrderLine(SellableProduct product, int amount) {
 		if (product != null) {
-			OrderLine ol = new OrderLine(product);
+			OrderLine ol = new OrderLine(product, amount);
 			orderLineList.add(ol);
 		}
 	}
 
+	public void addOrderLine(SellableProduct product) {
+		addOrderLine(product, 1);
+	}
+
 	public void editProductPrice(int index, double price) {
 		orderLineList.get(index).editPrice(price);
+	}
+	
+	public double getTotal() {
+		int total = -1;
+		
+		for(OrderLine line : orderLineList) {
+			total += line.getTotal();
+		}
+		
+		return total;
 	}
 }

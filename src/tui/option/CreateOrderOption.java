@@ -32,13 +32,34 @@ public class CreateOrderOption extends Option {
 	}
 
 	public void printReceipt(Order order) {
-		System.out.println("******************************");
-		System.out.println(String.format("* %s: %s   *", "Ordernumber", order.getOrderNumber()));
+		System.out.println("*********************************");
+		System.out.println(String.format("* %s\t: %s\t*", "Ordernumber", order.getOrderNumber()));
+		System.out.println("*-------------------------------*");
 		for (OrderLine line : order.getOrderLineList()) {
-			System.out.println(String.format("* %s: %s x %s *", line.getProduct().getName().substring(0, 16),
-					line.getAmount(), line.getPrice()));
+			System.out.println(String.format("* %s: %s x %s\t*", formatString(line.getProduct().getName(), 11),
+					line.getAmount(), line.getPrice() + " DKK"));
 		}
-		System.out.println("******************************");
+		System.out.println("*-------------------------------*");
+		System.out.println(String.format("* Total price\t: %s\t*", order.getTotal() + " DKK"));
+		System.out.println("*********************************");
+	}
+	
+	private String formatString(String input, int length) {
+		try {
+			input = input.substring(0, length) + "...";
+		} catch(Exception e) {
+			int tabs = -1;
+			if(input.length() < 6) {
+				tabs = 2;
+			} else {
+				tabs = 1;
+			}
+			for(int i = 0; i < tabs; i++) {
+				input += "\t";
+			}
+		}
+		
+		return input;
 	}
 
 	private void addProductToOrderline(SellableProduct currProduct) {

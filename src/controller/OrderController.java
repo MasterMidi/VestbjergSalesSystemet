@@ -24,15 +24,19 @@ public class OrderController {
 		order = new Order();
 		order.setEmployee(new EmployeeController().getCurrentEmployee());
 	}
-
-	public SellableProduct getProduct(String barcode) {
+	
+	public SellableProduct getProduct(String barcode, int amount) {
 		Product product = ProductContainer.getInstance().getProduct(barcode);
 		SellableProduct sellable = null;
 		if (product instanceof SellableProduct) {
 			sellable = (SellableProduct) product;
-			order.addOrderLine(sellable);
+			order.addOrderLine(sellable, amount);
 		}
 		return sellable;
+	}
+
+	public SellableProduct getProduct(String barcode) {
+		return getProduct(barcode, 1);
 	}
 
 	public void editProductPrice(int index, double price) {
