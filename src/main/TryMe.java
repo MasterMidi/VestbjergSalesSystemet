@@ -29,7 +29,7 @@ public class TryMe {
 		orderController.getProduct("12345678");
 		orderController.getProduct("13579246");
 		orderController.getProduct("98765432");
-		orderController.getProduct("89642378", 2);
+		orderController.getProduct("89642378");
 		orderController.attachCustomer("12345678");
 		orderController.finishSale(PaymentMethod.creditcard);
 		// new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
