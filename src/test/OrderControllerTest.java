@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,27 +46,27 @@ class OrderControllerTest {
 	void testProcessSale() {
 		
 		controller.createOrder();
-		//controller.scanProduct("1234");
-		//controller.scanProduct("12345");
+		controller.scanProduct("1234");
+		controller.scanProduct("12345");
 		controller.finishSale(PaymentMethod.creditcard);
 		
 		controller.createOrder();
-		//controller.scanProduct("12346");
+		controller.scanProduct("12346");
 		
 		controller.finishSale(PaymentMethod.cash);
-		assertSame(container.getOrderCount(),2);
+		assertEquals(container.getOrderCount(),2);
 	}
 	
 	@Test
 	void testEditPrice() {
 		controller.createOrder();
-		//controller.scanProduct("1234");
-		//controller.scanProduct("12345");
+		controller.scanProduct("1234");
+		controller.scanProduct("12345");
 		controller.editProductPrice(0, 100d);
 		
 		double orderPrice = controller.getCurrentOrder().getOrderLineList().get(0).getPrice();
-		
-		assertSame(orderPrice,100d);
+		System.out.println("Price is: " + orderPrice);
+		assertEquals(orderPrice,100d);
 	}
 
 }
