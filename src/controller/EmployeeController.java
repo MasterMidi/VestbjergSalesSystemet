@@ -7,7 +7,7 @@ import model.PersonRole;
 public class EmployeeController {
 
 	private EmployeeContainer container;
-	private Employee currentEmployee;
+	private static Employee currentEmployee;
 	
 	public EmployeeController()
 	{
