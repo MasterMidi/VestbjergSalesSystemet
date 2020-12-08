@@ -33,7 +33,7 @@ public class TryMe {
 		orderController.scanProduct("89642378");
 		orderController.editProductAmount(3, 2);
 		orderController.attachCustomer("12345678");
-		orderController.finishSale(PaymentMethod.creditcard);
-		// new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
+		orderController.finishSale(PaymentMethod.cash);
+		new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
 	}
 }
