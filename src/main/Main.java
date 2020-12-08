@@ -1,17 +1,11 @@
 package main;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import textinput.TextInput;
 import tui.menu.MainMenu;
 
 public class Main {
 	public static void main(String[] args) {
 		new TryMe();
-//		new MainMenu().start();
+		new MainMenu().start();
 //		
 //		Calendar c = Calendar.getInstance();
 //		Date dat = c.getTime();
