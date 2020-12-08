@@ -44,6 +44,10 @@ public class OrderController {
 	public void editProductPrice(int index, double price) {
 		order.editProductPrice(index, price);
 	}
+	
+	public void editProductAmount(int index, int amount) {
+		order.editProductAmount(index, amount);
+	}
 
 	public List<Person> findCustomers(String phone) {
 		return new CustomerController().findCustomers(phone);

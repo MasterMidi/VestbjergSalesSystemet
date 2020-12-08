@@ -156,6 +156,10 @@ public class Order {
 		orderLineList.get(index).editPrice(price);
 	}
 	
+	public void editProductAmount(int index, int amount) {
+		orderLineList.get(index).setAmount(amount);
+	}
+	
 	public double getTotal() {
 		int total = -1;
 		

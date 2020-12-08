@@ -7,6 +7,7 @@ import model.PaymentMethod;
 import model.PersonRole;
 import model.customer.CustomerContainer;
 import model.customer.PrivateCustomer;
+import tui.option.CreateOrderOption;
 
 public class TryMe {
 	ProductController prodCon;
@@ -26,12 +27,13 @@ public class TryMe {
 
 		OrderController orderController = new OrderController();
 		orderController.createOrder();
-		orderController.getProduct("12345678");
-		orderController.getProduct("13579246");
-		orderController.getProduct("98765432");
-		orderController.getProduct("89642378");
+		orderController.scanProduct("12345678");
+		orderController.scanProduct("13579246");
+		orderController.scanProduct("98765432");
+		orderController.scanProduct("89642378");
+		orderController.editProductAmount(3, 2);
 		orderController.attachCustomer("12345678");
 		orderController.finishSale(PaymentMethod.creditcard);
-		// new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
+//		new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
 	}
 }
