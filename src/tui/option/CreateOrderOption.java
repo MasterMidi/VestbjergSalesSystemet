@@ -6,6 +6,8 @@ import controller.OrderController;
 import model.Order;
 import model.Order.OrderLine;
 import model.product.SellableProduct;
+import textinput.ListRenderer;
+import textinput.TextChoice;
 import textinput.TextInput;
 import tui.Option;
 
@@ -27,7 +29,7 @@ public class CreateOrderOption extends Option {
 		// TODO Implement function.
 		System.out.println("Scan products now - ");
 		scanProducts(textinput);
-		if (textinput.promptBoolean("Would you like to change the price of any the products you scanned?")) {
+		if (textinput.promptBoolean("Would you like to change the price of any of the products you scanned?")) {
 			editProductPrice(orderCon.getCurrentOrder());
 		}
 		if (textinput.promptBoolean("Print the receipt?")) {
@@ -82,27 +84,24 @@ public class CreateOrderOption extends Option {
 	}
 
 	private void editProductPrice(Order order) {
-		int index = 1;
+		Boolean done = false;
 		List<OrderLine> orderLineList = order.getOrderLineList();
-		boolean done = false;
-		TextInput textinput = new TextInput();
-		System.out.println("****** " + "Edit OrderLines " + "******");
-		for (OrderLine currentOrderLine : orderLineList) {
-			System.out.println(String.format("(" + index++ + ")" + "%s: %s x %s *",
-					currentOrderLine.getProduct().getName().substring(0, 16), currentOrderLine.getAmount(),
-					currentOrderLine.getPrice()));
-		}
+		TextInput textInput = new TextInput();
 		while (!done) {
-			Integer choice = textinput.promptInt("Choose product you want to edit price [0 to stop]: ");
-			if (choice > 0 && choice <= orderLineList.size()) {
-				Integer newPrice = textinput.promptInt("****** " + "choose new price [-1 to cancel] " + "******");
-				if (choice == -1) {
-					done = true;
-				} else {
-					orderLineList.get(choice);
-				}
-			} else if (choice == 0) {
+			OrderLine currOrderline = new TextChoice<OrderLine>("*********************************", true,
+					new ListRenderer<OrderLine>() {
+						@Override
+						public String display(OrderLine option) {
+							return String.format("%s: %s x %s ,-", formatString(option.getProduct().getName(), 11),
+									option.getAmount(), option.getPrice());
+						}
+
+					}, orderLineList).promptMenu("Choose a product to edit price");
+			if (currOrderline == null) {
 				done = true;
+			} else {
+				Integer newPrice = textInput.promptInt("new payment price: ");
+				orderCon.editProductPrice(orderLineList.indexOf(currOrderline), newPrice);
 			}
 
 		}
