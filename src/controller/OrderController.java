@@ -30,9 +30,20 @@ public class OrderController {
 		SellableProduct sellable = null;
 		if (product instanceof SellableProduct) {
 			sellable = (SellableProduct) product;
-			order.addOrderLine(sellable);
 		}
 		return sellable;
+	}
+
+	public SellableProduct scanProduct(String barcode) {
+		SellableProduct currentProduct = getProduct(barcode);
+		if (currentProduct != null) {
+			addProductToOrderLine(currentProduct);
+		}
+		return currentProduct;
+	}
+
+	public void addProductToOrderLine(SellableProduct sellable) {
+		order.addOrderLine(sellable);
 	}
 
 	public void editProductPrice(int index, double price) {
