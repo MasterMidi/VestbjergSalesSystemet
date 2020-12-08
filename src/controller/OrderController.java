@@ -16,7 +16,7 @@ public class OrderController {
 	private Order order;
 
 	public OrderController() {
-		orderContainer = orderContainer.getInstance();
+		orderContainer = OrderContainer.getInstance();
 		productController = new ProductController();
 	}
 
