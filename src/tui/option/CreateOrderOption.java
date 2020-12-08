@@ -47,22 +47,22 @@ public class CreateOrderOption extends Option {
 		System.out.println(String.format("* Total price\t: %s\t*", order.getTotal() + " DKK"));
 		System.out.println("*********************************");
 	}
-	
+
 	private String formatString(String input, int length) {
 		try {
 			input = input.substring(0, length) + "...";
-		} catch(Exception e) {
+		} catch (Exception e) {
 			int tabs = -1;
-			if(input.length() < 6) {
+			if (input.length() < 6) {
 				tabs = 2;
 			} else {
 				tabs = 1;
 			}
-			for(int i = 0; i < tabs; i++) {
+			for (int i = 0; i < tabs; i++) {
 				input += "\t";
 			}
 		}
-		
+
 		return input;
 	}
 
@@ -94,12 +94,12 @@ public class CreateOrderOption extends Option {
 		}
 		while (!done) {
 			Integer choice = textinput.promptInt("Choose product you want to edit price [0 to stop]: ");
-			if(choice > 0 && choice <= orderLineList.size()) {
+			if (choice > 0 && choice <= orderLineList.size()) {
 				Integer newPrice = textinput.promptInt("****** " + "choose new price [-1 to cancel] " + "******");
 				if (choice == -1) {
 					done = true;
 				} else {
-					orderLineList.get(choice)
+					orderLineList.get(choice);
 				}
 			} else if (choice == 0) {
 				done = true;
