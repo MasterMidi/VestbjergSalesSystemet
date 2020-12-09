@@ -1,11 +1,11 @@
 package model;
 
 public abstract class Person {
-
 	private String phoneNr;
 	private String email;
 	private String name;
 	private PersonRole role;
+	private DiscountGroup discountGroup;
 
 	public Person(String phoneNr, String email, String name, PersonRole role) {
 		this.phoneNr = phoneNr;
