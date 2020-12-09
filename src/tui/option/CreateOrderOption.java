@@ -42,11 +42,15 @@ public class CreateOrderOption extends Option {
 				done = true;
 			}
 		}
-		orderController.attachCustomer(currentPerson.getPhoneNr());
+		attachCustomer(currentPerson.getPhoneNr());
 		finishSale();
 		if (textinput.promptBoolean("Print the receipt?")) {
 			printReceipt(orderController.getCurrentOrder());
 		}
+	}
+
+	private void attachCustomer(String phoneNr) {
+		orderController.attachCustomer(phoneNr);
 	}
 
 	public void printReceipt(Order order) {
