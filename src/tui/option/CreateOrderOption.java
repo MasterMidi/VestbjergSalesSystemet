@@ -5,6 +5,7 @@ import java.util.List;
 import controller.OrderController;
 import model.Order;
 import model.Order.OrderLine;
+import model.PaymentMethod;
 import model.Person;
 import model.product.SellableProduct;
 import textinput.ListRenderer;
@@ -45,6 +46,7 @@ public class CreateOrderOption extends Option {
 		if (textinput.promptBoolean("Print the receipt?")) {
 			printReceipt(orderCon.getCurrentOrder());
 		}
+		finishSale();
 	}
 
 	public void printReceipt(Order order) {
@@ -114,6 +116,26 @@ public class CreateOrderOption extends Option {
 				orderCon.editProductPrice(orderLineList.indexOf(currOrderline), newPrice);
 			}
 
+		}
+	}
+
+	private void finishSale() {
+		Order currOrder = orderCon.getCurrentOrder();
+		TextChoice<PaymentMethod> paymentChooser = new TextChoice<>("*********************************", false,
+				new ListRenderer<PaymentMethod>() {
+
+					@Override
+					public String display(PaymentMethod option) {
+						return option.name();
+					}
+				});
+		paymentChooser.addOption(PaymentMethod.cash);
+		paymentChooser.addOption(PaymentMethod.creditcard);
+		if (currOrder.getCustomer().getPhoneNr() == "0000") {
+			PaymentMethod choice = paymentChooser.promptMenu("Cash or creditcard?");
+			orderCon.finishSale(choice);
+		} else {
+			orderCon.finishSale(PaymentMethod.invoice);
 		}
 	}
 
