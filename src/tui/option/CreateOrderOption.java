@@ -25,26 +25,24 @@ public class CreateOrderOption extends Option {
 	}
 
 	@Override
-	// Mock data for create order.
 	public void start() {
 		TextInput textinput = new TextInput();
 		orderController.createOrder();
 		System.out.println("****** " + getDescription() + "******");
-		// TODO Implement function.
 		System.out.println("Scan products now - ");
 		scanProducts(textinput);
 		if (textinput.promptBoolean("Would you like to change the price of any of the products you scanned?")) {
 			editProductPrice(orderController.getCurrentOrder());
 		}
-		Person currPerson = null;
+		Person currentPerson = null;
 		boolean done = false;
 		while (!done) {
-			currPerson = findCustomers();
-			if (currPerson != null) {
+			currentPerson = selectCostumer(findCustomers());
+			if (currentPerson != null) {
 				done = true;
 			}
 		}
-		attachCustomer(currPerson.getPhoneNr());
+		orderController.attachCustomer(currentPerson.getPhoneNr());
 		finishSale();
 		if (textinput.promptBoolean("Print the receipt?")) {
 			printReceipt(orderController.getCurrentOrder());
@@ -52,12 +50,11 @@ public class CreateOrderOption extends Option {
 	}
 
 	public void printReceipt(Order order) {
-		
+
 		double total = order.getTotal(false);
 		double discountedTotal = order.getTotal(true);
-		System.out.println("Discounted total: " + discountedTotal + " total: " + total
-				);
-		
+		System.out.println("Discounted total: " + discountedTotal + " total: " + total);
+
 		System.out.println("*********************************");
 		System.out.println(String.format("* %s\t: %s\t*", "Ordernumber", order.getOrderNumber()));
 		System.out.println("*-------------------------------*");
@@ -68,7 +65,8 @@ public class CreateOrderOption extends Option {
 		System.out.println("*-------------------------------*");
 		System.out.println(String.format("* Total price\t: %.2f,-\t*", discountedTotal));
 		System.out.println(String.format("* Tax amounts\t: %.2f,-\t*", discountedTotal * 0.20));
-		if(discountedTotal != total)  System.out.println(String.format("* Discount\t: %.2f,-\t*", (total - discountedTotal)));
+		if (discountedTotal != total)
+			System.out.println(String.format("* Discount\t: %.2f,-\t*", (total - discountedTotal)));
 		System.out.println(String.format("* Cashier\t: %s*", formatString(order.getEmployee().getName(), 11)));
 		switch (order.getPayment()) {
 		case cash:
@@ -164,22 +162,21 @@ public class CreateOrderOption extends Option {
 		}
 	}
 
-	private Person findCustomers() {
+	private List<Person> findCustomers() {
 		TextInput textInput = new TextInput();
 		String costumerPhone = textInput.promptString("Find cusomer by phone [0000 is cash customer]");
 		List<Person> customers = orderController.findCustomers(costumerPhone);
+		return customers;
+	}
+
+	public Person selectCostumer(List<Person> customers) {
 		Person currPerson = new TextChoice<Person>("*********************************", true,
 				new ListRenderer<Person>() {
 					@Override
 					public String display(Person option) {
 						return String.format("%s - %s - %s", option.getName(), option.getPhoneNr(), option.getEmail());
 					}
-
 				}, customers).promptMenu("choose customer ");
 		return currPerson;
-	}
-
-	public void attachCustomer(String phone) {
-		orderController.attachCustomer(phone);
 	}
 }
