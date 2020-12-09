@@ -58,7 +58,22 @@ public class CreateOrderOption extends Option {
 					line.getAmount(), line.getPrice() + " DKK"));
 		}
 		System.out.println("*-------------------------------*");
-		System.out.println(String.format("* Total price\t: %s\t*", order.getTotal() + " DKK"));
+		System.out.println(String.format("* Total price\t: %.2f,-\t*", order.getTotal()));
+		System.out.println(String.format("* Tax amounts\t: %.2f,-\t*", order.getTotal() * 0.20));
+		System.out.println(String.format("* Cashier\t: %s*", formatString(order.getEmployee().getName(), 11)));
+		switch (order.getPayment()) {
+		case cash:
+			System.out.println("* Paid with cash\t\t*");
+			break;
+		case invoice:
+			System.out.println(String.format("* Customer\t: %s*", formatString(order.getCustomer().getName(), 11)));
+			System.out.println("* Paid over invoice\t\t*");
+			break;
+		default:
+			break;
+		}
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		System.out.println(String.format("* Payment date\t: %s*", formatString(df.format(order.getDate()), 11)));
 		System.out.println("*********************************");
 	}
 
