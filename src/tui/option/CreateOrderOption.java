@@ -168,7 +168,7 @@ public class CreateOrderOption extends Option {
 
 	private List<Person> findCustomers() {
 		TextInput textInput = new TextInput();
-		String costumerPhone = textInput.promptString("Find cusomer by phone [0000 is cash customer]");
+		String costumerPhone = textInput.promptString("Find customer by phone or name [0000 is cash customer]");
 		List<Person> customers = orderController.findCustomers(costumerPhone);
 		return customers;
 	}
