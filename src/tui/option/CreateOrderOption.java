@@ -49,8 +49,8 @@ public class CreateOrderOption extends Option {
 		}
 	}
 
-	private void attachCustomer(String phoneNr) {
-		orderController.attachCustomer(phoneNr);
+	private void attachCustomer(String phone) {
+		orderController.attachCustomer(phone);
 	}
 
 	public void printReceipt(Order order) {
