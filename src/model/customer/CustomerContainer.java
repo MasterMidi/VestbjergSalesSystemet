@@ -2,6 +2,7 @@ package model.customer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,6 @@ import model.Person;
 public class CustomerContainer {
 	private static CustomerContainer instance;
 	private Map<String, Person> customers;
-
 
 	private CustomerContainer() {
 		customers = new HashMap<>();
@@ -23,12 +23,22 @@ public class CustomerContainer {
 		return instance;
 	}
 
-	public List<Person> findCustomers(String phone) {
+	public List<Person> findCustomers(String input) {
 		List<Person> customerList = new ArrayList<>();
-		Person currPerson = customers.get(phone);
-		if (currPerson != null) {
-			customerList.add(currPerson);
+
+		boolean isName = input.trim().matches("[^\\d]+");
+
+		if (isName) {
+			for (Person customer : customers.values()) {
+				if (customer.getName().contains(input))
+					customerList.add(customer);
+			}
+		} else {
+			Person currPerson = customers.get(input);
+			if (currPerson != null)
+				customerList.add(currPerson);
 		}
+
 		return customerList;
 	}
 

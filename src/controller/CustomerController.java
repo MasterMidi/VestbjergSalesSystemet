@@ -38,8 +38,8 @@ public class CustomerController {
 		customerContainer.addCustomer(customer);
 	}
 
-	public List<Person> findCustomers(String phoneNr) {
-		return customerContainer.findCustomers(phoneNr);
+	public List<Person> findCustomers(String input) {
+		return customerContainer.findCustomers(input);
 	}
 
 }
