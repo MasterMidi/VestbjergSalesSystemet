@@ -15,24 +15,24 @@ import tui.Option;
 
 public class CreateOrderOption extends Option {
 
-	OrderController orderCon;
+	OrderController orderController;
 
 	public CreateOrderOption() {
 		super("Create Order");
-		orderCon = new OrderController();
+		orderController = new OrderController();
 	}
 
 	@Override
 	// Mock data for create order.
 	public void start() {
 		TextInput textinput = new TextInput();
-		orderCon.createOrder();
+		orderController.createOrder();
 		System.out.println("****** " + getDescription() + "******");
 		// TODO Implement function.
 		System.out.println("Scan products now - ");
 		scanProducts(textinput);
 		if (textinput.promptBoolean("Would you like to change the price of any of the products you scanned?")) {
-			editProductPrice(orderCon.getCurrentOrder());
+			editProductPrice(orderController.getCurrentOrder());
 		}
 		Person currPerson = null;
 		boolean done = false;
@@ -43,10 +43,10 @@ public class CreateOrderOption extends Option {
 			}
 		}
 		attachCustomer(currPerson.getPhoneNr());
-		if (textinput.promptBoolean("Print the receipt?")) {
-			printReceipt(orderCon.getCurrentOrder());
-		}
 		finishSale();
+		if (textinput.promptBoolean("Print the receipt?")) {
+			printReceipt(orderController.getCurrentOrder());
+		}
 	}
 
 	public void printReceipt(Order order) {
@@ -85,7 +85,7 @@ public class CreateOrderOption extends Option {
 		SellableProduct currProduct = null;
 		while (!done) {
 			String barcode = textinput.promptString("Enter Barcode [0 to stop]: ");
-			currProduct = orderCon.scanProduct(barcode);
+			currProduct = orderController.scanProduct(barcode);
 			if (currProduct != null) {
 				System.out.println("Scanned: " + currProduct.getName());
 			}
@@ -107,21 +107,20 @@ public class CreateOrderOption extends Option {
 							return String.format("%s: %s x %s ,-", formatString(option.getProduct().getName(), 11),
 									option.getAmount(), option.getPrice());
 						}
-
 					}, orderLineList).promptMenu("Choose a product to edit price");
 			if (currOrderline == null) {
 				done = true;
 			} else {
 				Integer newPrice = textInput.promptInt("new payment price: ");
-				orderCon.editProductPrice(orderLineList.indexOf(currOrderline), newPrice);
+				orderController.editProductPrice(orderLineList.indexOf(currOrderline), newPrice);
 			}
 
 		}
 	}
 
 	private void finishSale() {
-		Order currOrder = orderCon.getCurrentOrder();
-		TextChoice<PaymentMethod> paymentChooser = new TextChoice<>("*********************************", false,
+		Order currOrder = orderController.getCurrentOrder();
+		TextChoice<PaymentMethod> paymentChooser = new TextChoice<>("*********************************", true,
 				new ListRenderer<PaymentMethod>() {
 
 					@Override
@@ -133,16 +132,18 @@ public class CreateOrderOption extends Option {
 		paymentChooser.addOption(PaymentMethod.creditcard);
 		if (currOrder.getCustomer().getPhoneNr() == "0000") {
 			PaymentMethod choice = paymentChooser.promptMenu("Cash or creditcard?");
-			orderCon.finishSale(choice);
+			if (choice != null) {
+				orderController.finishSale(choice);
+			}
 		} else {
-			orderCon.finishSale(PaymentMethod.invoice);
+			orderController.finishSale(PaymentMethod.invoice);
 		}
 	}
 
 	private Person findCustomers() {
 		TextInput textInput = new TextInput();
 		String costumerPhone = textInput.promptString("Find cusomer by phone [0000 is cash customer]");
-		List<Person> customers = orderCon.findCustomers(costumerPhone);
+		List<Person> customers = orderController.findCustomers(costumerPhone);
 		Person currPerson = new TextChoice<Person>("*********************************", true,
 				new ListRenderer<Person>() {
 					@Override
@@ -155,6 +156,6 @@ public class CreateOrderOption extends Option {
 	}
 
 	public void attachCustomer(String phone) {
-		orderCon.attachCustomer(phone);
+		orderController.attachCustomer(phone);
 	}
 }
