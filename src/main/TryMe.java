@@ -11,24 +11,24 @@ import model.customer.PrivateCustomer;
 import tui.option.CreateOrderOption;
 
 public class TryMe {
-	ProductController prodCon;
-	EmployeeController empCon;
-	CustomerController cusCon;
+	ProductController productController;
+	EmployeeController employeeController;
+	CustomerController customerController;
 
 	public TryMe() {
-		prodCon = new ProductController();
-		empCon = new EmployeeController();
-		cusCon = new CustomerController();
-		prodCon.createSellableProduct("Magnuses gamle sko", "1111", "De lugter lidt", 200d, 10);
-		empCon.createEmployee("10101010", "hej@hejsa.dk", "Mike", 4321, PersonRole.manager);
-		cusCon.createPrivateCustomer("Default Cash customer", "N/A", "0000", "N/A");
-		cusCon.createPrivateCustomer("Michael", "bigbutts@gmail.com", "60495804", "290598-0117");
+		productController = new ProductController();
+		employeeController = new EmployeeController();
+		customerController = new CustomerController();
+		productController.createSellableProduct("Magnuses gamle sko", "1111", "De lugter lidt", 200d, 10);
+		employeeController.createEmployee("10101010", "hej@hejsa.dk", "Mike", 4321, PersonRole.manager);
+		customerController.createPrivateCustomer("Default Cash customer", "N/A", "0000", "N/A");
+		customerController.createPrivateCustomer("Michael", "bigbutts@gmail.com", "60495804", "290598-0117");
 		CustomerContainer.getInstance()
 				.addCustomer(new PrivateCustomer("12345678", "somehting@gmail.com", "My man", "87654321"));
-		prodCon.createSellableProduct("Toothbrush", "12345678", "A toothbrush", 20d, 1);
-		prodCon.createSellableProduct("Toothpaste", "13579246", "some toothpaste", 40d, 1);
-		prodCon.createSellableProduct("a very long string to cut", "98765432", "you know it ;)", 200d, 1);
-		prodCon.createSellableProduct("Nails", "89642378", "to nail your m...", 60d, 2);
+		productController.createSellableProduct("Toothbrush", "12345678", "A toothbrush", 20d, 1);
+		productController.createSellableProduct("Toothpaste", "13579246", "some toothpaste", 40d, 1);
+		productController.createSellableProduct("a very long string to cut", "98765432", "you know it ;)", 200d, 1);
+		productController.createSellableProduct("Nails", "89642378", "to nail your m...", 60d, 2);
 
 		OrderController orderController = new OrderController();
 		orderController.createOrder();
