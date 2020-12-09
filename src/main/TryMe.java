@@ -4,6 +4,7 @@ import controller.CustomerController;
 import controller.EmployeeController;
 import controller.OrderController;
 import controller.ProductController;
+import model.DiscountGroup;
 import model.PaymentMethod;
 import model.PersonRole;
 import model.customer.CustomerContainer;
@@ -22,7 +23,9 @@ public class TryMe {
 		productController.createSellableProduct("Magnuses gamle sko", "1111", "De lugter lidt", 200d, 10);
 		employeeController.createEmployee("10101010", "hej@hejsa.dk", "Mike", 4321, PersonRole.manager);
 		customerController.createPrivateCustomer("Default Cash customer", "N/A", "0000", "N/A");
-		customerController.createPrivateCustomer("Michael", "bigbutts@gmail.com", "60495804", "290598-0117");
+		
+		DiscountGroup michaelDiscountGroup = new DiscountGroup("michaels discount group",null, 0.25d);
+		customerController.createPrivateCustomer("Michael", "bigbutts@gmail.com", "60495804", "290598-0117",michaelDiscountGroup);
 		CustomerContainer.getInstance()
 				.addCustomer(new PrivateCustomer("12345678", "somehting@gmail.com", "My man", "87654321"));
 		productController.createSellableProduct("Toothbrush", "12345678", "A toothbrush", 20d, 1);

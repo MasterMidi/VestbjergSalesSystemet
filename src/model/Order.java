@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import model.customer.BuisnessCustomer;
+import model.customer.PrivateCustomer;
 import model.product.SellableProduct;
 
 public class Order {
@@ -183,13 +185,30 @@ public class Order {
 		orderLineList.get(index).setAmount(amount);
 	}
 
-	public double getTotal() {
+	public double getTotal(boolean useDiscount) {
 		int total = 0;
+		double discountAmount = 1;
 
 		for (OrderLine line : orderLineList) {
 			total += line.getTotal();
 		}
 
-		return total;
+		if (useDiscount) {
+			if (customer instanceof BuisnessCustomer) {
+				BuisnessCustomer _customer = (BuisnessCustomer) customer;
+
+				if (_customer.getDiscountGroup() != null) {
+					discountAmount = 1 - _customer.getDiscountGroup().getDiscount();
+				}
+			} else {
+				PrivateCustomer _customer = (PrivateCustomer) customer;
+
+				if (_customer.getDiscountGroup() != null) {
+					discountAmount = 1 -_customer.getDiscountGroup().getDiscount();
+				}
+			}
+		}
+
+		return total * discountAmount;
 	}
 }

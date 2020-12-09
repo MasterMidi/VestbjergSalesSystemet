@@ -52,6 +52,12 @@ public class CreateOrderOption extends Option {
 	}
 
 	public void printReceipt(Order order) {
+		
+		double total = order.getTotal(false);
+		double discountedTotal = order.getTotal(true);
+		System.out.println("Discounted total: " + discountedTotal + " total: " + total
+				);
+		
 		System.out.println("*********************************");
 		System.out.println(String.format("* %s\t: %s\t*", "Ordernumber", order.getOrderNumber()));
 		System.out.println("*-------------------------------*");
@@ -60,8 +66,9 @@ public class CreateOrderOption extends Option {
 					line.getAmount(), line.getPrice() + " DKK"));
 		}
 		System.out.println("*-------------------------------*");
-		System.out.println(String.format("* Total price\t: %.2f,-\t*", order.getTotal()));
-		System.out.println(String.format("* Tax amounts\t: %.2f,-\t*", order.getTotal() * 0.20));
+		System.out.println(String.format("* Total price\t: %.2f,-\t*", discountedTotal));
+		System.out.println(String.format("* Tax amounts\t: %.2f,-\t*", discountedTotal * 0.20));
+		if(discountedTotal != total)  System.out.println(String.format("* Discount\t: %.2f,-\t*", (total - discountedTotal)));
 		System.out.println(String.format("* Cashier\t: %s*", formatString(order.getEmployee().getName(), 11)));
 		switch (order.getPayment()) {
 		case cash:
