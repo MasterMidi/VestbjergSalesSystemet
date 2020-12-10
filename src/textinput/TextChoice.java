@@ -8,11 +8,11 @@ public class TextChoice<T> {
 	private String description;
 	private String cancelText;
 	private boolean cancellable;
-	private ListRenderer<T> renderer;
+	private IListRenderer<T> renderer;
 	private List<T> options;
 	private TextInput textinput = new TextInput();
 
-	public TextChoice(String description, boolean cancellable, ListRenderer<T> renderer) {
+	public TextChoice(String description, boolean cancellable, IListRenderer<T> renderer) {
 		this.description = description;
 		this.cancellable = cancellable;
 		this.renderer = renderer;
@@ -23,7 +23,7 @@ public class TextChoice<T> {
 		this.options.add(null);
 	}
 	
-	public TextChoice(String description, boolean cancellable, ListRenderer<T> renderer, List<T> options) {
+	public TextChoice(String description, boolean cancellable, IListRenderer<T> renderer, List<T> options) {
 		this(description, cancellable, renderer);
 		this.options.addAll(options);
 	}

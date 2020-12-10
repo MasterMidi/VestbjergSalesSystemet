@@ -1,6 +1,6 @@
 package textinput;
 
-public interface ListRenderer<T> {
+public interface IListRenderer<T> {
 
 	String display(T option);
 	

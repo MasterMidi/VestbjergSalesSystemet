@@ -1,9 +1,9 @@
 package textinput.renderers;
 
-import textinput.ListRenderer;
+import textinput.IListRenderer;
 import tui.Selectable;
 
-public class SellectableRenderer implements ListRenderer<Selectable> {
+public class SellectableRenderer implements IListRenderer<Selectable> {
 
 	@Override
 	public String display(Selectable option) {

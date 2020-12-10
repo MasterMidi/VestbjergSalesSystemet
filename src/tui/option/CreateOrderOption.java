@@ -10,7 +10,7 @@ import model.Order.OrderLine;
 import model.PaymentMethod;
 import model.Person;
 import model.product.SellableProduct;
-import textinput.ListRenderer;
+import textinput.IListRenderer;
 import textinput.TextChoice;
 import textinput.TextInput;
 import tui.Option;
@@ -127,7 +127,7 @@ public class CreateOrderOption extends Option {
 		TextInput textInput = new TextInput();
 		while (!done) {
 			OrderLine currOrderline = new TextChoice<OrderLine>("*********************************", true,
-					new ListRenderer<OrderLine>() {
+					new IListRenderer<OrderLine>() {
 						@Override
 						public String display(OrderLine option) {
 							return String.format("%s: %s x %s ,-", formatString(option.getProduct().getName(), 11),
@@ -147,7 +147,7 @@ public class CreateOrderOption extends Option {
 	private void finishSale() {
 		Order currOrder = orderController.getCurrentOrder();
 		TextChoice<PaymentMethod> paymentChooser = new TextChoice<>("*********************************", true,
-				new ListRenderer<PaymentMethod>() {
+				new IListRenderer<PaymentMethod>() {
 
 					@Override
 					public String display(PaymentMethod option) {
@@ -175,7 +175,7 @@ public class CreateOrderOption extends Option {
 
 	public Person selectCostumer(List<Person> customers) {
 		Person currPerson = new TextChoice<Person>("*********************************", true,
-				new ListRenderer<Person>() {
+				new IListRenderer<Person>() {
 					@Override
 					public String display(Person option) {
 						return String.format("%s - %s - %s", option.getName(), option.getPhoneNr(), option.getEmail());
