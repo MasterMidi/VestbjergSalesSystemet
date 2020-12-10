@@ -4,11 +4,11 @@ import controller.CustomerController;
 import controller.EmployeeController;
 import controller.OrderController;
 import controller.ProductController;
-import model.DiscountGroup;
-import model.PaymentMethod;
-import model.PersonRole;
-import model.customer.CustomerContainer;
-import model.customer.PrivateCustomer;
+import model.people.CustomerContainer;
+import model.people.DiscountGroup;
+import model.people.PersonRole;
+import model.people.PrivateCustomer;
+import model.sale.PaymentMethod;
 import tui.option.CreateOrderOption;
 
 public class TryMe {

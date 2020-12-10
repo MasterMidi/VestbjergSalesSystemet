@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import controller.EmployeeController;
 import controller.OrderController;
 import controller.ProductController;
-import model.OrderContainer;
-import model.PaymentMethod;
-import model.PersonRole;
+import model.people.PersonRole;
+import model.sale.OrderContainer;
+import model.sale.PaymentMethod;
 
 class OrderControllerTest {
 

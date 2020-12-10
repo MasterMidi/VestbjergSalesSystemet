@@ -1,8 +1,8 @@
 package controller;
 
-import model.Employee;
-import model.EmployeeContainer;
-import model.PersonRole;
+import model.people.Employee;
+import model.people.EmployeeContainer;
+import model.people.PersonRole;
 
 public class EmployeeController {
 

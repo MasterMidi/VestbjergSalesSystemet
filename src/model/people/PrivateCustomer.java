@@ -1,8 +1,4 @@
-package model.customer;
-
-import model.DiscountGroup;
-import model.Person;
-import model.PersonRole;
+package model.people;
 
 public class PrivateCustomer extends Person {
 	private double balance;

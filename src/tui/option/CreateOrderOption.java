@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import controller.OrderController;
-import model.Order;
-import model.Order.OrderLine;
-import model.PaymentMethod;
-import model.Person;
+import model.people.Person;
 import model.product.SellableProduct;
+import model.sale.Order;
+import model.sale.Order.OrderLine;
+import model.sale.PaymentMethod;
 import textinput.IListRenderer;
 import textinput.TextChoice;
 import textinput.TextInput;

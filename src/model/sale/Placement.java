@@ -1,4 +1,4 @@
-package model;
+package model.sale;
 
 public class Placement {
 	private int row;

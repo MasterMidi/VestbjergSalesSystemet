@@ -1,12 +1,9 @@
-package model.customer;
+package model.people;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import model.Person;
 
 public class CustomerContainer {
 	private static CustomerContainer instance;
@@ -23,6 +20,12 @@ public class CustomerContainer {
 		return instance;
 	}
 
+	/**
+	 * Used to find customers matching the input. If input is number it will be assumed to be a phone number, and therefore use it as a key for the hashmap, therefore O(1) acces time.
+	 * if searching by name, the access time will be O(n), however this can return multiple people.
+	 * @param input input can be a number (as a string) or a name.
+	 * @return Returns a list of customers matching the input string
+	 */
 	public List<Person> findCustomers(String input) {
 		List<Person> customerList = new ArrayList<>();
 

@@ -1,4 +1,4 @@
-package model;
+package model.people;
 
 public abstract class Person {
 	private String phoneNr;
@@ -32,5 +32,13 @@ public abstract class Person {
 
 	public void setRole(PersonRole newRole) {
 		this.role = newRole;
+	}
+
+	public DiscountGroup getDiscountGroup() {
+		return discountGroup;
+	}
+
+	public void setDiscountGroup(DiscountGroup discountGroup) {
+		this.discountGroup = discountGroup;
 	}
 }

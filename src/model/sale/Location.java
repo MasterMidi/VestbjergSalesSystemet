@@ -1,4 +1,4 @@
-package model;
+package model.sale;
 
 public class Location {
 	private String adress;
