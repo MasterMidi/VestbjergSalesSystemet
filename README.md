@@ -1,7 +1,6 @@
 # VestbjergSalesSystemet
 
 ### Description:
-
 The project was develop for our first semester project, to be used in our first year exam, studing computer science at UCN Aalborg, Denmark.
 The project is designed using 3-layer architecture, and is using a tui, however it will be updated to implement a gui.
 
@@ -11,8 +10,7 @@ We've also created UML diagrams, to design and document our code.
 It is worth mentioning, that this isn't a fully develop system. It's a one use-case system, out of many.
 This is primary due to the timeframe which we had to design, document and develop the system.
 
-###Setup:
-
+### Setup:
 Check that the program is not corrupt or tampered with by using the SHA256 checksum:
 
 ```
@@ -25,14 +23,13 @@ Running the executable JAR-file:
 java -jar VestbjergSalesSystem.jar
 ```
 
-###Dependencies:
-
+### Dependencies:
 1.  Java SE 14
 2.  JUnit for tests
 
 
-###Unit tests:
-Unit tests were done in 
+### Unit tests:
+Unit tests were created with JUnit.
 ```
 Open src->test
 Right click test
@@ -42,8 +39,7 @@ Success!
 
 <img src="/images/JUnit-test_execute.png" alt="img" width="400px">
 
-###Authors
-
+### Authors:
 1. [Julius Bendt](https://juto.dk),
 2. Magnus Baggesen,
 3. [Michael Andreas Graversen](mailto:michael-graversen@hotmail.com),
