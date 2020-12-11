@@ -1,9 +1,13 @@
 package model.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SellableProduct extends Product {
 
 	private int warehouseAmount;
 	private WarehouseStatus status;
+	private List<SellableProduct> products;
 
 	public SellableProduct(String name, String barcode, String description, Double price, int warehouseAmount) {
 		super(name, barcode, description, price);
@@ -13,7 +17,7 @@ public class SellableProduct extends Product {
 		} else {
 			this.status = WarehouseStatus.OutOfStock;
 		}
-
+		this.products = new ArrayList<>();
 	}
 
 	public SellableProduct(String name, String barcode, String description, int warehouseAmount) {
@@ -26,5 +30,15 @@ public class SellableProduct extends Product {
 
 	public WarehouseStatus getStatus() {
 		return this.status;
+	}
+	
+	public List<SellableProduct> getProducts(){
+		return new ArrayList<>(products);
+	}
+	
+	public void addProduct(SellableProduct product) {
+		if(product != null) {
+			products.add(product);
+		} 
 	}
 }

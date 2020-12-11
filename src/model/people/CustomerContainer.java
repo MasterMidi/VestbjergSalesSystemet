@@ -29,6 +29,7 @@ public class CustomerContainer {
 	public List<Person> findCustomers(String input) {
 		List<Person> customerList = new ArrayList<>();
 
+		// checks the input string, to see 
 		boolean isName = input.trim().matches("[^\\d]+");
 
 		if (isName) {
