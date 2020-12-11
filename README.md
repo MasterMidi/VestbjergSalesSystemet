@@ -1,7 +1,7 @@
 # VestbjergSalesSystemet
 
 ### Description:
-The project was develop for our first semester project, to be used in our first year exam, studing computer science at UCN Aalborg, Denmark.
+The project was developed for our first semester project, studing computer science at UCN Aalborg, Denmark.
 The project is designed using 3-layer architecture, and is using a tui, however it will be updated to implement a gui.
 
 The project is followed up in a report, where we first analysed the buisness we were developing the system for, essistially creating a buisness case.
@@ -11,23 +11,22 @@ It is worth mentioning, that this isn't a fully develop system. It's a one use-c
 This is primary due to the timeframe which we had to design, document and develop the system.
 
 ### Setup:
-Check that the program is not corrupt or tampered with by using the SHA256 checksum:
-
-Hashing method | Value
------------- | -------------
-MD5 | c2337996f10c1f89fb28181de92fe81c
-CRC32 | C57B042F
-CRC64 | 15A119EBF9944446
-SHA256 | 66652E971F56DE4A2E11F085480A4283BE3FDB4118E6C56DACEFB335418A011E
-SHA1 | 4A4DBB7871D2D6F9A796F6FAFE3577ECFE3961D9
-BLAKE2sp | 1D5533B51FD5AE067D63DBCA62013EA54DDA60C3F75EE5519BE975F57949A411
-
-
 Running the executable JAR-file:
 
 ```
 java -jar VestbjergSalesSystem.jar
 ```
+
+Check that the program is not corrupt or tampered with by using the SHA256 checksum:
+
+Hashing method | Value
+------------ | -------------
+CRC32 | C57B042F
+CRC64 | 15A119EBF9944446
+MD5 | c2337996f10c1f89fb28181de92fe81c
+SHA1 | 4A4DBB7871D2D6F9A796F6FAFE3577ECFE3961D9
+SHA256 | 66652E971F56DE4A2E11F085480A4283BE3FDB4118E6C56DACEFB335418A011E
+BLAKE2sp | 1D5533B51FD5AE067D63DBCA62013EA54DDA60C3F75EE5519BE975F57949A411
 
 ### Dependencies:
 1.  Java SE 14
@@ -47,7 +46,7 @@ Success!
 <img src="/images/JUnit-test_execute.png" alt="img" width="400px">
 
 ### Authors:
-1. [Julius Bendt](https://juto.dk),
+1. @julius-bendt <[portfolio](https://juto.dk)>,
 2. Magnus Baggesen,
 3. [Michael Andreas Graversen](mailto:michael-graversen@hotmail.com),
 4. Mike Johansson,
