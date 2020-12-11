@@ -7,7 +7,11 @@ The project is designed using 3-layer architecture, and is using a tui, however 
 The project is followed up in a report, where we first analysed the buisness we were developing the system for, essistially creating a buisness case.
 We've also created UML diagrams, to design and document our code.
 
-###Setup
+It is worth mentioning, that this isn't a fully develop system. It's a one use-case system, out of many.
+This is primary due to the timeframe which we had to design, document and develop the system.
+
+###Setup:
+
 Check that the program is not corrupt or tampered with by using the SHA256 checksum:
 
 ```
@@ -20,20 +24,24 @@ Running the executable JAR-file:
 java -jar VestbjergSalesSystem.jar
 ```
 
-###Dependencies
+###Dependencies:
+
 1.  Java SE 14
 2.  JUnit for tests
 
 
-###Unit tests
+###Unit tests:
+
 ```
 Open src->test
 Right click test
 Run as -> JUnit test
 Success!
 ```
-![Unit tests](/images/JUnit-test_execute.png)
-Format: ![Alt Text](url)
+
+<img src="/images/JUnit-test_execute.png" alt="img" align="right" width="400px">
+
+![Unit tests](/images/JUnit-test_execute.png =250x)
 
 ###Authors
 1. [Julius Bendt](https://juto.dk),
