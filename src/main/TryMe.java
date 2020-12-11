@@ -11,6 +11,7 @@ import model.people.PrivateCustomer;
 import model.product.ProductContainer;
 import model.product.SellableProduct;
 import model.sale.PaymentMethod;
+import tui.option.CreateOrderOption;
 
 public class TryMe {
 	ProductController productController;
@@ -50,6 +51,6 @@ public class TryMe {
 		orderController.editProductAmount(4, 2);
 		orderController.attachCustomer("12345678");
 		orderController.finishSale(PaymentMethod.cash);
-//		new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
+		new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
 	}
 }
