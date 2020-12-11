@@ -11,7 +11,6 @@ It is worth mentioning, that this isn't a fully develop system. It's a one use-c
 This is primary due to the timeframe which we had to design, document and develop the system.
 
 ###Setup:
-
 Check that the program is not corrupt or tampered with by using the SHA256 checksum:
 
 ```
@@ -25,13 +24,12 @@ java -jar VestbjergSalesSystem.jar
 ```
 
 ###Dependencies:
-
 1.  Java SE 14
 2.  JUnit for tests
 
 
 ###Unit tests:
-
+Unit tests were done in 
 ```
 Open src->test
 Right click test
@@ -39,7 +37,7 @@ Run as -> JUnit test
 Success!
 ```
 
-<img src="/images/JUnit-test_execute.png" alt="img" align="left" width="400px">
+<img src="/images/JUnit-test_execute.png" alt="img" width="400px">
 
 ###Authors
 1. [Julius Bendt](https://juto.dk),
