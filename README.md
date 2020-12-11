@@ -39,9 +39,7 @@ Run as -> JUnit test
 Success!
 ```
 
-<img src="/images/JUnit-test_execute.png" alt="img" align="right" width="400px">
-
-![Unit tests](/images/JUnit-test_execute.png =250x)
+<img src="/images/JUnit-test_execute.png" alt="img" align="left" width="400px">
 
 ###Authors
 1. [Julius Bendt](https://juto.dk),
