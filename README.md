@@ -30,6 +30,7 @@ java -jar VestbjergSalesSystem.jar
 
 ### Unit tests:
 Unit tests were created with JUnit.
+
 ```
 Open src->test
 Right click test
@@ -45,6 +46,8 @@ Success!
 3. [Michael Andreas Graversen](mailto:michael-graversen@hotmail.com),
 4. Mike Johansson,
 5. Nicolai Harms
+
+Made with :heart: in Aalborg, Denmark
 
 
 
