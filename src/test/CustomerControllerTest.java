@@ -12,10 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import controller.CustomerController;
-import model.Person;
-import model.customer.BuisnessCustomer;
-import model.customer.CustomerContainer;
-import model.customer.PrivateCustomer;
+import model.people.BuisnessCustomer;
+import model.people.CustomerContainer;
+import model.people.Person;
+import model.people.PrivateCustomer;
 
 class CustomerControllerTest {
 

@@ -1,4 +1,4 @@
-package model;
+package model.sale;
 
 import java.util.LinkedList;
 

@@ -1,4 +1,4 @@
-package model;
+package model.people;
 
 public class Employee extends Person {
 	private int employeeNumber;

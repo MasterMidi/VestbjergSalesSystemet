@@ -3,12 +3,12 @@ package controller;
 import java.util.Calendar;
 import java.util.List;
 
-import model.Order;
-import model.OrderContainer;
-import model.OrderStatus;
-import model.PaymentMethod;
-import model.Person;
+import model.people.Person;
 import model.product.SellableProduct;
+import model.sale.Order;
+import model.sale.OrderContainer;
+import model.sale.OrderStatus;
+import model.sale.PaymentMethod;
 
 public class OrderController {
 	private OrderContainer orderContainer;
@@ -58,6 +58,10 @@ public class OrderController {
 		order.setCustomer(customer);
 	}
 
+	/**
+	 * Finishes up the sale, adding missing information to the order and saving it.
+	 * @param payment the payment method used for the payment of the order
+	 */
 	public void finishSale(PaymentMethod payment) {
 		order.setDate(Calendar.getInstance().getTime());
 		order.setStatus(OrderStatus.completed);

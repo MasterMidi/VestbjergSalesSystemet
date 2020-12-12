@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import controller.OrderController;
-import model.Order;
-import model.Order.OrderLine;
-import model.PaymentMethod;
-import model.Person;
+import model.people.Person;
 import model.product.SellableProduct;
+import model.sale.Order;
+import model.sale.Order.OrderLine;
+import model.sale.PaymentMethod;
 import textinput.IListRenderer;
 import textinput.TextChoice;
 import textinput.TextInput;
@@ -57,40 +57,51 @@ public class CreateOrderOption extends Option {
 
 		double total = order.getTotal(false);
 		double discountedTotal = order.getTotal(true);
-		System.out.println("Discounted total: " + discountedTotal + " total: " + total);
+//		System.out.println("Discounted total: " + discountedTotal + " total: " + total);
 
-		System.out.println("*********************************");
+		System.out.println("***********************************");
 		System.out.println(String.format("* %s\t: %s\t*", "Ordernumber", order.getOrderNumber()));
 		System.out.println("*-------------------------------*");
 		for (OrderLine line : order.getOrderLineList()) {
-			System.out.println(String.format("* %s: %s x %s\t*", formatString(line.getProduct().getName(), 11),
+			System.out.println(String.format("* %s: %s x %s\t*", formatString(line.getProduct().getName(), 15),
 					line.getAmount(), line.getPrice() + " DKK"));
+			for (SellableProduct product : line.getProduct().getProducts()) {
+				printOrderLine(product, "-");
+			}
 		}
 		System.out.println("*-------------------------------*");
 		System.out.println(String.format("* Total price\t: %.2f,-\t*", discountedTotal));
 		System.out.println(String.format("* Tax amounts\t: %.2f,-\t*", discountedTotal * 0.20));
 		if (discountedTotal != total)
 			System.out.println(String.format("* Discount\t: %.2f,-\t*", (total - discountedTotal)));
-		System.out.println(String.format("* Cashier\t: %s*", formatString(order.getEmployee().getName(), 11)));
+		System.out.println(String.format("* Cashier\t: %s*", formatString(order.getEmployee().getName(), 15)));
 		switch (order.getPayment()) {
 		case cash:
 			System.out.println("* Paid with cash\t\t*");
 			break;
 		case invoice:
-			System.out.println(String.format("* Customer\t: %s*", formatString(order.getCustomer().getName(), 11)));
+			System.out.println(String.format("* Customer\t: %s*", formatString(order.getCustomer().getName(), 15)));
 			System.out.println("* Paid over invoice\t\t*");
 			break;
 		default:
 			break;
 		}
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-		System.out.println(String.format("* Payment date\t: %s*", formatString(df.format(order.getDate()), 11)));
+		System.out.println(String.format("* Payment date\t: %s*", formatString(df.format(order.getDate()), 15)));
 		System.out.println("*********************************");
+	}
+
+	private void printOrderLine(SellableProduct product, String indent) {
+		System.out.println(String.format("* %s %s: %s x %s\t*", indent, formatString(product.getName(), 9), 1,
+				product.getPrice() + " DKK"));
+		for (SellableProduct innerProduct : product.getProducts()) {
+			printOrderLine(innerProduct, indent + "-");
+		}
 	}
 
 	private String formatString(String input, int length) {
 		try {
-			input = input.substring(0, length) + "...";
+			input = input.substring(0, length - 3) + "...";
 		} catch (Exception e) {
 			int tabs = -1;
 			if (input.length() < 6) {

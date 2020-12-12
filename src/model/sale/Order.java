@@ -1,12 +1,14 @@
-package model;
+package model.sale;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import model.customer.BuisnessCustomer;
-import model.customer.PrivateCustomer;
+import model.people.BuisnessCustomer;
+import model.people.Employee;
+import model.people.Person;
+import model.people.PrivateCustomer;
 import model.product.SellableProduct;
 
 public class Order {

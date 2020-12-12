@@ -1,6 +1,5 @@
 package tui.option;
 
-import controller.OrderController;
 import tui.Option;
 
 public class UpdateOrderOption extends Option {
@@ -12,7 +11,7 @@ public class UpdateOrderOption extends Option {
 	@Override
 	// Mock data for create order.
 	public void start() {
-		OrderController orderController = new OrderController();
+//		OrderController orderController = new OrderController();
 		System.out.println("****** " + getDescription() + "******");
 		// TODO Implement function.
 		System.out.println("Method not implemented yet..");
