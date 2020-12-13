@@ -1,6 +1,6 @@
 # VestbjergSalesSystemet
 
-<p align="center">
+<p align="left">
 	<a href="https://github.com/MasterMidi/VestbjergSalesSystemet/releases/latest"><img src="https://img.shields.io/github/v/release/MasterMidi/VestbjergSalesSystemet"></a>
 	<a href="https://github.com/MasterMidi/VestbjergSalesSystemet/releases/latest"><img src="https://img.shields.io/github/v/release/MasterMidi/VestbjergSalesSystemet?include_prereleases"></a>
 </p>
@@ -19,6 +19,7 @@ This is primary due to the timeframe which we had to design, document and develo
 Running the executable JAR-file:
 
 ```
+cd "file-location"
 java -jar VestbjergSalesSystem.jar
 ```
 
