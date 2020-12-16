@@ -7,7 +7,7 @@ import model.people.PersonRole;
 public class EmployeeController {
 
 	private EmployeeContainer employeeContainer;
-	private static Employee currentEmployee = new Employee("24267667", "worker@fml.xxx", "José", 34564,
+	private static Employee currentEmployee = new Employee("24267667", "worker@fml.xxx", "JosÃ©", 34564,
 			PersonRole.clerk);
 
 	public EmployeeController() {

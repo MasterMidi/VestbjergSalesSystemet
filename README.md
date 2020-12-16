@@ -1,5 +1,10 @@
 # VestbjergSalesSystemet
 
+<p align="left">
+	<a href="https://github.com/MasterMidi/VestbjergSalesSystemet/releases/latest"><img src="https://img.shields.io/github/v/release/MasterMidi/VestbjergSalesSystemet"></a>
+	<a href="https://github.com/MasterMidi/VestbjergSalesSystemet/releases/latest"><img src="https://img.shields.io/github/v/release/MasterMidi/VestbjergSalesSystemet?include_prereleases"></a>
+</p>
+
 ### Description:
 The project was developed for our first semester project, studing computer science at UCN Aalborg, Denmark.
 The project is designed using 3-layer architecture, and is using a tui, however it will be updated to implement a gui.
@@ -14,6 +19,7 @@ This is primary due to the timeframe which we had to design, document and develo
 Running the executable JAR-file:
 
 ```
+cd "file-location"
 java -jar VestbjergSalesSystem.jar
 ```
 
