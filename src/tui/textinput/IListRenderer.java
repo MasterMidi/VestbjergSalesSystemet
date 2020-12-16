@@ -1,4 +1,4 @@
-package textinput;
+package tui.textinput;
 
 public interface IListRenderer<T> {
 

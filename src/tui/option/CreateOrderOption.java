@@ -3,7 +3,6 @@ package tui.option;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 
 import controller.OrderController;
 import model.people.Person;
@@ -11,10 +10,10 @@ import model.product.SellableProduct;
 import model.sale.Order;
 import model.sale.Order.OrderLine;
 import model.sale.PaymentMethod;
-import textinput.IListRenderer;
-import textinput.TextChoice;
-import textinput.TextInput;
 import tui.Option;
+import tui.textinput.IListRenderer;
+import tui.textinput.TextChoice;
+import tui.textinput.TextInput;
 
 public class CreateOrderOption extends Option {
 

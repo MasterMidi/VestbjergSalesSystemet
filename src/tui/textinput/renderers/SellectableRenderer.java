@@ -1,7 +1,7 @@
-package textinput.renderers;
+package tui.textinput.renderers;
 
-import textinput.IListRenderer;
 import tui.Selectable;
+import tui.textinput.IListRenderer;
 
 public class SellectableRenderer implements IListRenderer<Selectable> {
 

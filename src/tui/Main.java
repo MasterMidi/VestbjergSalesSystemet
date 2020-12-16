@@ -1,5 +1,6 @@
-package main;
+package tui;
 
+import main.TryMe;
 import tui.menu.MainMenu;
 
 public class Main {

@@ -1,4 +1,4 @@
-package textinput;
+package tui.textinput;
 
 import java.util.ArrayList;
 import java.util.Iterator;

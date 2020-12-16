@@ -1,4 +1,4 @@
-package textinput;
+package tui.textinput;
 
 import java.text.DateFormat;
 import java.text.ParseException;

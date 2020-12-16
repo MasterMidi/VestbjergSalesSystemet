@@ -3,8 +3,8 @@ package tui;
 import java.util.ArrayList;
 import java.util.List;
 
-import textinput.TextChoice;
-import textinput.renderers.SellectableRenderer;
+import tui.textinput.TextChoice;
+import tui.textinput.renderers.SellectableRenderer;
 import util.Console;
 
 public class Menu implements Selectable {
