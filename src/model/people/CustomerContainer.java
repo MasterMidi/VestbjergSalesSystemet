@@ -8,6 +8,7 @@ import java.util.Map;
 public class CustomerContainer {
 	private static CustomerContainer instance;
 	private Map<String, Person> customers;
+	private Person defaultCustomer;
 
 	private CustomerContainer() {
 		customers = new HashMap<>();
@@ -66,4 +67,11 @@ public class CustomerContainer {
 		customers.clear();
 	}
 
+	public Person getDefaultCustomer() {
+		return defaultCustomer;
+	}
+
+	public void setDefaultCustomer(Person defaultCustomer) {
+		this.defaultCustomer = defaultCustomer;
+	}
 }

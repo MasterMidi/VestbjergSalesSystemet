@@ -11,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -37,13 +39,10 @@ import javax.swing.event.ListSelectionListener;
 
 import controller.OrderController;
 import main.TryMe;
+import model.people.BuisnessCustomer;
 import model.people.Person;
 import model.people.PrivateCustomer;
 import model.sale.Order.OrderLine;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class MainMenu extends JFrame {
 
@@ -154,17 +153,24 @@ public class MainMenu extends JFrame {
 		pMain.add(scrlProducts, gbc_scrlProducts);
 
 		listProducts = new JList<>();
+		listProducts.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrlProducts.setViewportView(listProducts);
 
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(listProducts, popupMenu);
 
-		JMenuItem mntmEditPrice = new JMenuItem("Edit price");
+		JMenuItem mntmEditPrice = new JMenuItem("Ændre pris");
 		mntmEditPrice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		popupMenu.add(mntmEditPrice);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Ændre antal");
+		popupMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Slet product");
+		popupMenu.add(mntmNewMenuItem_1);
 
 		JScrollPane scrlCustomerInfo = new JScrollPane();
 		GridBagConstraints gbc_scrlCustomerInfo = new GridBagConstraints();
@@ -175,6 +181,7 @@ public class MainMenu extends JFrame {
 		pMain.add(scrlCustomerInfo, gbc_scrlCustomerInfo);
 
 		txtaCustomer = new JTextArea();
+		txtaCustomer.setEditable(false);
 		scrlCustomerInfo.setViewportView(txtaCustomer);
 
 		scrlCustomer = new JScrollPane();
@@ -270,18 +277,26 @@ public class MainMenu extends JFrame {
 	private void highlightCustomer() {
 		Person person = listCustomers.getSelectedValue();
 		if (person != null) {
+			String text = null;
+			
 			if (person instanceof PrivateCustomer) {
-				String text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s", 
+				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s", 
 						person.getName(),
 						((PrivateCustomer) person).getCPR(), 
 						person.getPhoneNr(), 
 						person.getEmail());
-				txtaCustomer.setText(text);
-
 			} else {
-
+				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s\nKontaktperson: %s - (%s)", 
+						person.getName(),
+						((BuisnessCustomer) person).getCVRNumber(), 
+						person.getPhoneNr(), 
+						person.getEmail(), 
+						((BuisnessCustomer) person).getContact(), 
+						((BuisnessCustomer) person).getContactPhone());
 			}
 
+			txtaCustomer.setText(text);
+			orderController.attachCustomer(person.getPhoneNr());
 		}
 	}
 
@@ -316,11 +331,14 @@ public class MainMenu extends JFrame {
 		});
 	}
 
+	// Fix this later
 	private void customerSearch() {
 		String search = txtfCustomer.getText();
 		List<Person> currList = orderController.findCustomers(search);
-		currList.addAll(0, orderController.findCustomers("0000"));
+		Person defaultCustomer = orderController.findCustomers("0000").get(0);
+		currList.remove(defaultCustomer);
 		cModel.clear();
+		currList.add(0, defaultCustomer);
 		cModel.addAll(currList);
 	}
 
@@ -332,6 +350,9 @@ public class MainMenu extends JFrame {
 
 	private void CreateEmptyOrder() {
 		orderController.createOrder();
+		cModel.clear();
+		pModel.clear();
+		txtaCustomer.setText("");
 		customerSearch();
 	}
 }

@@ -48,5 +48,12 @@ public class CustomerController {
 	public List<Person> findCustomers(String input) {
 		return customerContainer.findCustomers(input);
 	}
+	
+	public Person getDefaultCustomer() {
+		return customerContainer.getDefaultCustomer();
+	}
 
+	public void setDefaultCustomer(Person defaultCustomer) {
+		customerContainer.setDefaultCustomer(defaultCustomer);;
+	}
 }

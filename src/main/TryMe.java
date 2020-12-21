@@ -28,8 +28,9 @@ public class TryMe {
 				michaelDiscountGroup);
 		CustomerContainer.getInstance()
 				.addCustomer(new PrivateCustomer("12345678", "somehting@gmail.com", "My man", "87654321"));
-		customerController.createBuisnessCustomer("Business Man ", "google@emal.com", "88888888", "09112001-1447",
-				"29621602", "Thomas bossman");
+		customerController.createBuisnessCustomer("Business Man ", "google@emal.com", "88888888", "091101-1337",
+				"Thomas bossman", "29621602");
+		
 		productController.createSellableProduct("Toothbrush", "12345678", "A toothbrush", 20d, 1);
 		productController.createSellableProduct("Toothpaste", "13579246", "some toothpaste", 40d, 1);
 		productController.createSellableProduct("a very long string to cut", "98765432", "you know it ;)", 200d, 1);
