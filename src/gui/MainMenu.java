@@ -26,6 +26,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -161,14 +162,16 @@ public class MainMenu extends JFrame {
 
 		JMenuItem mntmEditPrice = new JMenuItem("Ændre pris");
 		mntmEditPrice.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
+				editpriceClicked();
 			}
 		});
 		popupMenu.add(mntmEditPrice);
-		
+
 		JMenuItem mntmNewMenuItem = new JMenuItem("Ændre antal");
 		popupMenu.add(mntmNewMenuItem);
-		
+
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Slet product");
 		popupMenu.add(mntmNewMenuItem_1);
 
@@ -194,6 +197,7 @@ public class MainMenu extends JFrame {
 
 		listCustomers = new JList<>();
 		listCustomers.addListSelectionListener(new ListSelectionListener() {
+			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				highlightCustomer();
 			}
@@ -278,21 +282,14 @@ public class MainMenu extends JFrame {
 		Person person = listCustomers.getSelectedValue();
 		if (person != null) {
 			String text = null;
-			
+
 			if (person instanceof PrivateCustomer) {
-				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s", 
-						person.getName(),
-						((PrivateCustomer) person).getCPR(), 
-						person.getPhoneNr(), 
-						person.getEmail());
+				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s", person.getName(),
+						((PrivateCustomer) person).getCPR(), person.getPhoneNr(), person.getEmail());
 			} else {
-				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s\nKontaktperson: %s - (%s)", 
-						person.getName(),
-						((BuisnessCustomer) person).getCVRNumber(), 
-						person.getPhoneNr(), 
-						person.getEmail(), 
-						((BuisnessCustomer) person).getContact(), 
-						((BuisnessCustomer) person).getContactPhone());
+				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s\nKontaktperson: %s - (%s)", person.getName(),
+						((BuisnessCustomer) person).getCVRNumber(), person.getPhoneNr(), person.getEmail(),
+						((BuisnessCustomer) person).getContact(), ((BuisnessCustomer) person).getContactPhone());
 			}
 
 			txtaCustomer.setText(text);
@@ -340,6 +337,20 @@ public class MainMenu extends JFrame {
 		cModel.clear();
 		currList.add(0, defaultCustomer);
 		cModel.addAll(currList);
+	}
+
+	private void editpriceClicked() {
+		OrderLine currItem = listProducts.getSelectedValue();
+		if (currItem != null) {
+			Double nPrice = Input.getInputDouble("nye pris: "); // retunere null ved cancel eller input der ikke er et
+																// tal
+			if (nPrice != null && currItem != null) {
+				currItem.editPrice(nPrice);
+				refreshProductList();
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "fejl, intet produkt valgt");
+		}
 	}
 
 	private void productSearch() {
