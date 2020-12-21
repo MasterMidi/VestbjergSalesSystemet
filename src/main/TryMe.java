@@ -41,16 +41,16 @@ public class TryMe {
 		product.addProduct(new SellableProduct("Hexdriver", "178503", "something", 20d, 1));
 		ProductContainer.getInstance().addProduct(product);
 
-		OrderController orderController = new OrderController();
-		orderController.createOrder();
-		orderController.scanProduct("12345678");
-		orderController.scanProduct("13579246");
-		orderController.scanProduct("98765432");
-		orderController.scanProduct("110301");
-		orderController.scanProduct("89642378");
-		orderController.editProductAmount(4, 2);
-		orderController.attachCustomer("12345678");
-		orderController.finishSale(PaymentMethod.cash);
-		new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
+//		OrderController orderController = new OrderController();
+//		orderController.createOrder();
+//		orderController.scanProduct("12345678");
+//		orderController.scanProduct("13579246");
+//		orderController.scanProduct("98765432");
+//		orderController.scanProduct("110301");
+//		orderController.scanProduct("89642378");
+//		orderController.editProductAmount(4, 2);
+//		orderController.attachCustomer("12345678");
+//		orderController.finishSale(PaymentMethod.cash);
+//		new CreateOrderOption().printReceipt(orderController.getCurrentOrder());
 	}
 }
