@@ -9,12 +9,13 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -37,9 +38,12 @@ import javax.swing.event.ListSelectionListener;
 import controller.OrderController;
 import main.TryMe;
 import model.people.Person;
+import model.people.PrivateCustomer;
 import model.sale.Order.OrderLine;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class MainMenu extends JFrame {
 
@@ -49,11 +53,12 @@ public class MainMenu extends JFrame {
 	private OrderController orderController;
 	private String pText;
 	private String cText;
-	private JTextField txtfBarcode;
+	private JTextField txtfProduct;
 	private JTextField txtfCustomer;
 	private JTextArea txtaCustomer;
 	private JList<Person> listCustomers;
 	private JList<OrderLine> listProducts;
+	private JScrollPane scrlCustomer;
 
 	/**
 	 * Launch the application.
@@ -88,32 +93,46 @@ public class MainMenu extends JFrame {
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel pCreateOrder = new JPanel();
+		pCreateOrder.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				CreateEmptyOrder();
+				System.out.println("hey");
+			}
+		});
 		tabbedPane.addTab("Create Order", null, pCreateOrder, null);
 		pCreateOrder.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_1 = new JPanel();
-		pCreateOrder.add(panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] { 0, 106, 0, 231, 0, 122, 0, 0, 0 };
-		gbl_panel_1.rowHeights = new int[] { 0, 23, 74, 276, 0, 0, 0 };
-		gbl_panel_1.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panel_1.setLayout(gbl_panel_1);
+		JPanel pMain = new JPanel();
+		pCreateOrder.add(pMain);
+		GridBagLayout gbl_pMain = new GridBagLayout();
+		gbl_pMain.columnWidths = new int[] { 20, 106, 20, 231, 50, 0 };
+		gbl_pMain.rowHeights = new int[] { 20, 23, 74, 276, 0 };
+		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_pMain.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		pMain.setLayout(gbl_pMain);
 
-		txtfBarcode = new JHintTextField("Stregkode...");
-		txtfBarcode.setForeground(Color.GRAY);
-		txtfBarcode.setColumns(10);
-		GridBagConstraints gbc_txtfBarcode = new GridBagConstraints();
-		gbc_txtfBarcode.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtfBarcode.insets = new Insets(0, 0, 5, 5);
-		gbc_txtfBarcode.gridx = 1;
-		gbc_txtfBarcode.gridy = 1;
-		panel_1.add(txtfBarcode, gbc_txtfBarcode);
+		txtfProduct = new JHintTextField("Stregkode...");
+		txtfProduct.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				productSearch();
+			}
+		});
+		txtfProduct.setForeground(Color.GRAY);
+		txtfProduct.setColumns(10);
+		GridBagConstraints gbc_txtfProduct = new GridBagConstraints();
+		gbc_txtfProduct.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtfProduct.insets = new Insets(0, 0, 5, 5);
+		gbc_txtfProduct.gridx = 1;
+		gbc_txtfProduct.gridy = 1;
+		pMain.add(txtfProduct, gbc_txtfProduct);
 
 		txtfCustomer = new JHintTextField("navn/tlf...");
 		txtfCustomer.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void keyReleased(KeyEvent e) {
+				customerSearch();
 			}
 		});
 		txtfCustomer.setForeground(Color.GRAY);
@@ -123,16 +142,16 @@ public class MainMenu extends JFrame {
 		gbc_txtfCustomer.insets = new Insets(0, 0, 5, 5);
 		gbc_txtfCustomer.gridx = 3;
 		gbc_txtfCustomer.gridy = 1;
-		panel_1.add(txtfCustomer, gbc_txtfCustomer);
+		pMain.add(txtfCustomer, gbc_txtfCustomer);
 
 		JScrollPane scrlProducts = new JScrollPane();
 		GridBagConstraints gbc_scrlProducts = new GridBagConstraints();
 		gbc_scrlProducts.fill = GridBagConstraints.BOTH;
 		gbc_scrlProducts.gridheight = 2;
-		gbc_scrlProducts.insets = new Insets(0, 0, 5, 5);
+		gbc_scrlProducts.insets = new Insets(0, 0, 0, 5);
 		gbc_scrlProducts.gridx = 1;
 		gbc_scrlProducts.gridy = 2;
-		panel_1.add(scrlProducts, gbc_scrlProducts);
+		pMain.add(scrlProducts, gbc_scrlProducts);
 
 		listProducts = new JList<>();
 		scrlProducts.setViewportView(listProducts);
@@ -153,18 +172,18 @@ public class MainMenu extends JFrame {
 		gbc_scrlCustomerInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_scrlCustomerInfo.gridx = 3;
 		gbc_scrlCustomerInfo.gridy = 2;
-		panel_1.add(scrlCustomerInfo, gbc_scrlCustomerInfo);
+		pMain.add(scrlCustomerInfo, gbc_scrlCustomerInfo);
 
 		txtaCustomer = new JTextArea();
 		scrlCustomerInfo.setViewportView(txtaCustomer);
 
-		JScrollPane scrlCustomer = new JScrollPane();
+		scrlCustomer = new JScrollPane();
 		GridBagConstraints gbc_scrlCustomer = new GridBagConstraints();
 		gbc_scrlCustomer.fill = GridBagConstraints.BOTH;
-		gbc_scrlCustomer.insets = new Insets(0, 0, 5, 5);
+		gbc_scrlCustomer.insets = new Insets(0, 0, 0, 5);
 		gbc_scrlCustomer.gridx = 3;
 		gbc_scrlCustomer.gridy = 3;
-		panel_1.add(scrlCustomer, gbc_scrlCustomer);
+		pMain.add(scrlCustomer, gbc_scrlCustomer);
 
 		listCustomers = new JList<>();
 		listCustomers.addListSelectionListener(new ListSelectionListener() {
@@ -218,6 +237,7 @@ public class MainMenu extends JFrame {
 		listCustomers.setModel(cModel);
 		createRenderers();
 		new TryMe();
+		customerSearch();
 	}
 
 	private void refreshProductList() {
@@ -248,7 +268,21 @@ public class MainMenu extends JFrame {
 	}
 
 	private void highlightCustomer() {
-		txtaCustomer.setText(listCustomers.getSelectedValue().getName());
+		Person person = listCustomers.getSelectedValue();
+		if (person != null) {
+			if (person instanceof PrivateCustomer) {
+				String text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s", 
+						person.getName(),
+						((PrivateCustomer) person).getCPR(), 
+						person.getPhoneNr(), 
+						person.getEmail());
+				txtaCustomer.setText(text);
+
+			} else {
+
+			}
+
+		}
 	}
 
 	private void createRenderers() {
@@ -280,6 +314,24 @@ public class MainMenu extends JFrame {
 				return renderer;
 			}
 		});
+	}
 
+	private void customerSearch() {
+		String search = txtfCustomer.getText();
+		List<Person> currList = orderController.findCustomers(search);
+		currList.addAll(0, orderController.findCustomers("0000"));
+		cModel.clear();
+		cModel.addAll(currList);
+	}
+
+	private void productSearch() {
+		String search = txtfProduct.getText();
+		orderController.scanProduct(search);
+		refreshProductList();
+	}
+
+	private void CreateEmptyOrder() {
+		orderController.createOrder();
+		customerSearch();
 	}
 }
