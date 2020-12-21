@@ -163,6 +163,10 @@ public class Order {
 		return index;
 	}
 
+	public void removeOrderLine(OrderLine orderline) {
+		orderLineList.remove(orderline);
+	}
+
 	public void addOrderLine(SellableProduct product, int amount) {
 		if (product != null) {
 			int index = orderLineContainsProduct(product);
@@ -206,7 +210,7 @@ public class Order {
 				PrivateCustomer _customer = (PrivateCustomer) customer;
 
 				if (_customer.getDiscountGroup() != null) {
-					discountAmount = 1 -_customer.getDiscountGroup().getDiscount();
+					discountAmount = 1 - _customer.getDiscountGroup().getDiscount();
 				}
 			}
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import model.people.Person;
 import model.product.SellableProduct;
 import model.sale.Order;
+import model.sale.Order.OrderLine;
 import model.sale.OrderContainer;
 import model.sale.OrderStatus;
 import model.sale.PaymentMethod;
@@ -23,6 +24,10 @@ public class OrderController {
 	public void createOrder() {
 		order = new Order();
 		order.setEmployee(new EmployeeController().getCurrentEmployee());
+	}
+
+	public void removeOrderLine(OrderLine orderLine) {
+		order.removeOrderLine(orderLine);
 	}
 
 	public SellableProduct getProduct(String barcode) {
@@ -44,7 +49,7 @@ public class OrderController {
 	public void editProductPrice(int index, double price) {
 		order.editProductPrice(index, price);
 	}
-	
+
 	public void editProductAmount(int index, int amount) {
 		order.editProductAmount(index, amount);
 	}
@@ -60,6 +65,7 @@ public class OrderController {
 
 	/**
 	 * Finishes up the sale, adding missing information to the order and saving it.
+	 * 
 	 * @param payment the payment method used for the payment of the order
 	 */
 	public void finishSale(PaymentMethod payment) {

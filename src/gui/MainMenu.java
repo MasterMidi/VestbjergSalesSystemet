@@ -97,7 +97,6 @@ public class MainMenu extends JFrame {
 			@Override
 			public void componentShown(ComponentEvent e) {
 				CreateEmptyOrder();
-				System.out.println("hey");
 			}
 		});
 		tabbedPane.addTab("Create Order", null, pCreateOrder, null);
@@ -170,9 +169,21 @@ public class MainMenu extends JFrame {
 		popupMenu.add(mntmEditPrice);
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Ændre antal");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChangeAmountClicked();
+			}
+		});
 		popupMenu.add(mntmNewMenuItem);
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Slet product");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deleteClicked();
+			}
+		});
 		popupMenu.add(mntmNewMenuItem_1);
 
 		JScrollPane scrlCustomerInfo = new JScrollPane();
@@ -234,11 +245,40 @@ public class MainMenu extends JFrame {
 		init();
 	}
 
-//	protected void setEmptyText(FocusEvent e) {
-//		TextField currTF = (TextField) e.getComponent();
-//		currTF.setText("");
-//
-//	}
+	private void deleteClicked() {
+		OrderLine currOrderLine = listProducts.getSelectedValue();
+		if (currOrderLine != null) {
+
+			if (JOptionPane.showConfirmDialog(this,
+					"Er du sikker på du vil fjerne" + currOrderLine.getProduct().getName() + "fra listen", "Slet",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				orderController.removeOrderLine(currOrderLine);
+				refreshProductList();
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "Fejl, intet produkt valgt");
+
+		}
+	}
+
+	private void ChangeAmountClicked() {
+		OrderLine currItem = listProducts.getSelectedValue();
+		if (currItem != null) {
+			Integer nAmount = Input.getInputInteger("Nyt antal af product"); // retunere null ved cancel eller input der
+																				// ikke er et tal
+			if (nAmount != null) {
+
+				if (nAmount > 0) {
+					currItem.setAmount(nAmount);
+					refreshProductList();
+				} else {
+					JOptionPane.showMessageDialog(this, "Antal skal være over \"0\"");
+				}
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "Fejl, intet produkt valgt");
+		}
+	}
 
 	private void init() {
 		orderController = new OrderController();
