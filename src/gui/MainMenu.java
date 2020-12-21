@@ -1,44 +1,59 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import controller.OrderController;
+import main.TryMe;
+import model.people.Person;
+import model.sale.Order.OrderLine;
 
 public class MainMenu extends JFrame {
 
+	private DefaultListModel<OrderLine> pModel;
+	private DefaultListModel<Person> cModel;
 	private JPanel contentPane;
 	private OrderController orderController;
 	private JTextField tfProducts;
 	private JTextField tfCustumers;
-	private JList lProducts;
-	private JList lCustomers;
-	private JTextPane tpDisplayCustomer;
+	private JList<OrderLine> lProducts;
+	private JList<Person> lCustomers;
+	private String pText;
+	private String cText;
 
 	/**
 	 * Launch the application.
@@ -81,16 +96,34 @@ public class MainMenu extends JFrame {
 		pCreateOrder.setName("");
 		tabbedPane.addTab("Create Order", null, pCreateOrder, null);
 		GridBagLayout gbl_pCreateOrder = new GridBagLayout();
-		gbl_pCreateOrder.columnWidths = new int[] { 106, 0, 231, 0, 91, 0, 0, 0 };
-		gbl_pCreateOrder.rowHeights = new int[] { 0, 23, 276, 0, 0, 0 };
-		gbl_pCreateOrder.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_pCreateOrder.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pCreateOrder.columnWidths = new int[] { 106, 0, 231, 0, 122, 0, 0, 0 };
+		gbl_pCreateOrder.rowHeights = new int[] { 0, 23, 74, 276, 0, 0, 0 };
+		gbl_pCreateOrder.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pCreateOrder.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pCreateOrder.setLayout(gbl_pCreateOrder);
 
 		tfProducts = new JTextField();
-		tfProducts.addKeyListener(new KeyAdapter() {
+		tfProducts.setForeground(Color.GRAY);
+		tfProducts.addFocusListener(new FocusAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e) {
+			public void focusGained(FocusEvent e) {
+				if (tfProducts.getText().equals(pText)) {
+					tfProducts.setText("");
+					tfProducts.setForeground(Color.BLACK);
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (tfProducts.getText().isEmpty()) {
+					tfProducts.setForeground(Color.GRAY);
+					tfProducts.setText(pText);
+				}
+			}
+		});
+		tfProducts.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				productSearch();
 			}
 		});
@@ -104,6 +137,24 @@ public class MainMenu extends JFrame {
 		tfProducts.setColumns(10);
 
 		tfCustumers = new JTextField();
+		tfCustumers.setForeground(Color.GRAY);
+		tfCustumers.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (tfCustumers.getText().equals(cText)) {
+					tfCustumers.setText("");
+					tfCustumers.setForeground(Color.BLACK);
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (tfCustumers.getText().isEmpty()) {
+					tfCustumers.setForeground(Color.GRAY);
+					tfCustumers.setText(cText);
+				}
+			}
+		});
 		tfCustumers.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -119,16 +170,28 @@ public class MainMenu extends JFrame {
 		pCreateOrder.add(tfCustumers, gbc_tfCustumers);
 		tfCustumers.setColumns(10);
 
+		JScrollPane scrollPane_2 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_2.gridx = 2;
+		gbc_scrollPane_2.gridy = 2;
+		pCreateOrder.add(scrollPane_2, gbc_scrollPane_2);
+
+		JTextArea textArea = new JTextArea();
+		scrollPane_2.setViewportView(textArea);
+
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridheight = 2;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
 		pCreateOrder.add(scrollPane, gbc_scrollPane);
 
-		lProducts = new JList();
-		lProducts.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		lProducts = new JList<OrderLine>();
+		lProducts.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(lProducts);
 
 		JPopupMenu popupMenu = new JPopupMenu();
@@ -148,36 +211,24 @@ public class MainMenu extends JFrame {
 		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 2;
-		gbc_scrollPane_1.gridy = 2;
+		gbc_scrollPane_1.gridy = 3;
 		pCreateOrder.add(scrollPane_1, gbc_scrollPane_1);
 
-		lCustomers = new JList();
+		lCustomers = new JList<Person>();
 		scrollPane_1.setViewportView(lCustomers);
 
-		tpDisplayCustomer = new JTextPane();
-		tpDisplayCustomer.setEditable(false);
-		GridBagConstraints gbc_tpDisplayCustomer = new GridBagConstraints();
-		gbc_tpDisplayCustomer.insets = new Insets(0, 0, 5, 5);
-		gbc_tpDisplayCustomer.fill = GridBagConstraints.BOTH;
-		gbc_tpDisplayCustomer.gridx = 4;
-		gbc_tpDisplayCustomer.gridy = 2;
-		pCreateOrder.add(tpDisplayCustomer, gbc_tpDisplayCustomer);
-
-		JButton btnCancel = new JButton("Annuller");
-		btnCancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cancelPressed();
-			}
-
-		});
-		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCancel.gridx = 5;
-		gbc_btnCancel.gridy = 4;
-		pCreateOrder.add(btnCancel, gbc_btnCancel);
+		JPanel panel = new JPanel();
+		panel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 4;
+		gbc_panel.gridy = 4;
+		pCreateOrder.add(panel, gbc_panel);
+		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
 		JButton btnConfirm = new JButton("Færdig");
+		panel.add(btnConfirm);
 		btnConfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -185,11 +236,16 @@ public class MainMenu extends JFrame {
 			}
 
 		});
-		GridBagConstraints gbc_btnConfirm = new GridBagConstraints();
-		gbc_btnConfirm.anchor = GridBagConstraints.EAST;
-		gbc_btnConfirm.gridx = 6;
-		gbc_btnConfirm.gridy = 4;
-		pCreateOrder.add(btnConfirm, gbc_btnConfirm);
+
+		JButton btnCancel = new JButton("Annuller");
+		panel.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cancelPressed();
+			}
+
+		});
 
 		JPanel pCreateOffer = new JPanel();
 		tabbedPane.addTab("Create Offer", null, pCreateOffer, null);
@@ -210,8 +266,54 @@ public class MainMenu extends JFrame {
 		init();
 	}
 
+	protected void setEmptyText(FocusEvent e) {
+		TextField currTF = (TextField) e.getComponent();
+		currTF.setText("");
+
+	}
+
 	private void init() {
 		orderController = new OrderController();
+		pModel = new DefaultListModel<>();
+		lProducts.setModel(pModel);
+		cModel = new DefaultListModel<>();
+		lCustomers.setModel(cModel);
+		createRenderers();
+		pText = tfProducts.getText();
+		cText = tfCustumers.getText();
+		new TryMe();
+	}
+
+	private void createRenderers() {
+		lProducts.setCellRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (renderer instanceof JLabel && value instanceof OrderLine) {
+					OrderLine castedValue = ((OrderLine) value);
+					String text = String.format("%d x %s - %s,-", castedValue.getAmount(),
+							castedValue.getProduct().getName(), Double.toString(castedValue.getPrice()));
+					((JLabel) renderer).setText(text);
+				}
+				return renderer;
+			}
+		});
+
+		lCustomers.setCellRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (renderer instanceof JLabel && value instanceof Person) {
+					Person castedValue = ((Person) value);
+					String text = String.format("%s - (%s)", castedValue.getName(), castedValue.getPhoneNr());
+					((JLabel) renderer).setText(text);
+				}
+				return renderer;
+			}
+		});
+
 	}
 
 	private void editPressed() {
@@ -230,17 +332,27 @@ public class MainMenu extends JFrame {
 	}
 
 	private void customerSearch() {
-		// TODO Auto-generated method stub
-
+		String search = tfCustumers.getText();
+		List<Person> currList = orderController.findCustomers(search);
+		currList.addAll(0, orderController.findCustomers("0000"));
+		cModel.clear();
+		cModel.addAll(currList);
 	}
 
 	private void productSearch() {
-		// TODO Auto-generated method stub
-
+		String search = tfProducts.getText();
+		orderController.scanProduct(search);
+		refreshProductList();
 	}
 
 	private void CreateEmptyOrder() {
 		orderController.createOrder();
+		customerSearch();
+	}
+
+	private void refreshProductList() {
+		pModel.clear();
+		pModel.addAll(orderController.getCurrentOrder().getOrderLineList());
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
