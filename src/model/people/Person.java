@@ -4,6 +4,16 @@ public abstract class Person {
 	private String phoneNr;
 	private String email;
 	private String name;
+	private String address;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	private PersonRole role;
 	private DiscountGroup discountGroup;
 
@@ -12,6 +22,11 @@ public abstract class Person {
 		this.email = email;
 		this.name = name;
 		this.role = role;
+	}
+
+	public Person(String phoneNr, String email, String name, String address, PersonRole role) {
+		this(phoneNr, email, name, role);
+		this.address = address;
 	}
 
 	public String getPhoneNr() {

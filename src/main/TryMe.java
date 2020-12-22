@@ -21,16 +21,16 @@ public class TryMe {
 		customerController = new CustomerController();
 		productController.createSellableProduct("Magnuses gamle sko", "1111", "De lugter lidt", 200d, 10);
 		employeeController.createEmployee("10101010", "hej@hejsa.dk", "Mike", 4321, PersonRole.manager);
-		customerController.createPrivateCustomer("Default Cash customer", "N/A", "0000", "N/A");
+		customerController.createPrivateCustomer("Default Cash customer", "N/A", "0000", "N/A", "N/A");
 
 		DiscountGroup michaelDiscountGroup = new DiscountGroup("michaels discount group", null, 0.25d);
-		customerController.createPrivateCustomer("Michael", "bigbutts@gmail.com", "60495804", "290598-0117",
-				michaelDiscountGroup);
-		CustomerContainer.getInstance()
-				.addCustomer(new PrivateCustomer("12345678", "somehting@gmail.com", "My man", "87654321"));
-		customerController.createBuisnessCustomer("Business Man ", "google@emal.com", "88888888", "091101-1337",
-				"Thomas bossman", "29621602");
-		
+		customerController.createPrivateCustomer("Michael", "bigbutts@gmail.com", "60495804", "Umamivej 24",
+				"290598-0117", michaelDiscountGroup);
+		CustomerContainer.getInstance().addCustomer(
+				new PrivateCustomer("12345678", "somehting@gmail.com", "My man", "Wallstreeetvej 24", "87654321"));
+		customerController.createBuisnessCustomer("Business Man ", "google@emal.com", "88888888",
+				"World trade center street 321", "091101-1337", "Thomas bossman", "29621602");
+
 		productController.createSellableProduct("Toothbrush", "12345678", "A toothbrush", 20d, 1);
 		productController.createSellableProduct("Toothpaste", "13579246", "some toothpaste", 40d, 1);
 		productController.createSellableProduct("a very long string to cut", "98765432", "you know it ;)", 200d, 1);

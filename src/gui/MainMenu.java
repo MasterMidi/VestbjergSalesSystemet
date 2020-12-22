@@ -106,7 +106,7 @@ public class MainMenu extends JFrame {
 		pCreateOrder.add(pMain);
 		GridBagLayout gbl_pMain = new GridBagLayout();
 		gbl_pMain.columnWidths = new int[] { 20, 106, 20, 231, 50, 0 };
-		gbl_pMain.rowHeights = new int[] { 20, 23, 74, 276, 0 };
+		gbl_pMain.rowHeights = new int[] { 20, 23, 100, 276, 0 };
 		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_pMain.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		pMain.setLayout(gbl_pMain);
@@ -324,11 +324,13 @@ public class MainMenu extends JFrame {
 			String text = null;
 
 			if (person instanceof PrivateCustomer) {
-				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s", person.getName(),
-						((PrivateCustomer) person).getCPR(), person.getPhoneNr(), person.getEmail());
+				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s\nAdresse: %s", person.getName(),
+						((PrivateCustomer) person).getCPR(), person.getPhoneNr(), person.getEmail(),
+						person.getAddress());
 			} else {
-				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s\nKontaktperson: %s - (%s)", person.getName(),
-						((BuisnessCustomer) person).getCVRNumber(), person.getPhoneNr(), person.getEmail(),
+				text = String.format("Navn: %s - (%s)\ntlf.: %s\nEmail: %s\nAdresse: %s\nKontaktperson: %s - (%s)",
+						person.getName(), ((BuisnessCustomer) person).getCVRNumber(), person.getPhoneNr(),
+						person.getEmail(), ((BuisnessCustomer) person).getAddress(),
 						((BuisnessCustomer) person).getContact(), ((BuisnessCustomer) person).getContactPhone());
 			}
 
