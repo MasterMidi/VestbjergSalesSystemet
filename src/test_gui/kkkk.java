@@ -2,7 +2,8 @@ package test_gui;
 
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import gui.JHintTextField;
+
+import gui.components.JHintTextField;
 
 public class kkkk extends JPanel {
 
