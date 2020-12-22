@@ -44,6 +44,7 @@ import model.people.BuisnessCustomer;
 import model.people.Person;
 import model.people.PrivateCustomer;
 import model.sale.Order.OrderLine;
+import model.sale.PaymentMethod;
 
 public class MainMenu extends JFrame {
 
@@ -96,7 +97,7 @@ public class MainMenu extends JFrame {
 		pCreateOrder.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent e) {
-				CreateEmptyOrder();
+				resetScreen();
 			}
 		});
 		tabbedPane.addTab("Create Order", null, pCreateOrder, null);
@@ -221,9 +222,21 @@ public class MainMenu extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
 		JButton btnConfirm = new JButton("Færdig");
+		btnConfirm.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				finishPressed();
+			}
+		});
 		panel.add(btnConfirm);
 
 		JButton btnCancel = new JButton("Annuller");
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cancelPressed();
+			}
+		});
 		panel.add(btnCancel);
 
 		JPanel pCreateOffer = new JPanel();
@@ -245,12 +258,41 @@ public class MainMenu extends JFrame {
 		init();
 	}
 
+	private void cancelPressed() {
+		resetScreen();
+	}
+
+	private void finishPressed() {
+		Person currPerson = listCustomers.getSelectedValue();
+		int numOfItems = pModel.getSize();
+		if (currPerson != null && numOfItems > 0) {
+			orderController.attachCustomer(currPerson.getPhoneNr());
+			PaymentMethod payment = (currPerson.getPhoneNr().equalsIgnoreCase("0000")) ? findPaymentMothod()
+					: PaymentMethod.invoice;
+			if (payment != null) {
+				orderController.finishSale(payment);
+				resetScreen();
+			}
+		} else {
+			String message = numOfItems <= 0 ? "Fejl, tilføj varer" : "Fejl, ingen kunde valgt!";
+			JOptionPane.showMessageDialog(this, message);
+		}
+	}
+
+	private PaymentMethod findPaymentMothod() {
+		// TODO find payment method (cash or card)
+		PaymentMethod res = null;
+		PaymentMethod[] list = { PaymentMethod.cash, PaymentMethod.creditcard };
+		res = Input.getPaymentInput("Vælg betaling metode", "Betaling", list);
+		return res;
+	}
+
 	private void deleteClicked() {
 		OrderLine currOrderLine = listProducts.getSelectedValue();
 		if (currOrderLine != null) {
 
 			if (JOptionPane.showConfirmDialog(this,
-					"Er du sikker på du vil fjerne" + currOrderLine.getProduct().getName() + "fra listen", "Slet",
+					"Er du sikker på du vil fjerne \"" + currOrderLine.getProduct().getName() + "\"", "Slet",
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				orderController.removeOrderLine(currOrderLine);
 				refreshProductList();
@@ -272,7 +314,7 @@ public class MainMenu extends JFrame {
 					currItem.setAmount(nAmount);
 					refreshProductList();
 				} else {
-					JOptionPane.showMessageDialog(this, "Antal skal være over \"0\"");
+					JOptionPane.showMessageDialog(this, "Fejl, antal skal være over \"0\"");
 				}
 			}
 		} else {
@@ -399,7 +441,9 @@ public class MainMenu extends JFrame {
 		refreshProductList();
 	}
 
-	private void CreateEmptyOrder() {
+	private void resetScreen() {
+		txtfCustomer.setText("");
+		txtfProduct.setText("");
 		orderController.createOrder();
 		cModel.clear();
 		pModel.clear();
