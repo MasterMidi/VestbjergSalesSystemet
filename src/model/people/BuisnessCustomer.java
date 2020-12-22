@@ -7,19 +7,18 @@ public class BuisnessCustomer extends Person {
 	private double balance;
 	private DiscountGroup discountGroup;
 
-	public BuisnessCustomer(String phoneNr, String email, String name, String contact, String contactPhone,
-			String cvrNumber, DiscountGroup discountGroup) {
-		super(phoneNr, email, name, PersonRole.activeCustomer);
+	public BuisnessCustomer(String phoneNr, String email, String name, String address, String contact,
+			String contactPhone, String cvrNumber, DiscountGroup discountGroup) {
+		super(phoneNr, email, name, address, PersonRole.activeCustomer);
 		this.contact = contact;
 		this.contactPhone = contactPhone;
 		CVR = cvrNumber;
 		this.balance = 0d;
 	}
-	
-	public BuisnessCustomer(String phoneNr, String email, String name, String contact, String contactPhone,
-			String cvrNumber) {
-		this(phoneNr, email, name, contact, contactPhone,
-				cvrNumber, null);
+
+	public BuisnessCustomer(String phoneNr, String email, String name, String address, String contact,
+			String contactPhone, String cvrNumber) {
+		this(phoneNr, email, name, address, contact, contactPhone, cvrNumber, null);
 	}
 
 	public double getSaldo() {
@@ -41,7 +40,7 @@ public class BuisnessCustomer extends Person {
 	public String getCVRNumber() {
 		return CVR;
 	}
-	
+
 	public DiscountGroup getDiscountGroup() {
 		return discountGroup;
 	}
