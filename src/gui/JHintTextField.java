@@ -13,9 +13,14 @@ import javax.swing.JTextField;
  * @author DaveTheDane, based on a suggestion from Adam Gawne-Cain
  */
 
+@SuppressWarnings("serial")
 public class JHintTextField extends JTextField {
 	private final String hint;
 
+	public JHintTextField() {
+		this(null);
+		
+	}
 	public JHintTextField(String hint) {
 		this.hint = hint;
 	}
@@ -26,8 +31,6 @@ public class JHintTextField extends JTextField {
 		final Graphics2D graphics2d = (Graphics2D) graphics;
 
 		super.paintComponent(graphics2d);
-
-//      System.out.println("Paint.: " + g2d);
 
 		if (getText().isEmpty()) {
 			graphics2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
