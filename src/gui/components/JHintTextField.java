@@ -15,19 +15,38 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class JHintTextField extends JTextField {
-	private final String hint;
+	private String hint;
 
 	public JHintTextField() {
 		this(null);
-		
 	}
+
 	public JHintTextField(String hint) {
+		super(null, null, 0);
 		this.hint = hint;
 	}
 	
+	public JHintTextField(String text, String hint) {
+		super(null, text, 0);
+		this.hint = hint;
+	}
+	
+	public JHintTextField(String text, String hint, int column) {
+		super(null, text, column);
+		this.hint = hint;
+	}
+
+	public String getHint() {
+		return hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
 	@Override
 	public void paintComponent(Graphics graphics) {
-		
+
 		final Graphics2D graphics2d = (Graphics2D) graphics;
 
 		super.paintComponent(graphics2d);
@@ -37,7 +56,7 @@ public class JHintTextField extends JTextField {
 
 			final Insets ins = getInsets();
 			final FontMetrics fm = graphics2d.getFontMetrics();
-			
+
 			final int cB = getBackground().getRGB();
 			final int cF = getForeground().getRGB();
 			final int m = 0xfefefefe;
