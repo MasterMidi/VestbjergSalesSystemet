@@ -10,6 +10,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import gui.tabs.pCreateOrder;
+import gui.tabs.pProducts;
 
 public class MainMenu extends JFrame {
 
@@ -59,6 +60,9 @@ public class MainMenu extends JFrame {
 		JPanel pProducts = new JPanel();
 		tabbedPane.addTab("Products", null, pProducts, null);
 		pProducts.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new pProducts();
+		pProducts.add(panel, BorderLayout.CENTER);
 
 		JPanel pOrders = new JPanel();
 		tabbedPane.addTab("Orders", null, pOrders, null);
