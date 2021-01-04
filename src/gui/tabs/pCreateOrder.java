@@ -83,7 +83,6 @@ public class pCreateOrder extends JPanel {
 				productSearch();
 			}
 		});
-		txtfProduct.setForeground(Color.GRAY);
 		txtfProduct.setColumns(10);
 		GridBagConstraints gbc_txtfProduct = new GridBagConstraints();
 		gbc_txtfProduct.fill = GridBagConstraints.HORIZONTAL;
@@ -100,7 +99,6 @@ public class pCreateOrder extends JPanel {
 				customerSearch();
 			}
 		});
-		txtfCustomer.setForeground(Color.GRAY);
 		txtfCustomer.setColumns(10);
 		GridBagConstraints gbc_txtfCustomer = new GridBagConstraints();
 		gbc_txtfCustomer.fill = GridBagConstraints.HORIZONTAL;
