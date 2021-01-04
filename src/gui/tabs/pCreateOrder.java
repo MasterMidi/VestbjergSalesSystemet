@@ -72,7 +72,7 @@ public class pCreateOrder extends JPanel {
 		GridBagLayout gbl_pMain = new GridBagLayout();
 		gbl_pMain.columnWidths = new int[] { 20, 106, 20, 231, 50, 0 };
 		gbl_pMain.rowHeights = new int[] { 20, 20, 0 };
-		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_pMain.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0 };
 		pMain.setLayout(gbl_pMain);
 
@@ -83,7 +83,6 @@ public class pCreateOrder extends JPanel {
 				productSearch();
 			}
 		});
-		txtfProduct.setForeground(Color.GRAY);
 		txtfProduct.setColumns(10);
 		GridBagConstraints gbc_txtfProduct = new GridBagConstraints();
 		gbc_txtfProduct.fill = GridBagConstraints.HORIZONTAL;
@@ -92,14 +91,14 @@ public class pCreateOrder extends JPanel {
 		gbc_txtfProduct.gridy = 1;
 		pMain.add(txtfProduct, gbc_txtfProduct);
 
-		txtfCustomer = new JHintTextField("navn/tlf...");
+		txtfCustomer = new JHintTextField();
+		((JHintTextField)txtfCustomer).setHint("navn/tlf...");
 		txtfCustomer.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				customerSearch();
 			}
 		});
-		txtfCustomer.setForeground(Color.GRAY);
 		txtfCustomer.setColumns(10);
 		GridBagConstraints gbc_txtfCustomer = new GridBagConstraints();
 		gbc_txtfCustomer.fill = GridBagConstraints.HORIZONTAL;

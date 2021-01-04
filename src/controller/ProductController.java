@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import model.product.Product;
 import model.product.ProductContainer;
 import model.product.SellableProduct;
@@ -27,5 +29,9 @@ public class ProductController {
 			sellable = (SellableProduct) currProduct;
 		}
 		return sellable;
+	}
+
+	public List<Product> getProducts(String barcode) {
+		return productContainer.getProducts(barcode);
 	}
 }

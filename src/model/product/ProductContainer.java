@@ -1,6 +1,8 @@
 package model.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductContainer {
@@ -34,6 +36,10 @@ public class ProductContainer {
 	public void clear()
 	{
 		products.clear();
+	}
+
+	public List<Product> getProducts(String barcode) {
+		return new ArrayList<>(products.values());
 	}
 
 }
