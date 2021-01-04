@@ -44,7 +44,7 @@ public class ProductContainer {
 		boolean isName = barcode.trim().matches("[^\\d]+");
 
 		for (Product product : products.values()) {
-			boolean contains = (isName) ? product.getName().contains(barcode) : product.getBarcode().contains(barcode);
+			boolean contains = (isName) ? product.getName().toLowerCase().contains(barcode.toLowerCase()) : product.getBarcode().contains(barcode);
 			if (contains) {
 				productList.add(product);
 			}
