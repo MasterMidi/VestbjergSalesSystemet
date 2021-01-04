@@ -18,7 +18,7 @@ public class JHintTextField extends JTextField {
 	private String hint;
 
 	public JHintTextField() {
-		this(null);
+		super(null, null, 0);
 	}
 
 	public JHintTextField(String hint) {

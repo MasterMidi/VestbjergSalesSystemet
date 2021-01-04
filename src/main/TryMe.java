@@ -40,6 +40,11 @@ public class TryMe {
 		product.addProduct(new SellableProduct("Screwdriver", "657189", "something", 30d, 1));
 		product.addProduct(new SellableProduct("Bits", "29873", "something", 60d, 1));
 		product.addProduct(new SellableProduct("Hexdriver", "178503", "something", 20d, 1));
+		
+		for(int i = 0; i < 1000000; i++) {
+			customerController.createPrivateCustomer("Kunde " + i, "hey" + i +"@gmail.com", String.valueOf(i), "Somewhere", "67890243-1233", null);
+			productController.createSellableProduct("Skruetrækker " + String.valueOf(i), String.valueOf(i), "something", 1d, 1);
+		}
 		ProductContainer.getInstance().addProduct(product);
 
 //		OrderController orderController = new OrderController();

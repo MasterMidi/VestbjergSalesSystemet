@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import model.people.Person;
+import java.util.stream.Collectors;
 
 public class ProductContainer {
 	private static ProductContainer instance;
@@ -38,17 +37,20 @@ public class ProductContainer {
 		products.clear();
 	}
 
-	public List<Product> getProducts(String barcode) {
-		List<Product> productList = new ArrayList<>();
+	public List<Product> getProducts(String input) {
+		List<Product> productList = null;
 
-		boolean isName = barcode.trim().matches("[^\\d]+");
+		boolean isName = input.trim().matches("[^\\d]+");
 
-		for (Product product : products.values()) {
-			boolean contains = (isName) ? product.getName().contains(barcode) : product.getBarcode().contains(barcode);
-			if (contains) {
-				productList.add(product);
-			}
+		if (input == null || input.isBlank()) {
+			productList = new ArrayList<>(products.values());
+		} else {
+			productList = products.values().stream()
+					.filter(product -> (isName) ? product.getName().toLowerCase().contains(input.toLowerCase())
+							: product.getBarcode().contains(input))
+					.collect(Collectors.toList());
 		}
+
 		return productList;
 	}
 }

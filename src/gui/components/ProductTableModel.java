@@ -3,19 +3,20 @@ package gui.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 
 import model.product.Product;
 import model.product.SellableProduct;
 
-public class ProductTableModel extends DefaultTableModel {
-	private static final String[] COL_NAMES = {"Navn", "Stregkode", "Pris", "Lagerbeholdning"};
+public class ProductTableModel extends AbstractTableModel {
+	private static final String[] COL_NAMES = { "Navn", "Stregkode", "Pris", "Lagerbeholdning", "Lager status",
+			"Product status" };
 	private List<Product> data;
-	
+
 	public ProductTableModel() {
 		data = new ArrayList<>();
 	}
-	
+
 	public void setData(List<Product> data) {
 		this.data.clear();
 		this.data.addAll(data);
@@ -33,7 +34,7 @@ public class ProductTableModel extends DefaultTableModel {
 	@Override
 	public int getRowCount() {
 		int res = 0;
-		if(data != null) {
+		if (data != null) {
 			res = data.size();
 		}
 		return res;
@@ -43,7 +44,7 @@ public class ProductTableModel extends DefaultTableModel {
 	public int getColumnCount() {
 		return COL_NAMES.length;
 	}
-	
+
 	@Override
 	public String getColumnName(int column) {
 		return COL_NAMES[column];
@@ -65,7 +66,13 @@ public class ProductTableModel extends DefaultTableModel {
 			res = String.valueOf(product.getPrice());
 			break;
 		case 3:
-			res = String.valueOf(((SellableProduct)product).getStock());
+			res = String.valueOf(((SellableProduct) product).getStock());
+			break;
+		case 4:
+			res = ((SellableProduct) product).getStatus().toString();
+			break;
+		case 5:
+			res = "In store";
 			break;
 		default:
 			res = "UNKNOWN COL - CONTACT ADMIN";
@@ -73,4 +80,9 @@ public class ProductTableModel extends DefaultTableModel {
 		}
 		return res;
 	}
+
+	public Class getColumnClass(int c) {
+		return getValueAt(0, c).getClass();
+	}
+
 }
