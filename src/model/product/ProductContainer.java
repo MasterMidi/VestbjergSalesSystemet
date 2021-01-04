@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import model.people.Person;
+
 public class ProductContainer {
 	private static ProductContainer instance;
 	private Map<String, Product> products;
@@ -27,19 +29,26 @@ public class ProductContainer {
 	public void addProduct(Product product) {
 		products.put(product.getBarcode(), product);
 	}
-	
-	public int getProductCount()
-	{
+
+	public int getProductCount() {
 		return products.size();
 	}
-	
-	public void clear()
-	{
+
+	public void clear() {
 		products.clear();
 	}
 
 	public List<Product> getProducts(String barcode) {
-		return new ArrayList<>(products.values());
-	}
+		List<Product> productList = new ArrayList<>();
 
+		boolean isName = barcode.trim().matches("[^\\d]+");
+
+		for (Product product : products.values()) {
+			boolean contains = (isName) ? product.getName().contains(barcode) : product.getBarcode().contains(barcode);
+			if (contains) {
+				productList.add(product);
+			}
+		}
+		return productList;
+	}
 }
