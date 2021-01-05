@@ -74,7 +74,7 @@ public class pCreateOrder extends JPanel {
 		pMain.setMinimumSize(new Dimension(600, 10));
 		add(pMain, BorderLayout.CENTER);
 		GridBagLayout gbl_pMain = new GridBagLayout();
-		gbl_pMain.columnWidths = new int[] { 10, 106, 10, 231, 10, 0 };
+		gbl_pMain.columnWidths = new int[] { 10, 200, 10, 200, 10, 0 };
 		gbl_pMain.rowHeights = new int[] { 10, 20, 0 };
 		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_pMain.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0 };
