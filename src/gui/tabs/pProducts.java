@@ -19,6 +19,7 @@ import gui.components.JHintTextField;
 import gui.components.ProductTableModel;
 import model.product.Product;
 import model.product.ProductStatus;
+import javax.swing.JCheckBox;
 
 public class pProducts extends JPanel {
 	private ProductController productController;
@@ -29,6 +30,7 @@ public class pProducts extends JPanel {
 	private JButton btnCreate;
 	private JButton btnDelete;
 	private JButton btnUpdate;
+	private JCheckBox chckbxShowInactive;
 
 	/**
 	 * Create the panel.
@@ -48,6 +50,9 @@ public class pProducts extends JPanel {
 				createClicked();
 			}
 		});
+		
+		chckbxShowInactive = new JCheckBox("VIs inaktive");
+		pButtons.add(chckbxShowInactive);
 		pButtons.add(btnCreate);
 
 		btnDelete = new JButton("Slet");
@@ -132,7 +137,7 @@ public class pProducts extends JPanel {
 	}
 
 	private void refreshProductTable() {
-		List<Product> lists = productController.getProducts(txtfBarcode.getText());
+		List<Product> lists = productController.getProducts(txtfBarcode.getText(), true);
 //		Collections.sort(lists, new Comparator<Product>() {
 //			@Override
 //			public int compare(Product o1, Product o2) {

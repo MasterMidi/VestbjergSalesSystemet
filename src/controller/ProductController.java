@@ -32,8 +32,8 @@ public class ProductController {
 		return sellable;
 	}
 
-	public List<Product> getProducts(String barcode) {
-		return productContainer.getProducts(barcode);
+	public List<Product> getProducts(String barcode, boolean includeInactive) {
+		return productContainer.getProducts(barcode,includeInactive);
 	}
 
 	public void updateProduct(String productBarcode, String name, String barcode, String description, double price, String date,

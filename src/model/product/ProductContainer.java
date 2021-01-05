@@ -37,7 +37,7 @@ public class ProductContainer {
 		products.clear();
 	}
 
-	public List<Product> getProducts(String input) {
+	public List<Product> getProducts(String input, boolean includeInactive) {
 		List<Product> productList = null;
 
 		boolean isName = input.trim().matches("[^\\d]+");
@@ -49,6 +49,12 @@ public class ProductContainer {
 					.filter(product -> (isName) ? product.getName().toLowerCase().contains(input.toLowerCase())
 							: product.getBarcode().contains(input))
 					.collect(Collectors.toList());
+			
+			if(!includeInactive) {
+				productList = productList.stream()
+						.filter(product -> ((SellableProduct)product).getStatus() != ProductStatus.Inactive)
+						.collect(Collectors.toList());
+			}
 		}
 
 		return productList;
