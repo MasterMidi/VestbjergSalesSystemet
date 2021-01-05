@@ -34,4 +34,9 @@ public class ProductController {
 	public List<Product> getProducts(String barcode) {
 		return productContainer.getProducts(barcode);
 	}
+
+	public void updateProduct(String productBarcode, String name, String barcode, String description, double price,
+			int amount) {
+		productContainer.editProduct(productBarcode, name, barcode, description, price, amount);
+	}
 }

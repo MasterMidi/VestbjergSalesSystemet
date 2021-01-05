@@ -27,6 +27,22 @@ public abstract class Product {
 		}
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPlacements(List<Placement> placements) {
+		this.placements = placements;
+	}
+
 	public Product(String name, String barcode, String description) {
 		this(name, barcode, description, null);
 	}
