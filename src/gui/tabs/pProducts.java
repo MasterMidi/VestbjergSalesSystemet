@@ -31,6 +31,7 @@ public class pProducts extends JPanel {
 	private JButton btnDelete;
 	private JButton btnUpdate;
 	private JCheckBox chckbxShowInactive;
+	private boolean showInactiveProducts;
 
 	/**
 	 * Create the panel.
@@ -52,6 +53,11 @@ public class pProducts extends JPanel {
 		});
 		
 		chckbxShowInactive = new JCheckBox("VIs inaktive");
+		chckbxShowInactive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refreshProductTable();
+			}
+		});
 		pButtons.add(chckbxShowInactive);
 		pButtons.add(btnCreate);
 
@@ -110,7 +116,8 @@ public class pProducts extends JPanel {
 		Product selectedProduct = tableModel.getDataAtIndex(tblProducts.getSelectedRow());
 		if (selectedProduct != null) {
 			productController.setProductStatus(selectedProduct.getBarcode(), ProductStatus.Inactive);
-		}
+		} 
+		refreshProductTable();
 	}
 
 	protected void updateClicked() {
@@ -120,12 +127,14 @@ public class pProducts extends JPanel {
 			productDisplay.setModal(true);
 			productDisplay.setVisible(true);
 		}
+		refreshProductTable();
 	}
 
 	private void createClicked() {
 		ProductDisplay productDisplay = new ProductDisplay(null);
 		productDisplay.setModal(true);
 		productDisplay.setVisible(true);
+		refreshProductTable();
 	}
 
 	private void init() {
@@ -137,7 +146,7 @@ public class pProducts extends JPanel {
 	}
 
 	private void refreshProductTable() {
-		List<Product> lists = productController.getProducts(txtfBarcode.getText(), true);
+		List<Product> lists = productController.getProducts(txtfBarcode.getText(),chckbxShowInactive.isSelected());
 //		Collections.sort(lists, new Comparator<Product>() {
 //			@Override
 //			public int compare(Product o1, Product o2) {
