@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import gui.tabs.pCreateOrder;
 import gui.tabs.pProducts;
+import java.awt.Dimension;
 
 public class MainMenu extends JFrame {
 
@@ -38,8 +39,9 @@ public class MainMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public MainMenu() {
+		setMinimumSize(new Dimension(400, 250));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 902, 608);
+		setBounds(100, 100, 699, 527);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -57,12 +59,8 @@ public class MainMenu extends JFrame {
 		JPanel pCustomers = new JPanel();
 		tabbedPane.addTab("Customers", null, pCustomers, null);
 
-		JPanel pProducts = new JPanel();
+		JPanel pProducts = new pProducts();
 		tabbedPane.addTab("Products", null, pProducts, null);
-		pProducts.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new pProducts();
-		pProducts.add(panel, BorderLayout.CENTER);
 
 		JPanel pOrders = new JPanel();
 		tabbedPane.addTab("Orders", null, pOrders, null);

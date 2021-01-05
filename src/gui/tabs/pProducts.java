@@ -97,7 +97,7 @@ public class pProducts extends JPanel {
 		scrlProducts.setViewportView(tblProducts);
 		tblProducts.getTableHeader().setReorderingAllowed(false);
 		tblProducts.setAutoCreateRowSorter(true);
-
+		
 		init();
 	}
 
@@ -118,7 +118,7 @@ public class pProducts extends JPanel {
 		productController = new ProductController();
 		tableModel = new ProductTableModel();
 		tblProducts.setModel(tableModel);
-
+		
 		refreshProductTable();
 	}
 
