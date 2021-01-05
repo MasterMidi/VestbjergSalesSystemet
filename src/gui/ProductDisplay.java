@@ -7,11 +7,13 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.stream.Stream;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -27,7 +29,6 @@ public class ProductDisplay extends JDialog {
 	private JTextField txtfName;
 	private JTextField txtfBarcode;
 	private JTextField txtfDescription;
-	private JTextField txtfPrice;
 	private JLabel lblAmount;
 	private JTextField txtfAmount;
 	private JPanel panel_1;
@@ -36,6 +37,10 @@ public class ProductDisplay extends JDialog {
 	private Product product;
 	private String productBarcode;
 	private ProductController productController;
+	private JTextField txtfPrice;
+	private JLabel lblPriceDate;
+	private JTextField txtfPriceDate;
+	private JPanel panel;
 
 	/**
 	 * Create the frame.
@@ -49,13 +54,13 @@ public class ProductDisplay extends JDialog {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 0, 77, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel.columnWidths = new int[] { 0, 92, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 29, 0, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
 		JLabel lblName = new JLabel("Navn:");
@@ -119,7 +124,7 @@ public class ProductDisplay extends JDialog {
 		gbc_lblPrice.gridx = 1;
 		gbc_lblPrice.gridy = 4;
 		panel.add(lblPrice, gbc_lblPrice);
-
+		
 		txtfPrice = new JTextField();
 		GridBagConstraints gbc_txtfPrice = new GridBagConstraints();
 		gbc_txtfPrice.insets = new Insets(0, 0, 5, 0);
@@ -129,21 +134,38 @@ public class ProductDisplay extends JDialog {
 		panel.add(txtfPrice, gbc_txtfPrice);
 		txtfPrice.setColumns(10);
 
-		lblAmount = new JLabel("Antal");
+		lblAmount = new JLabel("Antal:");
 		GridBagConstraints gbc_lblAmount = new GridBagConstraints();
 		gbc_lblAmount.anchor = GridBagConstraints.EAST;
-		gbc_lblAmount.insets = new Insets(0, 0, 0, 5);
+		gbc_lblAmount.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAmount.gridx = 1;
 		gbc_lblAmount.gridy = 5;
 		panel.add(lblAmount, gbc_lblAmount);
 
 		txtfAmount = new JTextField();
 		GridBagConstraints gbc_txtfAmount = new GridBagConstraints();
+		gbc_txtfAmount.insets = new Insets(0, 0, 5, 0);
 		gbc_txtfAmount.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtfAmount.gridx = 2;
 		gbc_txtfAmount.gridy = 5;
 		panel.add(txtfAmount, gbc_txtfAmount);
 		txtfAmount.setColumns(10);
+		
+		lblPriceDate = new JLabel("Pris Start Dato:");
+		GridBagConstraints gbc_lblPriceDate = new GridBagConstraints();
+		gbc_lblPriceDate.anchor = GridBagConstraints.LINE_END;
+		gbc_lblPriceDate.insets = new Insets(0, 0, 0, 5);
+		gbc_lblPriceDate.gridx = 1;
+		gbc_lblPriceDate.gridy = 6;
+		panel.add(lblPriceDate, gbc_lblPriceDate);
+		
+		txtfPriceDate = new JTextField();
+		GridBagConstraints gbc_txtfPriceDate = new GridBagConstraints();
+		gbc_txtfPriceDate.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtfPriceDate.gridx = 2;
+		gbc_txtfPriceDate.gridy = 6;
+		panel.add(txtfPriceDate, gbc_txtfPriceDate);
+		txtfPriceDate.setColumns(10);
 
 		panel_1 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
@@ -170,14 +192,13 @@ public class ProductDisplay extends JDialog {
 
 		});
 		panel_1.add(btnCreate);
-
 		product = inputProduct;
-		productBarcode = inputProduct.getBarcode();
 		init();
 	}
 
 	private void init() {
 		if (product != null) {
+			productBarcode = product.getBarcode();
 			fillTextFields(product);
 			System.out.println(product);
 		}
@@ -193,8 +214,10 @@ public class ProductDisplay extends JDialog {
 
 	private void createProduct() {
 		// OPDATER KUN HVIS DER ER TEXT!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
 		productController.createSellableProduct(txtfName.getText(), txtfBarcode.getText(), txtfDescription.getText(),
 				Double.parseDouble(txtfPrice.getText()), Integer.parseInt(txtfAmount.getText()));
+		
 
 	}
 
@@ -207,17 +230,47 @@ public class ProductDisplay extends JDialog {
 	}
 
 	private void saveClicked() {
-		if (product == null) {
-			createProduct();
+		if (validateTxtFields()) {
+			if (product == null) {
+				createProduct();
 
-		} else {
-			updateProduct();
+			} else {
+				updateProduct();
+			}
+			setVisible(false);
+			dispose();
 		}
-		setVisible(false);
-		dispose();
 	}
 
 	public Product getProduct() {
 		return product;
+	}
+	
+	private boolean validateTxtFields() {
+		boolean res = false;
+		String errors = "";
+		if(txtfName.getText().isBlank()) {
+			errors += "Fejl: produkt skal have et navn \n";
+		} if(txtfBarcode.getText().isBlank()) {
+			errors += "Fejl: produkt skal have en stregkode \n";
+		} if(txtfDescription.getText().length()<50) {
+			errors += "Fejl: produkt skal have en beskrivelse over 50 tegn \n";
+		} if(!txtfPrice.getText().isBlank() && txtfPrice.getText().trim().matches("[^\\d]+")) {
+			errors += "Fejl: pris skal være tomt eller et tal\n";
+		} if(!txtfPrice.getText().isBlank() && // checks if date is DD-MM-YYYY
+			 !txtfPriceDate.getText().matches("^(0[1-9]|[12][0-9]|3[01])[- \\/.](0[1-9]|1[012])[- \\/.](19|20|21)\\d\\d$")){
+			errors += "Fejl: pris skal have en gyldig start dato [DD-MM-YYYY]\n";
+		} if(txtfAmount.getText().isEmpty() && txtfAmount.getText().trim().matches("[^\\d]+")) {
+			errors += "Fejl: antal skal være 0 eller større";
+		}
+		
+		
+		
+		if(!errors.isBlank()) {
+			JOptionPane.showMessageDialog(this, errors);
+		} else { 
+			res = true;
+		} 
+		return res;
 	}
 }
