@@ -6,16 +6,16 @@ import java.util.List;
 public class SellableProduct extends Product {
 
 	private int warehouseAmount;
-	private WarehouseStatus status;
+	private ProductStatus status;
 	private List<SellableProduct> products;
 
 	public SellableProduct(String name, String barcode, String description, Double price, int warehouseAmount) {
 		super(name, barcode, description, price);
 		this.warehouseAmount = warehouseAmount;
 		if (warehouseAmount > 0) {
-			this.status = WarehouseStatus.Instock;
+			this.status = ProductStatus.Instock;
 		} else {
-			this.status = WarehouseStatus.OutOfStock;
+			this.status = ProductStatus.OutOfStock;
 		}
 		this.products = new ArrayList<>();
 	}
@@ -28,8 +28,12 @@ public class SellableProduct extends Product {
 		return this.warehouseAmount;
 	}
 
-	public WarehouseStatus getStatus() {
+	public ProductStatus getStatus() {
 		return this.status;
+	}
+	
+	public void setStatus(ProductStatus status) {
+		this.status = status;
 	}
 	
 	public List<SellableProduct> getProducts(){
@@ -40,5 +44,8 @@ public class SellableProduct extends Product {
 		if(product != null) {
 			products.add(product);
 		} 
+	}
+	public void setStock(int i) {
+		warehouseAmount = i;
 	}
 }

@@ -54,15 +54,22 @@ public class ProductContainer {
 		return productList;
 	}
 
-	public void editProduct(String currBarcode, String name, String barcode, String description, double price,
+	public void editProduct(String currBarcode, String name, String barcode, String description, double price, String date,
 			int amount) {
 		Product currProduct = this.getProduct(currBarcode);
 		products.remove(currBarcode);
 		currProduct.setName(name);
 		currProduct.setDescription(description);
 		currProduct.setBarcode(barcode);
-		// TODO: SET PRICE
+		currProduct.addPrice(price, date);
+		((SellableProduct)currProduct).setStock(amount);
 		this.addProduct(currProduct);
 
+	}
+
+	public void setProductStatus(String barcode, ProductStatus status) {
+		Product currProduct = this.getProduct(barcode);
+		((SellableProduct)currProduct).setStatus(status);
+		
 	}
 }

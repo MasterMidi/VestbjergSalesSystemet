@@ -32,6 +32,7 @@ public class TryMe {
 				"World trade center street 321", "091101-1337", "Thomas bossman", "29621602");
 
 		productController.createSellableProduct("Toothbrush", "12345678", "A toothbrush", 20d, 1);
+		productController.createSellableProduct("Toothbrush2", "12345678", "A toothbrush", 20d, 1);
 		productController.createSellableProduct("Toothpaste", "13579246", "some toothpaste", 40d, 1);
 		productController.createSellableProduct("a very long string to cut", "98765432", "you know it ;)", 200d, 1);
 		productController.createSellableProduct("Nails", "89642378", "to nail your m...", 60d, 2);
@@ -43,7 +44,7 @@ public class TryMe {
 		
 		for(int i = 0; i < 10000; i++) {
 			customerController.createPrivateCustomer("Kunde " + i, "hey" + i +"@gmail.com", String.valueOf(i), "Somewhere", "67890243-1233", null);
-			productController.createSellableProduct("Skruetrækker " + String.valueOf(i), String.valueOf(i), "something", 1d, 1);
+			productController.createSellableProduct("dillerdallere " + String.valueOf(i), String.valueOf(i), "something", 1d, 1);
 		}
 		ProductContainer.getInstance().addProduct(product);
 

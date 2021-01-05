@@ -1,5 +1,8 @@
 package model.product;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +30,16 @@ public abstract class Product {
 		}
 	}
 
+	public void addPrice(double price, String date) {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Date newDate = null;
+		try {
+			newDate = format.parse(date);
+		} catch (ParseException e) {
+		}
+		prices.addFirst(new Price(price,newDate));
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -64,6 +77,16 @@ public abstract class Product {
 	}
 
 	public Double getPrice(Date date) {
+		return getPriceObj(date).getPrice();
+
+	}
+
+	public Double getPrice() {
+		Date currTime = Calendar.getInstance().getTime();
+		return getPrice(currTime);
+
+	}
+	public Price getPriceObj(Date date) {
 		Price currPrice = null;
 		int index = 0;
 		boolean found = false;
@@ -74,15 +97,9 @@ public abstract class Product {
 			}
 			index++;
 		}
-		return currPrice.getPrice();
-
+		return currPrice;
 	}
-
-	public Double getPrice() {
-		Date currTime = Calendar.getInstance().getTime();
-		return getPrice(currTime);
-
-	}
+	
 
 	public List<Placement> getPlacements() {
 		return new ArrayList<Placement>(placements);

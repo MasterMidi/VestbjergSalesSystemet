@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import model.product.Product;
+import model.product.ProductStatus;
 import model.product.SellableProduct;
 
 public class ProductTableModel extends AbstractTableModel {
@@ -72,7 +73,7 @@ public class ProductTableModel extends AbstractTableModel {
 			res = ((SellableProduct) product).getStatus().toString();
 			break;
 		case 5:
-			res = "In store";
+			res = ((SellableProduct) product).getStatus() == ProductStatus.Inactive ? "Removed" : "in store";
 			break;
 		default:
 			res = "UNKNOWN COL - CONTACT ADMIN";

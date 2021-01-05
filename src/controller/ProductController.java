@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.product.Product;
 import model.product.ProductContainer;
+import model.product.ProductStatus;
 import model.product.SellableProduct;
 
 public class ProductController {
@@ -35,8 +36,13 @@ public class ProductController {
 		return productContainer.getProducts(barcode);
 	}
 
-	public void updateProduct(String productBarcode, String name, String barcode, String description, double price,
+	public void updateProduct(String productBarcode, String name, String barcode, String description, double price, String date,
 			int amount) {
-		productContainer.editProduct(productBarcode, name, barcode, description, price, amount);
+		productContainer.editProduct(productBarcode, name, barcode, description, price, date, amount);
+	}
+
+	public void setProductStatus(String barcode, ProductStatus status) {
+		productContainer.setProductStatus(barcode, status);
+		
 	}
 }

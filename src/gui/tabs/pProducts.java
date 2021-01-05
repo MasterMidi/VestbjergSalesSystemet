@@ -18,6 +18,7 @@ import gui.ProductDisplay;
 import gui.components.JHintTextField;
 import gui.components.ProductTableModel;
 import model.product.Product;
+import model.product.ProductStatus;
 
 public class pProducts extends JPanel {
 	private ProductController productController;
@@ -28,7 +29,6 @@ public class pProducts extends JPanel {
 	private JButton btnCreate;
 	private JButton btnDelete;
 	private JButton btnUpdate;
-	private JButton btnFind;
 
 	/**
 	 * Create the panel.
@@ -54,7 +54,7 @@ public class pProducts extends JPanel {
 		btnDelete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				deleteClicked();
 			}
 		});
 		pButtons.add(btnDelete);
@@ -101,11 +101,20 @@ public class pProducts extends JPanel {
 		init();
 	}
 
+	private void deleteClicked() {
+		Product selectedProduct = tableModel.getDataAtIndex(tblProducts.getSelectedRow());
+		if (selectedProduct != null) {
+			productController.setProductStatus(selectedProduct.getBarcode(), ProductStatus.Inactive);
+		}
+	}
+
 	protected void updateClicked() {
 		Product selectedProduct = tableModel.getDataAtIndex(tblProducts.getSelectedRow());
-		ProductDisplay productDisplay = new ProductDisplay(selectedProduct);
-		productDisplay.setModal(true);
-		productDisplay.setVisible(true);
+		if (selectedProduct != null) {
+			ProductDisplay productDisplay = new ProductDisplay(selectedProduct);
+			productDisplay.setModal(true);
+			productDisplay.setVisible(true);
+		}
 	}
 
 	private void createClicked() {

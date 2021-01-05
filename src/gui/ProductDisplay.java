@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.stream.Stream;
 
 import javax.swing.JButton;
@@ -200,7 +203,6 @@ public class ProductDisplay extends JDialog {
 		if (product != null) {
 			productBarcode = product.getBarcode();
 			fillTextFields(product);
-			System.out.println(product);
 		}
 		productController = new ProductController();
 	}
@@ -208,13 +210,11 @@ public class ProductDisplay extends JDialog {
 	private void updateProduct() {
 
 		productController.updateProduct(productBarcode, txtfName.getText(), txtfBarcode.getText(),
-				txtfDescription.getText(), Double.parseDouble(txtfPrice.getText()),
+				txtfDescription.getText(), Double.parseDouble(txtfPrice.getText()),txtfPriceDate.getText(),
 				Integer.parseInt(txtfAmount.getText()));
 	}
 
 	private void createProduct() {
-		// OPDATER KUN HVIS DER ER TEXT!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
 		productController.createSellableProduct(txtfName.getText(), txtfBarcode.getText(), txtfDescription.getText(),
 				Double.parseDouble(txtfPrice.getText()), Integer.parseInt(txtfAmount.getText()));
 		
@@ -227,6 +227,8 @@ public class ProductDisplay extends JDialog {
 		txtfDescription.setText(inputProduct.getDescription());
 		txtfPrice.setText(String.valueOf(inputProduct.getPrice()));
 		txtfAmount.setText(String.valueOf(((SellableProduct) inputProduct).getStock()));
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		txtfPriceDate.setText(format.format(((SellableProduct) inputProduct).getPriceObj(Calendar.getInstance().getTime()).getStartDate()));
 	}
 
 	private void saveClicked() {
