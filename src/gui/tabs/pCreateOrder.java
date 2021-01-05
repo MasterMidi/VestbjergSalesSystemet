@@ -42,6 +42,8 @@ import model.people.Person;
 import model.people.PrivateCustomer;
 import model.sale.Order.OrderLine;
 import model.sale.PaymentMethod;
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
 
 public class pCreateOrder extends JPanel {
 
@@ -59,6 +61,7 @@ public class pCreateOrder extends JPanel {
 	 * Create the panel.
 	 */
 	public pCreateOrder() {
+		setMinimumSize(new Dimension(400, 250));
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent e) {
@@ -68,11 +71,12 @@ public class pCreateOrder extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel pMain = new JPanel();
+		pMain.setMinimumSize(new Dimension(600, 10));
 		add(pMain, BorderLayout.CENTER);
 		GridBagLayout gbl_pMain = new GridBagLayout();
-		gbl_pMain.columnWidths = new int[] { 20, 106, 20, 231, 50, 0 };
-		gbl_pMain.rowHeights = new int[] { 20, 20, 0 };
-		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_pMain.columnWidths = new int[] { 10, 106, 10, 231, 10, 0 };
+		gbl_pMain.rowHeights = new int[] { 10, 20, 0 };
+		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_pMain.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0 };
 		pMain.setLayout(gbl_pMain);
 
@@ -117,6 +121,7 @@ public class pCreateOrder extends JPanel {
 		pMain.add(scrlProducts, gbc_scrlProducts);
 
 		listProducts = new JList<>();
+		listProducts.setMinimumSize(new Dimension(200, 0));
 		listProducts.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrlProducts.setViewportView(listProducts);
 
@@ -171,6 +176,7 @@ public class pCreateOrder extends JPanel {
 		pMain.add(scrlCustomer, gbc_scrlCustomer);
 
 		listCustomers = new JList<>();
+		listCustomers.setMinimumSize(new Dimension(200, 0));
 		listCustomers.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {

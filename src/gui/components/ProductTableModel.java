@@ -80,9 +80,4 @@ public class ProductTableModel extends AbstractTableModel {
 		}
 		return res;
 	}
-
-	public Class getColumnClass(int c) {
-		return getValueAt(0, c).getClass();
-	}
-
 }
