@@ -103,7 +103,8 @@ public class pProducts extends JPanel {
 		add(pProductView, BorderLayout.CENTER);
 		pProductView.setLayout(new BorderLayout(0, 0));
 
-		txtfBarcode = new JHintTextField("Stregkode / Navn...");
+		txtfBarcode = new JHintTextField();
+		txtfBarcode.setHint("Stregkode / Navn...");
 		txtfBarcode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {

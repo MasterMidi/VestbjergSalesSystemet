@@ -50,8 +50,8 @@ public class pCreateOrder extends JPanel {
 	private DefaultListModel<OrderLine> pModel;
 	private DefaultListModel<Person> cModel;
 	private OrderController orderController;
-	private JTextField txtfProduct;
-	private JTextField txtfCustomer;
+	private JHintTextField txtfProduct;
+	private JHintTextField txtfCustomer;
 	private JTextArea txtaCustomer;
 	private JList<Person> listCustomers;
 	private JList<OrderLine> listProducts;
@@ -80,7 +80,8 @@ public class pCreateOrder extends JPanel {
 		gbl_pMain.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0 };
 		pMain.setLayout(gbl_pMain);
 
-		txtfProduct = new JHintTextField("Stregkode...");
+		txtfProduct = new JHintTextField();
+		txtfProduct.setHint("Stregkode...");
 		txtfProduct.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -96,7 +97,7 @@ public class pCreateOrder extends JPanel {
 		pMain.add(txtfProduct, gbc_txtfProduct);
 
 		txtfCustomer = new JHintTextField();
-		((JHintTextField)txtfCustomer).setHint("navn/tlf...");
+		txtfCustomer.setHint("navn/tlf...");
 		txtfCustomer.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
