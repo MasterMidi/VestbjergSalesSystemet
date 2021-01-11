@@ -50,8 +50,8 @@ public class pCreateOrder extends JPanel {
 	private DefaultListModel<OrderLine> pModel;
 	private DefaultListModel<Person> cModel;
 	private OrderController orderController;
-	private JTextField txtfProduct;
-	private JTextField txtfCustomer;
+	private JHintTextField txtfProduct;
+	private JHintTextField txtfCustomer;
 	private JTextArea txtaCustomer;
 	private JList<Person> listCustomers;
 	private JList<OrderLine> listProducts;
@@ -74,13 +74,14 @@ public class pCreateOrder extends JPanel {
 		pMain.setMinimumSize(new Dimension(600, 10));
 		add(pMain, BorderLayout.CENTER);
 		GridBagLayout gbl_pMain = new GridBagLayout();
-		gbl_pMain.columnWidths = new int[] { 10, 106, 10, 231, 10, 0 };
+		gbl_pMain.columnWidths = new int[] { 10, 200, 10, 200, 10, 0 };
 		gbl_pMain.rowHeights = new int[] { 10, 20, 0 };
 		gbl_pMain.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_pMain.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0 };
 		pMain.setLayout(gbl_pMain);
 
-		txtfProduct = new JHintTextField("Stregkode...");
+		txtfProduct = new JHintTextField();
+		txtfProduct.setHint("Stregkode...");
 		txtfProduct.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -96,7 +97,7 @@ public class pCreateOrder extends JPanel {
 		pMain.add(txtfProduct, gbc_txtfProduct);
 
 		txtfCustomer = new JHintTextField();
-		((JHintTextField)txtfCustomer).setHint("navn/tlf...");
+		txtfCustomer.setHint("navn/tlf...");
 		txtfCustomer.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {

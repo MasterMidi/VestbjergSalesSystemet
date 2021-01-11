@@ -50,11 +50,12 @@ public class ProductContainer {
 							: product.getBarcode().contains(input))
 					.collect(Collectors.toList());
 			
-			if(!includeInactive) {
-				productList = productList.stream()
-						.filter(product -> ((SellableProduct)product).getStatus() != ProductStatus.Inactive)
-						.collect(Collectors.toList());
-			}
+			
+		}
+		if(!includeInactive) {
+			productList = productList.stream()
+					.filter(product -> ((SellableProduct)product).getStatus() != ProductStatus.Inactive)
+					.collect(Collectors.toList());
 		}
 
 		return productList;

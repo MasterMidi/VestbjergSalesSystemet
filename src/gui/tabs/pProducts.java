@@ -20,6 +20,7 @@ import gui.components.ProductTableModel;
 import model.product.Product;
 import model.product.ProductStatus;
 import javax.swing.JCheckBox;
+import java.awt.GridLayout;
 
 public class pProducts extends JPanel {
 	private ProductController productController;
@@ -31,6 +32,9 @@ public class pProducts extends JPanel {
 	private JButton btnDelete;
 	private JButton btnUpdate;
 	private JCheckBox chckbxShowInactive;
+	private boolean showInactiveProducts;
+	private JPanel pButtons;
+	private JPanel pFilter;
 
 	/**
 	 * Create the panel.
@@ -38,40 +42,54 @@ public class pProducts extends JPanel {
 	public pProducts() {
 		setLayout(new BorderLayout(0, 0));
 
-		JPanel pButtons = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) pButtons.getLayout();
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		add(pButtons, BorderLayout.SOUTH);
+		JPanel pActions = new JPanel();
+		add(pActions, BorderLayout.SOUTH);
+		pActions.setLayout(new GridLayout(0, 2, 0, 0));
 
-		btnCreate = new JButton("Opret...");
-		btnCreate.addActionListener(new ActionListener() {
-			@Override
+		pFilter = new JPanel();
+		FlowLayout fl_pFilter = (FlowLayout) pFilter.getLayout();
+		fl_pFilter.setAlignment(FlowLayout.LEFT);
+		pActions.add(pFilter);
+
+		chckbxShowInactive = new JCheckBox("Vis inaktive");
+		pFilter.add(chckbxShowInactive);
+		chckbxShowInactive.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createClicked();
+				refreshProductTable();
 			}
 		});
-		
-		chckbxShowInactive = new JCheckBox("VIs inaktive");
-		pButtons.add(chckbxShowInactive);
+
+		pButtons = new JPanel();
+		FlowLayout fl_pButtons = (FlowLayout) pButtons.getLayout();
+		fl_pButtons.setAlignment(FlowLayout.RIGHT);
+		pActions.add(pButtons);
+
+		btnCreate = new JButton("Opret...");
 		pButtons.add(btnCreate);
 
 		btnDelete = new JButton("Slet");
-		btnDelete.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				deleteClicked();
-			}
-		});
 		pButtons.add(btnDelete);
 
 		btnUpdate = new JButton("Opdater");
+		pButtons.add(btnUpdate);
 		btnUpdate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateClicked();
 			}
 		});
-		pButtons.add(btnUpdate);
+		btnDelete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deleteClicked();
+			}
+		});
+		btnCreate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				createClicked();
+			}
+		});
 
 //		btnFind = new JButton("Søg...");
 //		btnFind.addActionListener(new ActionListener() {
@@ -85,7 +103,8 @@ public class pProducts extends JPanel {
 		add(pProductView, BorderLayout.CENTER);
 		pProductView.setLayout(new BorderLayout(0, 0));
 
-		txtfBarcode = new JHintTextField("Stregkode / Navn...");
+		txtfBarcode = new JHintTextField();
+		txtfBarcode.setHint("Stregkode / Navn...");
 		txtfBarcode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -102,15 +121,26 @@ public class pProducts extends JPanel {
 		scrlProducts.setViewportView(tblProducts);
 		tblProducts.getTableHeader().setReorderingAllowed(false);
 		tblProducts.setAutoCreateRowSorter(true);
-		
+
 		init();
 	}
 
 	private void deleteClicked() {
-		Product selectedProduct = tableModel.getDataAtIndex(tblProducts.getSelectedRow());
-		if (selectedProduct != null) {
-			productController.setProductStatus(selectedProduct.getBarcode(), ProductStatus.Inactive);
+//		Product selectedProduct = tableModel.getDataAtIndex(tblProducts.getSelectedRow());
+		
+		int[] selectedProductIndecies = tblProducts.getSelectedRows();
+		Product[] selectedProducts = new Product[selectedProductIndecies.length];
+		for(int i = 0; i < selectedProducts.length; i++) {
+			selectedProducts[i] = tableModel.getDataAtIndex(selectedProductIndecies[i]);
 		}
+		
+		if (selectedProducts.length > 0) {
+			for(int i = 0; i < selectedProducts.length; i++) {
+				productController.setProductStatus(selectedProducts[i].getBarcode(), ProductStatus.Inactive);
+			}
+		}
+		
+		refreshProductTable();
 	}
 
 	protected void updateClicked() {
@@ -120,24 +150,26 @@ public class pProducts extends JPanel {
 			productDisplay.setModal(true);
 			productDisplay.setVisible(true);
 		}
+		refreshProductTable();
 	}
 
 	private void createClicked() {
 		ProductDisplay productDisplay = new ProductDisplay(null);
 		productDisplay.setModal(true);
 		productDisplay.setVisible(true);
+		refreshProductTable();
 	}
 
 	private void init() {
 		productController = new ProductController();
 		tableModel = new ProductTableModel();
 		tblProducts.setModel(tableModel);
-		
+
 		refreshProductTable();
 	}
 
 	private void refreshProductTable() {
-		List<Product> lists = productController.getProducts(txtfBarcode.getText(), true);
+		List<Product> lists = productController.getProducts(txtfBarcode.getText(), chckbxShowInactive.isSelected());
 //		Collections.sort(lists, new Comparator<Product>() {
 //			@Override
 //			public int compare(Product o1, Product o2) {

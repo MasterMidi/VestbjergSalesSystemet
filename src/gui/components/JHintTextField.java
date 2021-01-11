@@ -21,21 +21,6 @@ public class JHintTextField extends JTextField {
 		super(null, null, 0);
 	}
 
-	public JHintTextField(String hint) {
-		super(null, null, 0);
-		this.hint = hint;
-	}
-	
-	public JHintTextField(String text, String hint) {
-		super(null, text, 0);
-		this.hint = hint;
-	}
-	
-	public JHintTextField(String text, String hint, int column) {
-		super(null, text, column);
-		this.hint = hint;
-	}
-
 	public String getHint() {
 		return hint;
 	}
@@ -54,23 +39,16 @@ public class JHintTextField extends JTextField {
 		if (getText().isEmpty()) {
 			graphics2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
+			// gets the insets (border space data) of the component
 			final Insets ins = getInsets();
+			
+			// gets information about the font used in the textfield
 			final FontMetrics fm = graphics2d.getFontMetrics();
 
-			final int cB = getBackground().getRGB();
-			final int cF = getForeground().getRGB();
-			final int m = 0xfefefefe;
-			final int c = ((cB & m) >>> 1) + ((cF & m) >>> 1); // "for X in (A, R, G, B) {Xnew = (Xb + Xf) / 2}"
-			/*
-			 * The hint text color should be halfway between the foreground and background
-			 * colors so it is always gently visible. The variables cB,cF,m,c calculate the
-			 * halfway color's ARGB fields simultaneously without overflowing 8 bits. Swing
-			 * sets the Graphics' font to match the JTextField's font property before
-			 * calling the "paint" method, so the hint font will match the JTextField's
-			 * font. Don't think there are any side effects because Swing discards the
-			 * Graphics after painting. Adam Gawne-Cain, Aug 6 2019 at 15:55
-			 */
-			graphics2d.setColor(new Color(c, true));
+			// Set the text color to be grey and gentle
+			graphics2d.setColor(Color.GRAY);
+			
+			// draws the hint text onto the textfield
 			graphics2d.drawString(hint, ins.left, getHeight() - fm.getDescent() - ins.bottom);
 			/*
 			 * y Coordinate based on Descent & Bottom-inset seems to align Text spot-on.
