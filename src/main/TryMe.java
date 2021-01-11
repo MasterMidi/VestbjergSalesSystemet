@@ -44,7 +44,7 @@ public class TryMe {
 		
 		for(int i = 0; i < 10000; i++) {
 			customerController.createPrivateCustomer("Kunde " + i, "hey" + i +"@gmail.com", String.valueOf(i), "Somewhere", "67890243-1233", null);
-			productController.createSellableProduct("dillerdallere " + String.valueOf(i), String.valueOf(i), "something", 1d, 1);
+			productController.createSellableProduct(FakeData.getName(), String.valueOf(i), "something", FakeData.getPrice(10000), FakeData.getStock(100));
 		}
 		ProductContainer.getInstance().addProduct(product);
 

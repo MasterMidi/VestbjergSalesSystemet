@@ -1,5 +1,6 @@
 package main;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class FakeData {
@@ -33,22 +34,36 @@ public class FakeData {
 	
 	public static String[] units = {"g","kg","ton"};
 	
-	public static String[] colors = {"Grøn","Blå","Sort","Hvid","lyse blå","lyse grøn","mørke grøn","mørke blå","rød","lilla","violet","Gul","hudfarvet"}; // 14
-	public static String[] sizes = {"lille","stor","meget stor","meget lille","kæmpe"}; //6 
+	public static String[] colors = {"grønne","blå","sorte","hvide","lyse blå","lyse grønne","mørke grønne","mørke blå","røde","lilla","violette","gule","hudfarvet"}; // 14
+	public static String[] sizes = {"lille","store","meget store","meget lille","kæmpe"}; //6 
 	public static String[] manufactorer = {"Bosch", "nilfisk", "silvan", "ALLUX","Vileda","RoLeX", "Gucci","versace", "Adidas","kurnigsægt"}; //10
-	public static String[] addictives = {"smukke","fandens","grimme","mindre pæne","flotte","erotisk buttet", "aggresiv","små glad ;) ","sarkastisk"}; //9
+	public static String[] addictives = {"smukke","fandens","grimme","mindre pæne","flotte","erotisk buttet", "aggresiv","små glad","sarkastisk"}; //9
+	//advektiv, size, color, navn fra manufaktorer
+	private static DecimalFormat df2 = new DecimalFormat("####,##");
+	private static Random r = new Random();
+	
 	
 	public static String getName()
 	{
-		Random r = new Random();
-		int nameIndex = r.nextInt();
-		int unitIndex = r.nextInt();
-		int sizeIndex = r.nextInt();
-		int colorIndex = r.nextInt();
-		int manufactorIndex = r.nextInt();
-		int addIndex = r.nextInt();
+		int nameIndex = r.nextInt(names.length);
+		int unitIndex = r.nextInt(units.length);
+		int sizeIndex = r.nextInt(sizes.length);
+		int colorIndex = r.nextInt(colors.length);
+		int manufactorIndex = r.nextInt(manufactorer.length);
+		int addIndex = r.nextInt(addictives.length);
+		String fakeName = String.format("%s %s %s %s fra %s",addictives[addIndex], sizes[sizeIndex],colors[colorIndex],names[nameIndex],manufactorer[manufactorIndex]  );
 		
 		
-		return "Magnus lugter";
+		return fakeName;
+	}
+	public static int getStock(int i) {
+		return r.nextInt(i);
+		
+	}
+	
+	public static Double getPrice(int i) {
+		double res = r.nextInt(i) + 0.95d;
+		return res;
+		
 	}
 }

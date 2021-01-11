@@ -118,6 +118,7 @@ public class pProducts extends JPanel {
 		pProductView.add(scrlProducts, BorderLayout.CENTER);
 
 		tblProducts = new JTable();
+		tblProducts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scrlProducts.setViewportView(tblProducts);
 		tblProducts.getTableHeader().setReorderingAllowed(false);
 		tblProducts.setAutoCreateRowSorter(true);
@@ -164,7 +165,6 @@ public class pProducts extends JPanel {
 		productController = new ProductController();
 		tableModel = new ProductTableModel();
 		tblProducts.setModel(tableModel);
-
 		refreshProductTable();
 	}
 
